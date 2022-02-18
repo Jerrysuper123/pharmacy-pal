@@ -162,7 +162,11 @@ The app will also adopt a more offcial them, not too fancy color or front.
 
 Font
 
-![font](font.png)
-If you're looking for a smart, professional look, this is a great font pairing to try. Julius Sans One is an all caps font that only comes in one weight, but, with its fine stroke and broader baseline, it's a top choice for a display font. The more geometric Archivo Narrow is a perfect match and works equally well in print and digital.
+![font](https://elementor.com/cdn-cgi/image/f=auto,w=720/marketing/wp-content/uploads/sites/9/2020/11/4-Archivo-Black_Roboto.png)
+
+Archivo Black & Roboto
+Here we have a pairing of two sans serif fonts. Archivo Black is a grotesque sans serif, which makes it feel slightly imperfect compared to the neo-grotesque and geometric styling of Roboto.
+
+This is a great example of how to use fonts in concord with one another. Yes, they’re two sans serifs, but the imperfect/perfect pairing of their character sets creates a good balance. This would work really well in giving an ecommerce site a youthful and trustworthy vibe.
 
 Icon

@@ -60,7 +60,7 @@ document.querySelector("#appBrief").addEventListener("click", function () {
 //show search OTC drug page
 document.querySelector("#searchOTCBtn").addEventListener("click", function () {
   let appBrief = document.querySelector("#searchOTCPage");
-  appBrief.classList.remove("hideBottom");
+  appBrief.classList.remove("hideTop");
   appBrief.classList.add("show");
 });
 
@@ -68,18 +68,18 @@ document.querySelector("#searchOTCBtn").addEventListener("click", function () {
 document.querySelector("#searchOTCPage").addEventListener("click", function () {
   let appBrief = document.querySelector("#searchOTCPage");
   appBrief.classList.remove("show");
-  appBrief.classList.add("hideBottom");
+  appBrief.classList.add("hideTop");
 });
 
 //e-pharmacy page
 document.querySelector("#ePharmacyBtn").addEventListener("click", function () {
   let appBrief = document.querySelector("#ePharmacyPage");
-  appBrief.classList.remove("hideBottom");
+  appBrief.classList.remove("hideTop");
   appBrief.classList.add("show");
 });
 
 document.querySelector("#ePharmacyPage").addEventListener("click", function () {
   let appBrief = document.querySelector("#ePharmacyPage");
   appBrief.classList.remove("show");
-  appBrief.classList.add("hideBottom");
+  appBrief.classList.add("hideTop");
 });
