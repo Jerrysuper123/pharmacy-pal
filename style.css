@@ -1,3 +1,69 @@
 #singaporeMap {
   height: 100vh;
 }
+
+.mainContainer {
+  position: relative;
+}
+
+#navBar {
+  margin-left: 4rem;
+  margin-top: 1rem;
+  z-index: 3000;
+  position: absolute;
+}
+
+#searchDrugStore {
+  border-radius: 2rem;
+  height: 2.5rem;
+  /* width: 100%; */
+}
+
+#searchDrugStore:hover {
+  transform: scale(1.1);
+}
+
+.navBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.navBox:hover {
+  transform: scale(1.1);
+}
+
+.shadow {
+  box-shadow: 5px 10px;
+}
+
+.greyContainer {
+  /* width: 50%; */
+  height: 100vh;
+  background-color: rgba(57, 57, 57, 0.5);
+  position: absolute;
+  top: 0;
+  z-index: 3000;
+}
+
+.textArea {
+  width: 70%;
+  height: 100vh;
+  background-color: white;
+}
+
+.hideLeft {
+  transform: translateX(-100%);
+  transition: transform 1s;
+}
+
+.show {
+  transform: translateX(0);
+  transition: transform 0.5s;
+}
+
+.hideBottom {
+  transform: translateY(100%);
+  transition: transform 1s;
+}
