@@ -26,7 +26,8 @@ h1 {
 
 #searchDrugStore {
   border-radius: 2rem;
-  height: 2.5rem;
+  height: 3rem;
+  width: 16rem;
   /* width: 100%; */
 }
 
@@ -41,6 +42,8 @@ h1 {
   align-items: center;
   font-size: small;
   color: rgb(94, 94, 94);
+  width: 8rem;
+  height: 3rem;
 }
 
 .navBox:hover {
@@ -54,6 +57,7 @@ h1 {
 .greyContainer {
   /* width: 50%; */
   height: 100vh;
+  width: 100vw;
   background-color: rgba(57, 57, 57, 0.5);
   position: absolute;
   top: 0;
@@ -63,7 +67,7 @@ h1 {
 .textArea {
   width: 70%;
   height: 100vh;
-  background-color: rgba(255, 255, 255, 0.92);
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
 .hideLeft {
