@@ -20,7 +20,7 @@ document.querySelector("#searchOTCBtn").addEventListener("click", function () {
 });
 
 //hide search OTC drug page
-document.querySelector("#searchOTCPage").addEventListener("click", function () {
+document.querySelector(".greyContainer").addEventListener("click", function () {
   let appBrief = document.querySelector("#searchOTCPage");
   appBrief.classList.remove("show");
   appBrief.classList.add("hideTop");
