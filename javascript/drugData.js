@@ -1,3 +1,4 @@
+//read and display drug data
 document
   .querySelector("#searchDrugBtn")
   .addEventListener("click", async function () {
@@ -6,8 +7,16 @@ document
     let drugArray = await readDrug(queryString);
     let drugContentElement = document.querySelector("#drugContent");
     drugContentElement.innerHTML = "";
-    //transform data;
+
+    //get full list of act codes with explanation
+    let atcFullList = await mergeATCData();
+
     for (let el of drugArray) {
+      let levelOne = el.atc_code.slice(0, 1).toLowerCase();
+      let levelTwo = el.atc_code.slice(0, 3).toLowerCase();
+      levelOneUse = atcFullList[levelOne];
+      levelTwoUse = atcFullList[levelTwo];
+
       let divElement = document.createElement("div");
       let content = `
         <h1>${el.product_name}</h1>
@@ -15,9 +24,11 @@ document
         <p>The drug is manufactured by ${el.manufacturer} in ${
         el.country_of_manufacturer
       }</p>
-        <p>The drug is available in the form of ${el.dosage_form.toLowerCase()} and ${el.route_of_administration.toLowerCase()} consumption</p>
+        <p>The drug is available in the form of ${el.dosage_form.toLowerCase()} and for ${el.route_of_administration.toLowerCase()} use only</p>
         <p>active ingredients: ${el.active_ingredients}</p>
-        <p>ATC Code: ${el.atc_code}</p>
+        <h3>Drug usage:</h3>
+        <p>${levelOneUse}</p>
+        <p>${levelTwoUse}</p>
       `;
       divElement.innerHTML = content;
       drugContentElement.appendChild(divElement);

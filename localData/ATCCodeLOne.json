@@ -1,5 +1,4 @@
 {
-    "level1":{
         "a": "alimentary tract and metabolism",
         "b": "blood and blood forming organs",
         "c": "cardiovascular system",
@@ -14,6 +13,4 @@
         "r" : "respiratory system",
         "s": "sensory organs",
         "v": "various"
-    }
-   
 }

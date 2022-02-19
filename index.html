@@ -41,7 +41,6 @@
                     </form>
                 </div>
 
-
                 <div id="searchOTCBtn" class="navBox bg-light ms-3 p-2 rounded shadow">
                     <i class="fa-solid fa-pills"></i>
                     <p>search OTC drug</p>
@@ -51,15 +50,6 @@
                     <i class="fa-brands fa-discourse"></i>
                     <p>e-pharmacy</p>
                 </div>
-                <!-- 
-                <form action="">
-                    <input type="text" placeholder="search OTC drugs">
-                    <button>search</button>
-                </form>
-
-                <form action="">
-                    <button>check out e-pharmacy</button>
-                </form> -->
             </nav>
             <div id="singaporeMap"></div>
 
@@ -98,7 +88,7 @@
 
                 <input id="queryDrugNameInput" class="form-control" type="text" placeholder="search by drug name...">
                 <button id="searchDrugBtn" class="btn btn-primary">Search</button>
-
+                <section id="autoComplete"></section>
                 <section id="drugContent"></section>
             </article>
         </aside>
@@ -147,7 +137,9 @@
         integrity="sha512-/Q6t3CASm04EliI1QyIDAA/nDo9R8FQ/BULoUFyN4n/BDdyIxeH7u++Z+eobdmr11gG5D/6nPFyDlnisDwhpYA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+    <script src="./javascript/readATC.js"></script>
     <script src="./javascript/drugData.js"></script>
+    <script src="./javascript/pharmacistData.js"></script>
     <script src="./javascript/main.js"></script>
     <script src="./javascript/SPA-animation.js"></script>
 </body>

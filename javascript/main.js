@@ -1,5 +1,5 @@
 async function readPharmacyLocationJson() {
-  let response = await axios.get("pharmacyLocation.geojson");
+  let response = await axios.get("../localData/pharmacyLocation.geojson");
 
   let pharmacyLocationLayer = L.geoJson(response.data, {
     onEachFeature: function (feature, layer) {
