@@ -24,6 +24,14 @@ h1 {
   position: absolute;
 }
 
+#result {
+  margin-left: 4rem;
+  margin-top: 4rem;
+  z-index: 3000;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
 #searchDrugStore {
   border-radius: 2rem;
   height: 3rem;
@@ -71,6 +79,7 @@ h1 {
   overflow-y: auto;
   background-color: rgba(255, 255, 255, 0.9);
   z-index: 3001;
+  pointer-events: none;
 }
 
 .hideLeft {

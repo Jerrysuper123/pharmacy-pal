@@ -93,6 +93,7 @@ async function extractAddressForSearch() {
     let unitNo = columns[2].innerHTML;
     let postalCode = columns[0].innerHTML;
 
+    //array[0]= address, lat, lng
     let oneAddress = [
       `${pharmacyName}, ${buildingName} blk ${blkNo} ${roadName} #${levelNo}-${unitNo} Singapore ${postalCode},`.toLowerCase(),
       lat,
@@ -103,3 +104,5 @@ async function extractAddressForSearch() {
   }
   return pharmacySearchArrayData;
 }
+
+// let searchDatabase = await extractAddressForSearch();

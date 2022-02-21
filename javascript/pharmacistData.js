@@ -9,7 +9,7 @@ async function readPharmacist() {
   let response = await axios.get(BASE_URL, {
     params: data,
   });
-  console.log(response.data.result.records);
+  // console.log(response.data.result.records);
   return response.data.result.records;
 }
 
