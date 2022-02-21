@@ -1,5 +1,11 @@
+window.addEventListener("DOMContentLoaded", async function () {
+  await readPharmacyLocationJson();
+});
+
 async function readPharmacyLocationJson() {
   let response = await axios.get("../localData/pharmacyLocation.geojson");
+
+  console.log(response.data);
 
   let pharmacyLocationLayer = L.geoJson(response.data, {
     onEachFeature: function (feature, layer) {
@@ -30,7 +36,3 @@ L.tileLayer(
       "pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw", //demo access token
   }
 ).addTo(map);
-
-window.addEventListener("DOMContentLoaded", function () {
-  readPharmacyLocationJson();
-});
