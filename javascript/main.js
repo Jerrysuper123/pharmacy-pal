@@ -1,22 +1,22 @@
-window.addEventListener("DOMContentLoaded", async function () {
-  await readPharmacyLocationJson();
+window.addEventListener("DOMContentLoaded", function () {
+  readPharmacyLocationJson();
 });
 
 async function readPharmacyLocationJson() {
   let response = await axios.get("../localData/pharmacyLocation.geojson");
 
-  console.log(response.data);
+  let locationArray = response.data.features;
 
-  let pharmacyLocationLayer = L.geoJson(response.data, {
-    onEachFeature: function (feature, layer) {
-      layer.bindPopup(feature.properties.Description);
-    },
-  }).addTo(map);
-  pharmacyLocationLayer.setStyle({
-    color: "red",
-  });
+  // return locationArray;
 
-  return pharmacyLocationLayer;
+  for (let el of locationArray) {
+    let lat = Number(el.geometry.coordinates[1]);
+    let lng = Number(el.geometry.coordinates[0]);
+    let description = el.properties.Description;
+    let marker = L.marker([lat, lng]);
+    marker.bindPopup(description);
+    marker.addTo(markerClusterGroup);
+  }
 }
 
 let singapore = [1.29, 103.85];
@@ -36,3 +36,6 @@ L.tileLayer(
       "pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw", //demo access token
   }
 ).addTo(map);
+
+let markerClusterGroup = L.markerClusterGroup();
+markerClusterGroup.addTo(map);
