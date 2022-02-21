@@ -73,7 +73,13 @@
         <!-- application brief -->
         <aside id="appBrief" class="greyContainer d-flex">
             <article class="textArea p-4">
-                <h1>About this app</h1>
+                <div class="d-flex">
+                    <h1>About this app</h1>
+                    <div id="closeAppBriefBtn" class="ms-auto display-6 text-secondary">
+                        <i class="fa-solid fa-xmark"></i>
+                    </div>
+                </div>
+
                 <p>Due to cov19, we have gradually shifted our demand on pharmacy products/services. This app is
                     designed to
                     help you find a government-registered pharmacy near your home, while providing the certified
@@ -104,6 +110,10 @@
         <!-- search OTC drug -->
         <aside id="searchOTCPage" class="greyContainer hideLeft">
             <article class="textArea2 p-4">
+                <div id="otcPageBackBtn" class="display-6 text-secondary">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    back
+                </div>
                 <h1>Check if an OTC drug is available</h1>
                 <input id="queryDrugNameInput" class="form-control" type="text" placeholder="search by drug name...">
                 <button id="searchDrugBtn" class="btn btn-primary">Search</button>
@@ -115,6 +125,10 @@
         <!-- e-pharmacy page -->
         <aside id="ePharmacyPage" class="greyContainer hideLeft">
             <article class="textArea2 p-4">
+                <div id="ePharmacyBackBtn" class="display-6 text-secondary">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    back
+                </div>
                 <h1>List of legit e-pharmacy in Singapore</h1>
 
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt aliquid, ab enim consectetur
