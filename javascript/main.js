@@ -49,6 +49,7 @@ async function main() {
             let lng = Number(el[2]);
             divElement.addEventListener("click", function () {
               map.flyTo([lat, lng], 15);
+              // need to access markers to open it up
             });
 
             resultDiv.appendChild(divElement);
