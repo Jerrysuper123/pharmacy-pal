@@ -1,6 +1,7 @@
 /* google font */
 @import url("https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto&display=swap");
 
+/* primary setting, font, shadow and border */
 body {
   font-family: "Roboto", sans-serif;
 }
@@ -9,90 +10,106 @@ h1 {
   font-family: "Archivo Black", sans-serif;
 }
 
-#singaporeMap {
-  height: 100vh;
+.shadow {
+  box-shadow: 0px 4px 1px 2px rgba(0, 0, 0, 0);
 }
 
+.customBorder {
+  border: 1px solid rgba(140, 140, 140, 0.7);
+}
+
+#singaporeMap {
+  height: 100vh;
+  z-index: 1;
+}
+
+/* main body */
 .mainContainer {
   position: relative;
 }
 
+/* search bar and returned result */
 #navBar {
   margin-left: 4rem;
   margin-top: 1rem;
-  z-index: 3000;
+  z-index: 2;
   position: absolute;
 }
 
 #result {
   margin-left: 4rem;
-  margin-top: 4rem;
-  z-index: 3000;
+  margin-top: 5rem;
   position: absolute;
-  background-color: rgba(255, 255, 255, 0.5);
+  padding: 0.5rem;
+  background-color: white;
+  z-index: 2;
 }
 
+/* search drug store nearby */
 #searchDrugStore {
   border-radius: 2rem;
-  height: 3rem;
-  width: 16rem;
-  /* width: 100%; */
+  height: 4rem;
+  width: 17rem;
 }
 
-#searchDrugStore:hover {
-  transform: scale(1.1);
-}
-
+/* all the boxes setting*/
 .navBox {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: small;
-  color: rgb(94, 94, 94);
-  width: 8rem;
-  height: 3rem;
+  text-align: center;
+  border-radius: 1rem;
+  padding-top: 1rem;
+  font-size: 0.8rem;
+  margin-left: 1rem;
+  width: 5rem;
+  height: 4rem;
+  color: grey;
 }
 
-.navBox:hover {
-  transform: scale(1.1);
+.searchBarIcon {
+  font-size: 1.5rem;
+  color: #ab5e69;
 }
 
-.shadow {
-  box-shadow: 5px 10px;
-}
-
+/* other pages, grey base */
 .greyContainer {
-  /* width: 50%; */
   height: 100vh;
   width: 100vw;
-
   background-color: rgba(57, 57, 57, 0.5);
   position: absolute;
   top: 0;
-  z-index: 3000;
+  z-index: 3;
 }
 
+/* white text area */
 .textArea {
   width: 70%;
   height: 100vh;
   overflow-y: auto;
   background-color: rgba(255, 255, 255, 0.9);
-  z-index: 3001;
-  pointer-events: none;
+}
+
+.textArea2 {
+  width: 100%;
+  height: 100vh;
+  overflow-y: auto;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* clickable area to hide the page */
+.hideClickArea {
+  width: 30%;
+  height: 100vh;
 }
 
 .hideLeft {
   transform: translateX(-100%);
-  transition: transform 1s;
+  transition: transform 0.5s;
 }
 
 .show {
   transform: translateX(0);
   transition: transform 0.5s;
-}
-
-.hideTop {
-  transform: translateY(-100%);
-  transition: transform 1s;
 }

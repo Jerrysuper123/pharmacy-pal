@@ -33,7 +33,7 @@
     <main class="mainContainer">
         <section>
             <nav id="navBar" class="d-flex align-items-center">
-                <div id="searchDrugStore" class="d-flex align-items-center border bg-light px-3 py-2 shadow">
+                <div id="searchDrugStore" class="d-flex align-items-center shadow customBorder bg-light px-3 py-2">
                     <div id="barIcon" class="mx-1"><i class="fa-solid fa-bars"></i></div>
                     <input id="searchString" type="text" class="border-0" placeholder="search by address...">
                     <div id="searchBtn" class="ms-2">
@@ -42,18 +42,24 @@
 
                 </div>
 
-                <div id="searchNearBy" class="navBox bg-light ms-3 p-2 rounded shadow">
-                    <i class="fa-solid fa-mortar-pestle"></i>
+                <div id="searchNearBy" class="navBox bg-light shadow customBorder">
+                    <div class="searchBarIcon">
+                        <i class="fa-solid fa-mortar-pestle"></i>
+                    </div>
                     <p>near me</p>
                 </div>
 
-                <div id="searchOTCBtn" class="navBox bg-light ms-3 p-2 rounded shadow">
-                    <i class="fa-solid fa-pills"></i>
-                    <p>search OTC drug</p>
+                <div id="searchOTCBtn" class="navBox bg-light shadow customBorder">
+                    <div class="searchBarIcon">
+                        <i class="fa-solid fa-pills"></i>
+                    </div>
+                    <p>search drug</p>
                 </div>
 
-                <div id="ePharmacyBtn" class="navBox bg-light ms-3 p-2 rounded shadow">
-                    <i class="fa-brands fa-discourse"></i>
+                <div id="ePharmacyBtn" class="navBox bg-light shadow customBorder">
+                    <div class="searchBarIcon">
+                        <i class="fa-brands fa-discourse"></i>
+                    </div>
                     <p>e-pharmacy</p>
                 </div>
             </nav>
@@ -61,38 +67,43 @@
                 <div id="result"></div>
             </section>
             <div id="singaporeMap"></div>
-
         </section>
 
 
         <!-- application brief -->
-        <aside id="appBrief" class="greyContainer hideLeft">
+        <aside id="appBrief" class="greyContainer d-flex">
             <article class="textArea p-4">
                 <h1>About this app</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt aliquid, ab enim consectetur
-                    voluptate
-                    commodi accusamus magni corporis! Deleniti esse, assumenda repellat optio alias iure ipsum illo sunt
-                    officia
-                    magni.</p>
-
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt aliquid, ab enim consectetur
-                    voluptate
-                    commodi accusamus magni corporis! Deleniti esse, assumenda repellat optio alias iure ipsum illo sunt
-                    officia
-                    magni.</p>
-
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt aliquid, ab enim consectetur
-                    voluptate
-                    commodi accusamus magni corporis! Deleniti esse, assumenda repellat optio alias iure ipsum illo sunt
-                    officia
-                    magni.</p>
-                <div><i class="fa-brands fa-github"></i></div>
+                <p>Due to cov19, we have gradually shifted our demand on pharmacy products/services. This app is
+                    designed to
+                    help you find a government-registered pharmacy near your home, while providing the certified
+                    pharmacist's name to ensure the authencity of the service.</p>
+                <p>In addition, you could research on the desired OTC drugs before making physical visits.</p>
+                <ol>
+                    <li>whether the drug is an otc drug</li>
+                    <li>ingredient, usage etc..</li>
+                </ol>
+                <P>Against a backdrop of many rising fake online pharmacy, we also provide a curated list of
+                    government-registered e-pharmacy, enabling you to seek pharmacy consultation at your fingertips.</P>
+                <h2>Start here now</h2>
+                <div>
+                    <input type="text" class="form-control">
+                    <button class="btn btn-primary">search nearby pharmacy</button>
+                </div>
+                <div>
+                    <a href="https://github.com/Jerrysuper123/visitPharmacy">
+                        <i class="fa-brands fa-github"></i>
+                    </a>
+                </div>
             </article>
+
+            <div class="hideClickArea" id="appBriefHide">
+            </div>
         </aside>
 
         <!-- search OTC drug -->
-        <aside id="searchOTCPage" class="greyContainer hideTop">
-            <article class="textArea p-4">
+        <aside id="searchOTCPage" class="greyContainer hideLeft">
+            <article class="textArea2 p-4">
                 <h1>Check if an OTC drug is available</h1>
                 <input id="queryDrugNameInput" class="form-control" type="text" placeholder="search by drug name...">
                 <button id="searchDrugBtn" class="btn btn-primary">Search</button>
@@ -102,20 +113,9 @@
         </aside>
 
         <!-- e-pharmacy page -->
-        <aside id="ePharmacyPage" class="greyContainer hideTop">
-            <article class="textArea p-4">
+        <aside id="ePharmacyPage" class="greyContainer hideLeft">
+            <article class="textArea2 p-4">
                 <h1>List of legit e-pharmacy in Singapore</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt aliquid, ab enim consectetur
-                    voluptate
-                    commodi accusamus magni corporis! Deleniti esse, assumenda repellat optio alias iure ipsum illo sunt
-                    officia
-                    magni.</p>
-
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt aliquid, ab enim consectetur
-                    voluptate
-                    commodi accusamus magni corporis! Deleniti esse, assumenda repellat optio alias iure ipsum illo sunt
-                    officia
-                    magni.</p>
 
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt aliquid, ab enim consectetur
                     voluptate
@@ -146,6 +146,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script src="./javascript/readATC.js"></script>
+    <script src="./javascript/getUserLocation.js"></script>
     <script src="./javascript/readLocation.js"></script>
     <script src="./javascript/readLocation.js"></script>
     <script src="./javascript/drugData.js"></script>
