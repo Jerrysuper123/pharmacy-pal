@@ -1,5 +1,6 @@
 async function readPharmacyLocationJson(map) {
   let response = await axios.get("../localData/pharmacyLocation.geojson");
+  let pharmacistNames = await extractPharmacistData();
 
   let locationArray = response.data.features;
   let markerClusterGroup = L.markerClusterGroup();
@@ -24,6 +25,14 @@ async function readPharmacyLocationJson(map) {
     let levelNo = columns[3].innerHTML;
     let unitNo = columns[2].innerHTML;
     let postalCode = columns[0].innerHTML;
+    let pharmacistName = "";
+
+    // if there is pharmacist name data, add to the pop up;
+    if (pharmacistNames[postalCode]) {
+      pharmacistName = pharmacistNames[postalCode];
+    } else {
+      pharmacistName = "Pharmacist name currently unavailable";
+    }
 
     marker.bindPopup(`
       <ul>
@@ -31,6 +40,7 @@ async function readPharmacyLocationJson(map) {
         <li>${buildingName}</li>
         <li>Blk ${blkNo} ${roadName} #${levelNo}-${unitNo}</li>
         <li>Singapore ${postalCode}</li>
+        <li>${pharmacistName}</li>
       </ul>
       `);
 
