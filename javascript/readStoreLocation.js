@@ -101,7 +101,6 @@ async function extractAddressForSearch() {
       pharmacistName = "Pharmacist name currently unavailable";
     }
 
-    //array[0]= address, lat, lng, pharmacist name
     let oneAddress = [
       `${pharmacyName}, ${buildingName}, blk ${blkNo}, ${roadName}, #${levelNo}-${unitNo}, Singapore ${postalCode},`.toLowerCase(),
       lat,
