@@ -25,36 +25,49 @@ async function main() {
     let map = initMap();
 
     window.addEventListener("DOMContentLoaded", async function () {
-      // let addressesForSearch = await extractAddressForSearch();
-      await readPharmacyLocationJson(map);
-      let searchData = await extractAddressForSearch();
-
-      //this has to go into readLocation.js so that marker could be clicked too
+      let searchDataArray = await extractAddressForSearch();
+      let searchResultLayer = L.layerGroup();
       document
         .querySelector("#searchBtn")
-        .addEventListener("click", function () {
-          // console.log("search btn");
+        .addEventListener("click", function (event) {
+          event.preventDefault();
+
+          searchResultLayer.clearLayers();
           let searchString = document.querySelector("#searchString").value;
-          // // console.log(searchString);
-          let filteredResult = searchData.filter((el) =>
+          let filteredResult = searchDataArray.filter((el) =>
             el[0].includes(searchString.toLowerCase())
           );
 
           let resultDiv = document.querySelector("#result");
           resultDiv.innerHTML = "";
+
           for (el of filteredResult) {
-            let divElement = document.createElement("div");
-            divElement.innerHTML = el[0].split(",")[0];
+            //create marker based on filteredResult;
             let lat = Number(el[1]);
             let lng = Number(el[2]);
+            let address = el[0];
+            let pharmacistName = el[3];
+            let marker = L.marker([lat, lng]);
+            marker.bindPopup(`
+          <ul>
+            <li>${address}</li>
+            <li>${pharmacistName}</li>
+          </ul>
+          `);
+            marker.addTo(searchResultLayer);
+
+            //create search result list and add event listener to each result
+            let divElement = document.createElement("div");
+            divElement.innerHTML = el[0].split(",")[0];
             divElement.addEventListener("click", function () {
               map.flyTo([lat, lng], 15);
-              // need to access markers to open it up
+              marker.openPopup();
             });
 
             resultDiv.appendChild(divElement);
           }
         });
+      searchResultLayer.addTo(map);
     });
   }
   init();

@@ -35,10 +35,13 @@
             <nav id="navBar" class="d-flex align-items-center">
                 <div id="searchDrugStore" class="d-flex align-items-center shadow customBorder bg-light px-3 py-2">
                     <div id="barIcon" class="mx-1"><i class="fa-solid fa-bars"></i></div>
-                    <input id="searchString" type="text" class="border-0" placeholder="search by address...">
-                    <div id="searchBtn" class="ms-2">
-                        <i class=" fa-solid fa-magnifying-glass-location"></i>
-                    </div>
+
+                    <form action="" class="d-flex ms-1">
+                        <input id="searchString" type="text" class="border-0" placeholder="search by address...">
+                        <button id="searchBtn" class="ms-2 bg-light border-0">
+                            <i class=" fa-solid fa-magnifying-glass-location"></i>
+                        </button>
+                    </form>
 
                 </div>
 
@@ -71,7 +74,7 @@
 
 
         <!-- application brief -->
-        <aside id="appBrief" class="greyContainer d-flex">
+        <aside id="appBrief" class="greyContainer d-flex hideLeft">
             <article class="textArea p-4">
                 <div class="d-flex">
                     <h1>About this app</h1>
@@ -161,7 +164,7 @@
 
     <script src="./javascript/readATC.js"></script>
     <script src="./javascript/getUserLocation.js"></script>
-    <script src="./javascript/readLocation.js"></script>
+    <script src="./javascript/readStoreLocation.js"></script>
     <script src="./javascript/readLocation.js"></script>
     <script src="./javascript/drugData.js"></script>
     <script src="./javascript/pharmacistData.js"></script>

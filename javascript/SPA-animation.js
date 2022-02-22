@@ -1,4 +1,4 @@
-//show app brief through the barIcon
+// show app brief through the barIcon
 document.querySelector("#barIcon").addEventListener("click", function () {
   let page = document.querySelector("#appBrief");
   page.classList.remove("hideLeft");

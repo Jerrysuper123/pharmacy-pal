@@ -68,6 +68,7 @@ async function readPharmacyLocationJson(map) {
 
 async function extractAddressForSearch() {
   let response = await axios.get("../localData/pharmacyLocation.geojson");
+  let pharmacistNames = await extractPharmacistData();
 
   let pharmacySearchArrayData = [];
 
@@ -92,12 +93,20 @@ async function extractAddressForSearch() {
     let levelNo = columns[3].innerHTML;
     let unitNo = columns[2].innerHTML;
     let postalCode = columns[0].innerHTML;
+    let pharmacistName = "";
 
-    //array[0]= address, lat, lng
+    if (pharmacistNames[postalCode]) {
+      pharmacistName = pharmacistNames[postalCode];
+    } else {
+      pharmacistName = "Pharmacist name currently unavailable";
+    }
+
+    //array[0]= address, lat, lng, pharmacist name
     let oneAddress = [
-      `${pharmacyName}, ${buildingName} blk ${blkNo} ${roadName} #${levelNo}-${unitNo} Singapore ${postalCode},`.toLowerCase(),
+      `${pharmacyName}, ${buildingName}, blk ${blkNo}, ${roadName}, #${levelNo}-${unitNo}, Singapore ${postalCode},`.toLowerCase(),
       lat,
       lng,
+      pharmacistName,
     ];
 
     pharmacySearchArrayData.push(oneAddress);

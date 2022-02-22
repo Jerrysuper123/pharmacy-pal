@@ -68,6 +68,16 @@ h1 {
   color: grey;
 }
 
+#searchBtn {
+  font-size: 1.5rem;
+  color: #ab5e69;
+}
+
+#barIcon {
+  font-size: 1.5rem;
+  color: #ab5e69;
+}
+
 .searchBarIcon {
   font-size: 1.5rem;
   color: #ab5e69;
