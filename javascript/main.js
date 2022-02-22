@@ -23,6 +23,15 @@ function initMap() {
 async function main() {
   async function init() {
     let map = initMap();
+
+    //leaflet routing services 
+    L.Routing.control({
+      waypoints: [
+        L.latLng(1.3590, 103.7637),
+        L.latLng(1.3061, 103.8832)
+      ],
+      routeWhileDragging: true
+    }).addTo(map);
     
     //get user location and put on a marker
     let options = {
