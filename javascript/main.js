@@ -23,6 +23,36 @@ function initMap() {
 async function main() {
   async function init() {
     let map = initMap();
+    
+    //get user location and put on a marker
+    let options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0
+    };
+  
+    function success(pos) {
+      let crd = pos.coords;
+      console.log("Your current position is:");
+      console.log(`Latitude : ${crd.latitude}`);
+      console.log(`Longitude: ${crd.longitude}`);
+  
+      let lat = crd.latitude;
+      let lng = crd.longitude;
+      
+      let userMaker = L.marker([lat, lng]);
+      userMaker.bindPopup("You are here!");
+      userMaker.addTo(map);
+      map.flyTo([lat,lng],15);
+      userMaker.openPopup();
+    }
+  
+    function error(err) {
+      console.warn(`ERROR(${err.code}): ${err.message}`);
+      alert("Please allow us to access your location to find the pharmacy near you!")
+    }
+  
+    navigator.geolocation.getCurrentPosition(success, error, options);
 
     window.addEventListener("DOMContentLoaded", async function () {
       let searchDataArray = await extractAddressForSearch();
