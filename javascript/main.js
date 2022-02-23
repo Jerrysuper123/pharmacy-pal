@@ -20,52 +20,73 @@ function initMap() {
   return map;
 }
 
+
 async function main() {
   async function init() {
     let map = initMap();
 
-    //leaflet routing services 
-    L.Routing.control({
-      waypoints: [
-        L.latLng(1.3590, 103.7637),
-        L.latLng(1.3061, 103.8832)
-      ],
-      routeWhileDragging: true
-    }).addTo(map);
-    
-    //get user location and put on a marker
-    let options = {
-      enableHighAccuracy: true,
-      timeout: 5000,
-      maximumAge: 0
-    };
-  
-    function success(pos) {
-      let crd = pos.coords;
-      console.log("Your current position is:");
-      console.log(`Latitude : ${crd.latitude}`);
-      console.log(`Longitude: ${crd.longitude}`);
-  
-      let lat = crd.latitude;
-      let lng = crd.longitude;
-      
-      let userMaker = L.marker([lat, lng]);
-      userMaker.bindPopup("You are here!");
-      userMaker.addTo(map);
-      map.flyTo([lat,lng],15);
-      userMaker.openPopup();
-    }
-  
-    function error(err) {
-      console.warn(`ERROR(${err.code}): ${err.message}`);
-      alert("Please allow us to access your location to find the pharmacy near you!")
-    }
-  
-    navigator.geolocation.getCurrentPosition(success, error, options);
-
     window.addEventListener("DOMContentLoaded", async function () {
       let searchDataArray = await extractAddressForSearch();
       let searchResultLayer = L.layerGroup();
+
+      //find the nearby pharmacy
+      document.querySelector("#searchNearByBtn")
+        .addEventListener("click", function () {
+          
+          let options = {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0
+          };
+
+          //get user location 
+          function success(pos) {
+            let crd = pos.coords;
+            console.log("Your current position is:");
+            console.log(`Latitude : ${crd.latitude}`);
+            console.log(`Longitude: ${crd.longitude}`);
+
+            let lat = crd.latitude;
+            let lng = crd.longitude;
+
+            let nearbyLatLng = [];
+            let minDistance = Infinity;
+            for (let el of searchDataArray) {
+              let lat2 = Number(el[1]);
+              let lng2 = Number(el[2]);
+
+              //cal distance(km) between 2 coordinates
+              let distance = calDistance(lat, lng, lat2, lng2);
+
+              //get the coordinates of the min-distanced pharmacy
+              if (distance < minDistance) {
+                minDistance = distance;
+                nearbyLatLng = [];
+                nearbyLatLng.push(lat2, lng2);
+              }
+            }
+
+            //draw the route, add to map
+            L.Routing.control({
+              waypoints: [
+                L.latLng(lat, lng),
+                L.latLng(nearbyLatLng[0], nearbyLatLng[1])
+              ],
+              routeWhileDragging: true
+            }).addTo(map);
+
+            map.flyTo([lat, lng], 13);
+          }
+
+          function error(err) {
+            console.warn(`ERROR(${err.code}): ${err.message}`);
+            alert("Please allow us to access your location to find the pharmacy near you!")
+          }
+
+          navigator.geolocation.getCurrentPosition(success, error, options);
+        })
+
+      // search for pharmacy through address
       document
         .querySelector("#searchBtn")
         .addEventListener("click", function (event) {
@@ -113,4 +134,4 @@ async function main() {
 }
 
 main();
-// let addressesForSearch = await extractAddressForSearch();
+
