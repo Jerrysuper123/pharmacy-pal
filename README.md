@@ -1,6 +1,47 @@
 //find a route and directions
+endless medical free to do symptom checker to know your illness
+https://endlessmedical.com/SymptomChecker/
+
 ESRI leaflet
 https://developers.arcgis.com/esri-leaflet/route-and-directions/find-a-route-and-directions/
+
+Illness and their treatment api
+https://documenter.getpostman.com/view/4692440/RWEmKHEN
+https://www.altexsoft.com/blog/healthcare-api-overview/
+https://rapidapi.com/lukaszkiljanek/api/endlessmedicalapi1/
+https://www.altexsoft.com/blog/healthcare-api-overview/
+https://dailymed.nlm.nih.gov/dailymed/app-support-web-services.cfm
+https://www.altexsoft.com/blog/drug-data-openfda-dailymed-rxnorm-goodrx/
+
+Disclaimer:
+Please consult your pharmacist or medication doctors before taking the medication.
+All results in 
+
+1. User key in symptoms/illness - explained by wikipedia what it is (with image)
+2. Return possible drugs for it (source: FDA)
+3. Drug usage (source: FDA)
+4. Check if this drug is available in the pharmacy (Source: HSA)
+
+Can we display chart? Reported cases averse effects.
+Averse effects by year and type (till date)
+Some sample adverse effect samples
+https://api.fda.gov/drug/event.json?search=patient.drug.medicinalproduct:”Panadol”
+
+Let BASE_URL = “https://api.fda.gov/drug/event.json?search=”
+
+Congrats! Your API Key is:IIkjoiok33N5aEpSrb9XDMHXw7PPdiXZc2NFfYHL
+
+# below is the right way search by generic or brand name drug, but only return 1 adverse case
+https://api.fda.gov/drug/event.json?api_key=IIkjoiok33N5aEpSrb9XDMHXw7PPdiXZc2NFfYHL&search=patient.drug.medicinalproduct:"panadol"
+
+# try to get date range in place
+https://api.fda.gov/drug/event.json?api_key=IIkjoiok33N5aEpSrb9XDMHXw7PPdiXZc2NFfYHL&search=patient.drug.medicinalproduct:"panadol" & search=receivedate:[20040101+TO+20081231]
+
+https://open.fda.gov/apis/drug/event/searchable-fields/
+string
+Drug name. This may be the valid trade name of the product (such as ADVIL or ALEVE) or the generic name (such as IBUPROFEN). This field is not systematically normalized. It may contain misspellings or idiosyncratic descriptions of drugs, such as combination products such as those used for birth control.
+This is an .exact field. It has been indexed both as its exact string content, and also tokenized.
+* 		search=patient.drug.medicinalproduct:"FOO+BAR" Searches for records where either FOO or BAR appear anywhere in this field. 
 
 # visitPharmacy Application
 
