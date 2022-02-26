@@ -12,35 +12,36 @@ async function readDisease() {
     // let response = await axios.get("https://en.wikipedia.org/w/api.php?action=parse&page=cough&prop=text")
 
     //below return short description of the disease
-    let response = await axios.get("https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=tuberculosis")
-    console.log(response);
+    // https://en.wikipedia.org/w/api.php?format=json&action=query&page=cough
+    //wikipedia api not working
+    // let response = await axios.get(`https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=disease`)
+    console.log(response.query.pages[8072].extract);
+}
+
+//credit: https://open.fda.gov/apis/drug/event/explore-the-api-with-an-interactive-chart/
+//below shows the most popular API from US FDA
+//credit:https://open.fda.gov/about/statistics/
+//below gets the side effects incidents reported from 2014 to current date
+async function getAdverseEventOverTime(drugName) {
+    const DRUGEVENT_BASE_URL = "https://api.fda.gov/drug/event.json"; 
+    let response = await axios.get(`https://api.fda.gov/drug/event.json?search=(receivedate:[20040101+TO+20220225])+AND+${drugName}&count=receivedate`);
+    
+    return response.data.results;
 }
 
 
+//below gets the side effects type reported from 2014 to current date
+async function getAdverseEventType(drugName) {
+    const DRUGEVENT_BASE_URL = "https://api.fda.gov/drug/event.json"; 
+    let response = await axios.get(`https://api.fda.gov/drug/event.json?search=(receivedate:[20040101+TO+20220226])+AND+${drugName}&count=patient.reaction.reactionmeddrapt.exact`);
+    return response.data.results;
+}
 
-
-// async function getDrug() {
-//     const OPENFDA_API_KEY = "IIkjoiok33N5aEpSrb9XDMHXw7PPdiXZc2NFfYHL";
-//     // Congrats! Your API Key is:IIkjoiok33N5aEpSrb9XDMHXw7PPdiXZc2NFfYHL
-//     // https://api.fda.gov/drug/event.json?api_key=yourAPIKeyHere&search=...
-//     // const FAD_BASE_URL = "https://api.fda.gov/drug/label.json?search=purpose";
-
-
-//     //a bit bad returns inconistent object, hard to manage
-//     let response = await axios.get("https://api.fda.gov/drug/label.json?search=purpose:covid&limit=5");
-//     // let response = await axios.get(FAD_BASE_URL);
-//     console.log(response.data);
-// }
-
+//return drug name by users' symptoms and disease
 async function getDrug(symptom) {
     const OPENFDA_API_KEY = "IIkjoiok33N5aEpSrb9XDMHXw7PPdiXZc2NFfYHL";
-    // Congrats! Your API Key is:IIkjoiok33N5aEpSrb9XDMHXw7PPdiXZc2NFfYHL
-    // https://api.fda.gov/drug/event.json?api_key=yourAPIKeyHere&search=...
     const DRUGLABEL_BASE_URL = "https://api.fda.gov/drug/label.json";
 
-
-    //a bit bad returns inconistent object, hard to manage
-    // let response = await axios.get("https://api.fda.gov/drug/label.json?search=purpose:covid&limit=5");
     let response = await axios.get(DRUGLABEL_BASE_URL,{
         params:{
             api_key: OPENFDA_API_KEY,
@@ -48,8 +49,6 @@ async function getDrug(symptom) {
             limit: 5
         }
     });
-    
-    // let response = await axios.get(FAD_BASE_URL);
-    // console.log(response.data.results);
+
     return response.data.results;
 }
