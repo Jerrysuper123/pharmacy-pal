@@ -5,17 +5,46 @@
 //3. whether available in pharmacy
 
 async function readDisease() {
-    //not very useful, only return 46 disease type below, symptoms also, not very clear
-    // let response = await axios.get("https://disease-info-api.herokuapp.com/diseases.json")
+    const endpoint = 'https://en.wikipedia.org/w/api.php?';
+    const params = {
+        origin: '*',
+        format: 'json',
+        // peform query action on wiki
+        action: 'query',
+        // return extracts of the given page
+        prop: 'extracts',
+        //return content before the first section
+        exintro: true,
+        //return in plain text
+        explaintext: true,
+        generator: 'search',
+        gsrlimit: 1,
+    };
 
-    //below is the wikipea return full page of a disease
-    // let response = await axios.get("https://en.wikipedia.org/w/api.php?action=parse&page=cough&prop=text")
+    params.gsrsearch = "covid19";
+       let response = await axios.get(endpoint, { params });
+       console.log(response);
+        
+}
 
-    //below return short description of the disease
-    // https://en.wikipedia.org/w/api.php?format=json&action=query&page=cough
-    //wikipedia api not working
-    // let response = await axios.get(`https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=disease`)
-    console.log(response.query.pages[8072].extract);
+async function getImage(){
+
+    //credit to pexels
+    // <a href="https://www.pexels.com">Photos provided by Pexels</a>
+    const PEXEL_API_KEY = "563492ad6f91700001000001b48bc8b04e5c404db7fbfccf0d8824a2";
+        const endpoint = 'https://api.pexels.com/v1/search';
+        let response = await axios.get(endpoint, {
+            params: {
+              query: "cough",
+              per_page: 1,
+              size: "small"
+            },
+        
+            headers: {
+              Authorization: PEXEL_API_KEY,
+            },
+          });
+        console.log(response);
 }
 
 //credit: https://open.fda.gov/apis/drug/event/explore-the-api-with-an-interactive-chart/
@@ -23,16 +52,16 @@ async function readDisease() {
 //credit:https://open.fda.gov/about/statistics/
 //below gets the side effects incidents reported from 2014 to current date
 async function getAdverseEventOverTime(drugName) {
-    const DRUGEVENT_BASE_URL = "https://api.fda.gov/drug/event.json"; 
+    const DRUGEVENT_BASE_URL = "https://api.fda.gov/drug/event.json";
     let response = await axios.get(`https://api.fda.gov/drug/event.json?search=(receivedate:[20040101+TO+20220225])+AND+${drugName}&count=receivedate`);
-    
+
     return response.data.results;
 }
 
 
 //below gets the side effects type reported from 2014 to current date
 async function getAdverseEventType(drugName) {
-    const DRUGEVENT_BASE_URL = "https://api.fda.gov/drug/event.json"; 
+    const DRUGEVENT_BASE_URL = "https://api.fda.gov/drug/event.json";
     let response = await axios.get(`https://api.fda.gov/drug/event.json?search=(receivedate:[20040101+TO+20220226])+AND+${drugName}&count=patient.reaction.reactionmeddrapt.exact`);
     return response.data.results;
 }
@@ -42,10 +71,10 @@ async function getDrug(symptom) {
     const OPENFDA_API_KEY = "IIkjoiok33N5aEpSrb9XDMHXw7PPdiXZc2NFfYHL";
     const DRUGLABEL_BASE_URL = "https://api.fda.gov/drug/label.json";
 
-    let response = await axios.get(DRUGLABEL_BASE_URL,{
-        params:{
+    let response = await axios.get(DRUGLABEL_BASE_URL, {
+        params: {
             api_key: OPENFDA_API_KEY,
-            search: "purpose:"+ symptom,
+            search: "purpose:" + symptom,
             limit: 5
         }
     });
