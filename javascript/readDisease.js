@@ -9,6 +9,9 @@ async function readDisease(){
     // let response = await axios.get("https://disease-info-api.herokuapp.com/diseases.json")
 
     //below is the wikipea return full page of a disease
-    let response = await axios.get("https://en.wikipedia.org/w/api.php?action=parse&page=cough&prop=text")
+    // let response = await axios.get("https://en.wikipedia.org/w/api.php?action=parse&page=cough&prop=text")
+
+    //below return short description of the disease
+    let response = await axios.get("https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=tuberculosis")
     console.log(response);
 }

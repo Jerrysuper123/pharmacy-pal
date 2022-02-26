@@ -2,8 +2,6 @@
 endless medical free to do symptom checker to know your illness
 https://endlessmedical.com/SymptomChecker/
 
-ESRI leaflet
-https://developers.arcgis.com/esri-leaflet/route-and-directions/find-a-route-and-directions/
 
 Illness and their treatment api
 https://documenter.getpostman.com/view/4692440/RWEmKHEN
