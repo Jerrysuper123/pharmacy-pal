@@ -15,6 +15,7 @@ Disclaimer:
 Please consult your pharmacist or medication doctors before taking the medication.
 All results in 
 
+1.check supplements or drugs
 1. User key in symptoms/illness - explained by wikipedia what it is (with image)
 2. Return possible drugs for it (source: FDA)
 3. Drug usage (source: FDA)
