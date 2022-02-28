@@ -4,7 +4,7 @@
 //2. decide kind of drug
 //3. whether available in pharmacy
 
-async function readDisease() {
+async function readDisease(diseaseName) {
     const endpoint = 'https://en.wikipedia.org/w/api.php?';
     const params = {
         origin: '*',
@@ -21,14 +21,13 @@ async function readDisease() {
         gsrlimit: 1,
     };
 
-    params.gsrsearch = "covid19";
+    params.gsrsearch = diseaseName;
        let response = await axios.get(endpoint, { params });
        console.log(response);
         
 }
 
 async function getImage(){
-
     //credit to pexels
     // <a href="https://www.pexels.com">Photos provided by Pexels</a>
     const PEXEL_API_KEY = "563492ad6f91700001000001b48bc8b04e5c404db7fbfccf0d8824a2";
