@@ -30,8 +30,8 @@ async function main() {
       options: {
         //width and height
         iconSize: [37, 40],
-        iconAnchor:   [22, 94],
-        popupAnchor:  [-3, -76]
+        iconAnchor: [22, 94],
+        popupAnchor: [-3, -76]
       }
     });
 
@@ -111,7 +111,7 @@ async function main() {
           searchResultLayer.clearLayers();
           let searchString = document.querySelector("#searchString").value;
           let filteredResult = searchDataArray.filter((el) =>
-            el[0].includes(searchString.toLowerCase())
+            el[0].toLowerCase().includes(searchString.toLowerCase())
           );
 
           let resultDiv = document.querySelector("#result");
@@ -121,22 +121,42 @@ async function main() {
             //create marker based on filteredResult;
             let lat = Number(el[1]);
             let lng = Number(el[2]);
-            let address = el[0];
+            let addressArray = el[0].split(",");
+            let name = addressArray[0].toUpperCase();
+            let address = addressArray.slice(1);
             let pharmacistName = el[3];
-            let marker = L.marker([lat, lng],{icon: pharmacyIcon});
-            marker.bindPopup(`
-          <ul>
-            <li>${address}</li>
-            <li>${pharmacistName}</li>
-          </ul>
-          `);
+            let marker = L.marker([lat, lng], { icon: pharmacyIcon });
+
+            let popUpElement = document.createElement("div");
+            let textElement = document.createElement("div");
+            textElement.innerHTML = `
+            <h1 class="headerText">${name}</h1>
+            <p>Address: ${address}</p>
+            <p>Registered Pharmacist: ${pharmacistName}</p>
+            `;
+
+            let directionDivElement = document.createElement("div");
+            // directionButton.classList.add("ms-auto");
+            directionDivElement.innerHTML = `
+            <button class="btn btn-info">
+            direction <i class="fa-solid fa-diamond-turn-right"></i>
+            </button>
+            `;
+
+            popUpElement.appendChild(textElement);
+            popUpElement.appendChild(directionDivElement);
+
+            marker.bindPopup(
+              popUpElement
+            );
             marker.addTo(searchResultLayer);
 
             //create search result list and add event listener to each result
             let divElement = document.createElement("div");
             divElement.innerHTML = el[0].split(",")[0];
             divElement.addEventListener("click", function () {
-              map.flyTo([lat, lng], 15);
+              resultDiv.innerHTML = "";
+              map.flyTo([lat, lng], 13);
               marker.openPopup();
             });
 
