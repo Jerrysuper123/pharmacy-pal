@@ -25,6 +25,22 @@ async function main() {
   async function init() {
     let map = initMap();
 
+    //change the marker
+    let LeafIcon = L.Icon.extend({
+      options: {
+        //width and height
+        iconSize: [37, 40],
+        iconAnchor:   [22, 94],
+        popupAnchor:  [-3, -76]
+      }
+    });
+
+    let pharmacyIcon = new LeafIcon({
+      iconUrl: './images/pharmacy.png',
+    })
+
+    // L.marker([1.35, 103.81], {icon: pharmacyIcon}).addTo(map);
+
     window.addEventListener("DOMContentLoaded", async function () {
       let searchDataArray = await extractAddressForSearch();
       let searchResultLayer = L.layerGroup();
@@ -32,7 +48,7 @@ async function main() {
       //find the nearby pharmacy
       document.querySelector("#searchNearByBtn")
         .addEventListener("click", function () {
-          
+
           let options = {
             enableHighAccuracy: true,
             timeout: 5000,
@@ -107,7 +123,7 @@ async function main() {
             let lng = Number(el[2]);
             let address = el[0];
             let pharmacistName = el[3];
-            let marker = L.marker([lat, lng]);
+            let marker = L.marker([lat, lng],{icon: pharmacyIcon});
             marker.bindPopup(`
           <ul>
             <li>${address}</li>
