@@ -30,7 +30,7 @@ async function extractAddressForSearch() {
     if (pharmacistNames[columns[0].innerHTML]) {
       pharmacistName = pharmacistNames[columns[0].innerHTML];
     } else {
-      pharmacistName = "Pharmacist name currently unavailable";
+      pharmacistName = "N.A.";
     }
     //[["address", lat,lng, name],[...]]
     let oneAddress = [

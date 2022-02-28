@@ -122,7 +122,7 @@ async function main() {
             let lat = Number(el[1]);
             let lng = Number(el[2]);
             let addressArray = el[0].split(",");
-            let name = addressArray[0].toUpperCase();
+            let name = addressArray[0];
             let address = addressArray.slice(1);
             let pharmacistName = el[3];
             let marker = L.marker([lat, lng], { icon: pharmacyIcon });
@@ -130,9 +130,16 @@ async function main() {
             let popUpElement = document.createElement("div");
             popUpElement.classList.add("makerPopUp");
             popUpElement.innerHTML = `
-            <h1>${name}</h1>
-            <p>Registered Pharmacist: ${pharmacistName}</p>
-            <p class="subText">Address: ${address}</p>
+            <h1 class="m-0">${name}</h1>
+            <div class="d-flex align-items-center my-2">
+              <i class="fa-solid fa-user-nurse markerAvatar me-3"></i>
+              <section>
+                <p class="fw-bold m-0">Registered Pharmacist</p>
+                <p class="my-1">Name: ${pharmacistName}</p>
+                <p class="m-0 p-0">Experience: <i class="fa-solid fa-ellipsis"></i></p>
+              </section/>
+            </div>
+            <p class="address subText"><i class="fa-solid fa-location-dot"></i> ${address}</p>
             `;
 
             let directionDivElement = document.createElement("div");
