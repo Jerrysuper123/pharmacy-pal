@@ -6,8 +6,21 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
-.headerText {
+.popUpHeader{
+  background-color: #ab5e69;
+  color: white;
   font-family: "Archivo Black", sans-serif;
+  font-size: 1rem;
+  width: 100%;
+  padding: 0.5rem;
+}
+
+.directionButton{
+  margin-left: 12rem;
+}
+
+.headerText {
+  /* font-family: "Archivo Black", sans-serif; */
   font-size: 1rem;
 }
 

@@ -130,7 +130,9 @@ async function main() {
             let popUpElement = document.createElement("div");
             let textElement = document.createElement("div");
             textElement.innerHTML = `
-            <h1 class="headerText">${name}</h1>
+            <div class="popUpHeader">
+             <div>${name}</div>
+            </div>
             <p>Address: ${address}</p>
             <p>Registered Pharmacist: ${pharmacistName}</p>
             `;
@@ -138,7 +140,7 @@ async function main() {
             let directionDivElement = document.createElement("div");
             // directionButton.classList.add("ms-auto");
             directionDivElement.innerHTML = `
-            <button class="btn btn-info">
+            <button class="btn btn-info directionButton">
             direction <i class="fa-solid fa-diamond-turn-right"></i>
             </button>
             `;
