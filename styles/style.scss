@@ -1,0 +1,37 @@
+@import "./constant";
+@import './marker';
+@import "./mapPage";
+@import "./appBriefPage";
+
+#singaporeMap {
+  height: 100vh;
+  z-index: 1;
+}
+
+/* main body */
+.mainContainer {
+  position: relative;
+}
+
+.primaryPageBackground {
+  width: 100%;
+  height: 100vh;
+  overflow-y: auto;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* clickable area to hide the page */
+.hideClickArea {
+  width: 30%;
+  height: 100vh;
+}
+
+.hideLeft {
+  transform: translateX(-100%);
+  transition: transform 0.5s;
+}
+
+.show {
+  transform: translateX(0);
+  transition: transform 0.5s;
+}

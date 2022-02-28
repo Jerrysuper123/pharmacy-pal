@@ -1,45 +1,46 @@
 /* google font */
-@import url("https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lora&family=Roboto&display=swap");
+/* color setting */
+/* font family and size setting */
+h1 {
+  font-family: "Lora", serif;
+  font-size: 1.5rem;
+}
 
-/* primary setting, font, shadow and border */
 body {
   font-family: "Roboto", sans-serif;
 }
 
-.popUpHeader{
-  background-color: #ab5e69;
-  color: white;
-  font-family: "Archivo Black", sans-serif;
-  font-size: 1rem;
-  width: 100%;
-  padding: 0.5rem;
+.subText {
+  font-family: "Roboto", sans-serif;
+  font-size: 0.7rem;
+  font-style: italic;
+  color: grey;
 }
 
-.directionButton{
-  margin-left: 12rem;
-}
-
-.headerText {
-  /* font-family: "Archivo Black", sans-serif; */
-  font-size: 1rem;
-}
-
-.shadow {
-  box-shadow: 0px 4px 1px 2px rgba(0, 0, 0, 0);
-}
-
+/* border setting */
 .customBorder {
   border: 1px solid rgba(140, 140, 140, 0.7);
 }
 
-#singaporeMap {
-  height: 100vh;
-  z-index: 1;
+/*icon size and color*/
+.primaryIconStyle {
+  color: #ab5e69;
+  font-size: 1.5rem;
+}
+.primaryIconStyle:hover {
+  color: #8fb095;
 }
 
-/* main body */
-.mainContainer {
-  position: relative;
+.makerPopUp h1 {
+  background-color: #ab5e69;
+  color: white;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+.makerPopUp button {
+  margin-left: 12rem;
+  color: white;
 }
 
 /* search bar and returned result */
@@ -60,14 +61,18 @@ body {
 }
 
 /* search drug store nearby */
-#searchDrugStore {
+#searchByAddressBar {
   border-radius: 2rem;
   height: 4rem;
   width: 17rem;
 }
+#searchByAddressBar button {
+  font-size: 1.5rem;
+  color: #ab5e69;
+}
 
 /* all the boxes setting*/
-.navBox {
+.primaryNavBtn {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -82,21 +87,6 @@ body {
   color: grey;
 }
 
-#searchBtn {
-  font-size: 1.5rem;
-  color: #ab5e69;
-}
-
-#barIcon {
-  font-size: 1.5rem;
-  color: #ab5e69;
-}
-
-.searchBarIcon {
-  font-size: 1.5rem;
-  color: #ab5e69;
-}
-
 /* other pages, grey base */
 .greyContainer {
   height: 100vh;
@@ -108,18 +98,28 @@ body {
 }
 
 /* white text area */
-.textArea {
-  width: 70%;
+.secondaryPageBackground {
   height: 100vh;
   overflow-y: auto;
   background-color: rgba(255, 255, 255, 0.9);
+  width: 70%;
 }
 
-.textArea2 {
+#singaporeMap {
+  height: 100vh;
+  z-index: 1;
+}
+
+/* main body */
+.mainContainer {
+  position: relative;
+}
+
+.primaryPageBackground {
   width: 100%;
   height: 100vh;
   overflow-y: auto;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
 /* clickable area to hide the page */
@@ -136,4 +136,4 @@ body {
 .show {
   transform: translateX(0);
   transition: transform 0.5s;
-}
+}/*# sourceMappingURL=style.css.map */

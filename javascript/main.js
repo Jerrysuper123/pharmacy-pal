@@ -128,24 +128,22 @@ async function main() {
             let marker = L.marker([lat, lng], { icon: pharmacyIcon });
 
             let popUpElement = document.createElement("div");
-            let textElement = document.createElement("div");
-            textElement.innerHTML = `
-            <div class="popUpHeader">
-             <div>${name}</div>
-            </div>
-            <p>Address: ${address}</p>
+            popUpElement.classList.add("makerPopUp");
+            popUpElement.innerHTML = `
+            <h1>${name}</h1>
             <p>Registered Pharmacist: ${pharmacistName}</p>
+            <p class="subText">Address: ${address}</p>
             `;
 
             let directionDivElement = document.createElement("div");
             // directionButton.classList.add("ms-auto");
             directionDivElement.innerHTML = `
-            <button class="btn btn-info directionButton">
+            <button class="btn btn-info">
             direction <i class="fa-solid fa-diamond-turn-right"></i>
             </button>
             `;
 
-            popUpElement.appendChild(textElement);
+            // popUpElement.appendChild(textElement);
             popUpElement.appendChild(directionDivElement);
 
             marker.bindPopup(

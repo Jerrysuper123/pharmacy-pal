@@ -27,7 +27,7 @@
 
 
     <!-- own css -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./styles/style.css">
 
 </head>
 
@@ -35,35 +35,35 @@
     <main class="mainContainer">
         <section>
             <nav id="navBar" class="d-flex align-items-center">
-                <div id="searchDrugStore" class="d-flex align-items-center shadow customBorder bg-light px-3 py-2">
-                    <div id="barIcon" class="mx-1"><i class="fa-solid fa-bars"></i></div>
+                <div id="searchByAddressBar" class="d-flex align-items-center shadow customBorder bg-light px-3 py-2">
+                    <div id="barIcon" class="mx-1 primaryIconStyle"><i class="fa-solid fa-bars"></i></div>
 
                     <form action="" class="d-flex ms-1">
                         <input id="searchString" type="text" class="border-0" placeholder="search by address...">
 
                         <button id="searchBtn" class="ms-2 bg-light border-0">
-                            <i class=" fa-solid fa-magnifying-glass-location"></i>
+                            <i class="primaryIconStyle fa-solid fa-magnifying-glass-location"></i>
                         </button>
                     </form>
 
                 </div>
 
-                <div id="searchNearByBtn" class="navBox bg-light shadow customBorder">
-                    <div class="searchBarIcon">
+                <div id="searchNearByBtn" class="primaryNavBtn bg-light shadow customBorder">
+                    <div class="primaryIconStyle">
                         <i class="fa-solid fa-mortar-pestle"></i>
                     </div>
                     <p>near me</p>
                 </div>
 
-                <div id="searchOTCBtn" class="navBox bg-light shadow customBorder">
-                    <div class="searchBarIcon">
+                <div id="searchOTCBtn" class="primaryNavBtn bg-light shadow customBorder">
+                    <div class="primaryIconStyle">
                         <i class="fa-solid fa-pills"></i>
                     </div>
                     <p>drug advisor</p>
                 </div>
 
-                <div id="ePharmacyBtn" class="navBox bg-light shadow customBorder">
-                    <div class="searchBarIcon">
+                <div id="ePharmacyBtn" class="primaryNavBtn bg-light shadow customBorder">
+                    <div class="primaryIconStyle">
                         <i class="fa-brands fa-discourse"></i>
                     </div>
                     <p>e-pharmacy</p>
@@ -85,8 +85,6 @@
                         <i class="fa-solid fa-xmark"></i>
                     </div>
                 </div>
-                <img src="https://images.pexels.com/photos/3807629/pexels-photo-3807629.jpeg?cs=srgb&dl=pexels-andrea-piacquadio-3807629.jpg&fm=jpg" alt="">
-
                 <p>Due to cov19, we have gradually shifted our demand on pharmacy products/services. This app is
                     designed to
                     help you find a government-registered pharmacy near your home, while providing the certified
@@ -98,7 +96,7 @@
                 </ol>
                 <P>Against a backdrop of many rising fake online pharmacy, we also provide a curated list of
                     government-registered e-pharmacy, enabling you to seek pharmacy consultation at your fingertips.</P>
-                <h2>Start here now</h2>
+                <h1>Start here now</h1>
                 <div>
                     <input type="text" class="form-control">
                     <button class="btn btn-primary">search nearby pharmacy</button>
@@ -108,6 +106,7 @@
                         <i class="fa-brands fa-github"></i>
                     </a>
                 </div>
+                <p class="subText">subscript</p>
             </article>
 
             <div class="hideClickArea" id="appBriefHide">
@@ -116,7 +115,7 @@
 
         <!-- search OTC drug -->
         <aside id="searchOTCPage" class="greyContainer hideLeft">
-            <article class="textArea2 p-4">
+            <article class="primaryPageBackground p-4">
                 <div id="otcPageBackBtn" class="display-6 text-secondary">
                     <i class="fa-solid fa-arrow-left"></i>
                     back
@@ -131,7 +130,7 @@
 
         <!-- e-pharmacy page -->
         <aside id="ePharmacyPage" class="greyContainer hideLeft">
-            <article class="textArea2 p-4">
+            <article class="primaryPageBackground p-4">
                 <div id="ePharmacyBackBtn" class="display-6 text-secondary">
                     <i class="fa-solid fa-arrow-left"></i>
                     back

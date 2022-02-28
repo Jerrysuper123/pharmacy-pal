@@ -1,0 +1,46 @@
+/* google font */
+@import url('https://fonts.googleapis.com/css2?family=Lora&family=Roboto&display=swap');
+
+/* color setting */
+$colorPrimary: #ab5e69;
+$colorSecondary: #c2fbcd;
+$colorAccentOne: #F7c1c9;
+$colorAccentTwo: #E0ffe7;
+$colorAccentThree: #8fb095;
+
+// shadow to use bootstrap shadow - shadow-sm, shadow, and shadow-lg
+
+/* font family and size setting */
+$headerFront: 'Lora', serif;
+$bodyTextFront: 'Roboto', sans-serif;
+
+h1 {
+  font-family: $headerFront;
+  font-size: 1.5rem;
+}
+
+body {
+  font-family: $bodyTextFront;
+}
+
+// for citation etc
+.subText {
+  font-family: $bodyTextFront;
+  font-size: 0.7rem;
+  font-style: italic;
+  color: grey;
+}
+
+/* border setting */
+.customBorder {
+  border: 1px solid rgba(140, 140, 140, 0.7);
+}
+
+/*icon size and color*/
+.primaryIconStyle {
+  color: $colorPrimary;
+  font-size: 1.5rem;
+  &:hover{
+    color: $colorAccentThree;
+  }
+}
