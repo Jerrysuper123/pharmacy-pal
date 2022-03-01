@@ -86,6 +86,8 @@ async function main() {
             let lat = crd.latitude;
             let lng = crd.longitude;
 
+            
+
             let nearbyLatLng = [];
             let minDistance = Infinity;
             for (let el of searchDataArray) {
@@ -107,7 +109,7 @@ async function main() {
               }
             }
 
-            //if there is routing machine layer, remove it and add a new layer
+            //if there is routing machine layer, remove it when user clicked again
             if (routingControl !== null) {
               map.removeControl(routingControl);
 
