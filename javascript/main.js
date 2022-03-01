@@ -55,18 +55,77 @@ function createCustomMarkerIcon(imageUrl) {
   return customIcon;
 }
 
+function drawRoute(lat, lng, destiLat, destiLng, popUpElement, startingPointIcon, pharmacyIcon, map){
+  let routingControl = null;
+  //if there is routing machine layer, remove it when user clicked again
+  if (routingControl !== null) {
+    map.removeControl(routingControl);
+
+    routingControl = null;
+  };
+  routingControl = L.Routing.control({
+    lineOptions: {
+      styles: [
+        { color: '#17a2b8', opacity: 1, weight: 5 }
+      ]
+    },
+    waypoints: [
+      L.latLng(lat, lng),
+      L.latLng(destiLat, destiLng)
+    ],
+    //https://gis.stackexchange.com/questions/236934/leaflet-routing-control-change-marker-icon
+    createMarker: function (i, start, n) {
+      let marker_icon = null
+      if (i == 0) {
+        // This is the first marker, indicating start
+        marker_icon = startingPointIcon
+      } else if (i == n - 1) {
+        //This is the last marker indicating destination
+        marker_icon = pharmacyIcon
+      }
+      let marker = L.marker(start.latLng, {
+        draggable: true,
+        bounceOnAdd: false,
+        bounceOnAddOptions: {
+          duration: 1000,
+          height: 800,
+        },
+        icon: marker_icon
+      })
+      //below addes pop up only to the destination
+      if (i == 0) {
+        marker.bindPopup("You are here!");
+      } else if (i == n - 1) {
+        //This is the last marker indicating destination
+        marker.bindPopup(popUpElement);
+      }
+      return marker
+    },
+  });
+  routingControl.addTo(map);
+
+  // it is diffcult to get twoway point to open pop up
+  //Path overlays like polylines also have a bindPopup method. Here's a more complicated way to open a popup on a map:
+  let pop1 = L.popup()
+    .setLatLng([destiLat, destiLng])
+    .setContent(popUpElement)
+    .openOn(map);
+
+  map.flyTo([lat, lng], 10);
+}
+
 async function main() {
   async function init() {
     let map = initMap();
 
     let pharmacyIcon = createCustomMarkerIcon('./images/pharmacy.png')
-    let startingPoint = createCustomMarkerIcon("./images/start.png");
+    let startingPointIcon = createCustomMarkerIcon("./images/start.png");
 
     window.addEventListener("DOMContentLoaded", async function () {
       let searchDataArray = await extractAddressForSearch();
       let searchResultLayer = L.layerGroup();
 
-      let routingControl = null;
+
       //find the nearby pharmacy
       document.querySelector("#searchNearByBtn")
         .addEventListener("click", function () {
@@ -114,34 +173,6 @@ async function main() {
 
             let nearbyLatLng = getNearestPharmacyInfo(lat, lng, searchDataArray);
 
-            // let nearbyLatLng = [];
-            // let minDistance = Infinity;
-            // for (let el of searchDataArray) {
-            //   let address = el[0];
-            //   let lat2 = Number(el[1]);
-            //   let lng2 = Number(el[2]);
-            //   let pharmacistName = el[3];
-
-            //   //cal distance(km) between 2 coordinates
-            //   let distance = calDistance(lat, lng, lat2, lng2);
-
-            //   //get the coordinates of the min-distanced pharmacy
-            //   if (distance < minDistance) {
-            //     minDistance = distance;
-            //     nearbyLatLng = [];
-            //     nearbyLatLng.push(lat2, lng2);
-            //     nearbyLatLng.push(address);
-            //     nearbyLatLng.push(pharmacistName);
-            //   }
-            // }
-
-            //if there is routing machine layer, remove it when user clicked again
-            if (routingControl !== null) {
-              map.removeControl(routingControl);
-
-              routingControl = null;
-            };
-
             //extract all destination info to be used later
             let destiLat = nearbyLatLng[0];
             let destiLng = nearbyLatLng[1];
@@ -149,61 +180,10 @@ async function main() {
             let name = addressArray[0];
             let address = addressArray.slice(1);
             let pharmacistName = nearbyLatLng[3];
-
             let popUpElement = document.createElement("div");
             popUpElement.classList.add("makerPopUp");
             popUpElement.innerHTML = createPopUpContent(name, pharmacistName, address);
-
-            routingControl = L.Routing.control({
-              lineOptions: {
-                styles: [
-                  { color: '#17a2b8', opacity: 1, weight: 5 }
-                ]
-              },
-              waypoints: [
-                L.latLng(lat, lng),
-                L.latLng(destiLat, destiLng)
-              ],
-
-              //https://gis.stackexchange.com/questions/236934/leaflet-routing-control-change-marker-icon
-              createMarker: function (i, start, n) {
-                let marker_icon = null
-                if (i == 0) {
-                  // This is the first marker, indicating start
-                  marker_icon = startingPoint
-                } else if (i == n - 1) {
-                  //This is the last marker indicating destination
-                  marker_icon = pharmacyIcon
-                }
-                let marker = L.marker(start.latLng, {
-                  draggable: true,
-                  bounceOnAdd: false,
-                  bounceOnAddOptions: {
-                    duration: 1000,
-                    height: 800,
-                  },
-                  icon: marker_icon
-                })
-                //below addes pop up only to the destination
-                if (i == 0) {
-                  marker.bindPopup("You are here!");
-                } else if (i == n - 1) {
-                  //This is the last marker indicating destination
-                  marker.bindPopup(popUpElement);
-                }
-                return marker
-              },
-            });
-            routingControl.addTo(map);
-
-            // it is diffcult to get twoway point to open pop up
-            //Path overlays like polylines also have a bindPopup method. Here's a more complicated way to open a popup on a map:
-            let pop1 = L.popup()
-              .setLatLng([nearbyLatLng[0], nearbyLatLng[1]])
-              .setContent(popUpElement)
-              .openOn(map);
-
-            map.flyTo([lat, lng], 10);
+            drawRoute(lat, lng, destiLat, destiLng, popUpElement,startingPointIcon, pharmacyIcon, map);
           }
 
           function error(err) {
