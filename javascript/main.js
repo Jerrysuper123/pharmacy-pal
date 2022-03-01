@@ -55,14 +55,19 @@ function createCustomMarkerIcon(imageUrl) {
   return customIcon;
 }
 
-function drawRoute(lat, lng, destiLat, destiLng, popUpElement, startingPointIcon, pharmacyIcon, map){
-  let routingControl = null;
-  //if there is routing machine layer, remove it when user clicked again
+//leave this as a global variable so as to check if there is already routing drawn, if so, remove it
+let routingControl = null;
+
+function removeRouteDrawn(map){
   if (routingControl !== null) {
     map.removeControl(routingControl);
 
     routingControl = null;
   };
+}
+
+function drawRoute(lat, lng, destiLat, destiLng, popUpElement, startingPointIcon, pharmacyIcon, map){ 
+  removeRouteDrawn(map);
   routingControl = L.Routing.control({
     lineOptions: {
       styles: [
@@ -114,6 +119,30 @@ function drawRoute(lat, lng, destiLat, destiLng, popUpElement, startingPointIcon
   map.flyTo([lat, lng], 10);
 }
 
+function getNearestPharmacyInfo(lat, lng, searchDataArray) {
+  let nearbyLatLng = [];
+  let minDistance = Infinity;
+  for (let el of searchDataArray) {
+    let address = el[0];
+    let lat2 = Number(el[1]);
+    let lng2 = Number(el[2]);
+    let pharmacistName = el[3];
+
+    //cal distance(km) between 2 coordinates
+    let distance = calDistance(lat, lng, lat2, lng2);
+
+    //get the coordinates of the min-distanced pharmacy
+    if (distance < minDistance) {
+      minDistance = distance;
+      nearbyLatLng = [];
+      nearbyLatLng.push(lat2, lng2);
+      nearbyLatLng.push(address);
+      nearbyLatLng.push(pharmacistName);
+    }
+  }
+  return nearbyLatLng;
+}
+
 async function main() {
   async function init() {
     let map = initMap();
@@ -144,32 +173,6 @@ async function main() {
 
             let lat = crd.latitude;
             let lng = crd.longitude;
-
-
-            function getNearestPharmacyInfo(lat, lng, searchDataArray) {
-              let nearbyLatLng = [];
-              let minDistance = Infinity;
-              for (let el of searchDataArray) {
-                let address = el[0];
-                let lat2 = Number(el[1]);
-                let lng2 = Number(el[2]);
-                let pharmacistName = el[3];
-
-                //cal distance(km) between 2 coordinates
-                let distance = calDistance(lat, lng, lat2, lng2);
-
-                //get the coordinates of the min-distanced pharmacy
-                if (distance < minDistance) {
-                  minDistance = distance;
-                  nearbyLatLng = [];
-                  nearbyLatLng.push(lat2, lng2);
-                  nearbyLatLng.push(address);
-                  nearbyLatLng.push(pharmacistName);
-                }
-              }
-
-              return nearbyLatLng;
-            }
 
             let nearbyLatLng = getNearestPharmacyInfo(lat, lng, searchDataArray);
 
@@ -259,6 +262,39 @@ async function main() {
             });
 
             resultDiv.appendChild(divElement);
+
+            //event listener when user click get direction button from pharmacy store
+            directionDivElement.addEventListener("click", function(){
+                  //remove all other pharmacy markers to focus on the drawn route only
+              searchResultLayer.clearLayers();
+              //has to repeat geolocation because havenot created the function for it
+              let options = {
+                enableHighAccuracy: true,
+                timeout: 5000,
+                maximumAge: 0
+              };
+    
+              //get user location 
+              function success(pos) {
+                let crd = pos.coords;
+                console.log("Your current position is:");
+                console.log(`Latitude : ${crd.latitude}`);
+                console.log(`Longitude: ${crd.longitude}`);
+    
+                let staringLat = crd.latitude;
+                let startingLng = crd.longitude;
+    
+                //extract all destination info to be used later
+                drawRoute(staringLat, startingLng, lat, lng, popUpElement,startingPointIcon, pharmacyIcon, map);
+              }
+    
+              function error(err) {
+                console.warn(`ERROR(${err.code}): ${err.message}`);
+                alert("Please allow us to access your location to find the pharmacy near you!")
+              }
+    
+              navigator.geolocation.getCurrentPosition(success, error, options);
+            });
           }
         });
       searchResultLayer.addTo(map);
