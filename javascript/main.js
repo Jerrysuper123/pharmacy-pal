@@ -20,7 +20,7 @@ function initMap() {
   return map;
 }
 
-function createPopUpContent(name, pharmacistName, address){
+function createPopUpContent(name, pharmacistName, address) {
   let htmlString = `
   <h1 class="m-0">${name}</h1>
   <div class="d-flex align-items-center my-2">
@@ -86,28 +86,54 @@ async function main() {
             let lat = crd.latitude;
             let lng = crd.longitude;
 
-            
 
-            let nearbyLatLng = [];
-            let minDistance = Infinity;
-            for (let el of searchDataArray) {
-              let address = el[0];
-              let lat2 = Number(el[1]);
-              let lng2 = Number(el[2]);
-              let pharmacistName = el[3];
+            function getNearestPharmacyInfo(lat, lng, searchDataArray) {
+              let nearbyLatLng = [];
+              let minDistance = Infinity;
+              for (let el of searchDataArray) {
+                let address = el[0];
+                let lat2 = Number(el[1]);
+                let lng2 = Number(el[2]);
+                let pharmacistName = el[3];
 
-              //cal distance(km) between 2 coordinates
-              let distance = calDistance(lat, lng, lat2, lng2);
+                //cal distance(km) between 2 coordinates
+                let distance = calDistance(lat, lng, lat2, lng2);
 
-              //get the coordinates of the min-distanced pharmacy
-              if (distance < minDistance) {
-                minDistance = distance;
-                nearbyLatLng = [];
-                nearbyLatLng.push(lat2, lng2);
-                nearbyLatLng.push(address);
-                nearbyLatLng.push(pharmacistName);
+                //get the coordinates of the min-distanced pharmacy
+                if (distance < minDistance) {
+                  minDistance = distance;
+                  nearbyLatLng = [];
+                  nearbyLatLng.push(lat2, lng2);
+                  nearbyLatLng.push(address);
+                  nearbyLatLng.push(pharmacistName);
+                }
               }
+
+              return nearbyLatLng;
             }
+
+            let nearbyLatLng = getNearestPharmacyInfo(lat, lng, searchDataArray);
+
+            // let nearbyLatLng = [];
+            // let minDistance = Infinity;
+            // for (let el of searchDataArray) {
+            //   let address = el[0];
+            //   let lat2 = Number(el[1]);
+            //   let lng2 = Number(el[2]);
+            //   let pharmacistName = el[3];
+
+            //   //cal distance(km) between 2 coordinates
+            //   let distance = calDistance(lat, lng, lat2, lng2);
+
+            //   //get the coordinates of the min-distanced pharmacy
+            //   if (distance < minDistance) {
+            //     minDistance = distance;
+            //     nearbyLatLng = [];
+            //     nearbyLatLng.push(lat2, lng2);
+            //     nearbyLatLng.push(address);
+            //     nearbyLatLng.push(pharmacistName);
+            //   }
+            // }
 
             //if there is routing machine layer, remove it when user clicked again
             if (routingControl !== null) {
@@ -161,7 +187,7 @@ async function main() {
                 //below addes pop up only to the destination
                 if (i == 0) {
                   marker.bindPopup("You are here!");
-                }else if (i == n - 1) {
+                } else if (i == n - 1) {
                   //This is the last marker indicating destination
                   marker.bindPopup(popUpElement);
                 }
@@ -173,9 +199,9 @@ async function main() {
             // it is diffcult to get twoway point to open pop up
             //Path overlays like polylines also have a bindPopup method. Here's a more complicated way to open a popup on a map:
             let pop1 = L.popup()
-            .setLatLng([nearbyLatLng[0], nearbyLatLng[1]])
-            .setContent(popUpElement)
-            .openOn(map);
+              .setLatLng([nearbyLatLng[0], nearbyLatLng[1]])
+              .setContent(popUpElement)
+              .openOn(map);
 
             map.flyTo([lat, lng], 10);
           }
