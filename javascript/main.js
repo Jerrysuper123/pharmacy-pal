@@ -20,6 +20,24 @@ function initMap() {
   return map;
 }
 
+function createPopUpContent(name, pharmacistName, address){
+  let htmlString = `
+  <div class="makerPopUp">
+  <h1 class="m-0">${name}</h1>
+  <div class="d-flex align-items-center my-2">
+    <i class="fa-solid fa-user-nurse markerAvatar me-3"></i>
+    <section>
+      <p class="fw-bold m-0">Registered Pharmacist</p>
+      <p class="my-1">Name: <span class="keyInfo"> ${pharmacistName} </span> </p>
+      <p class="m-0 p-0">Experience: <i class="fa-solid fa-ellipsis keyInfo"></i></p>
+    </section/>
+  </div>
+  <p class="address subText"><i class="fa-solid fa-location-dot"></i> ${address}</p>
+  </div>
+  `;
+  return htmlString;
+};
+
 
 async function main() {
   async function init() {
@@ -75,6 +93,7 @@ async function main() {
               let address = el[0];
               let lat2 = Number(el[1]);
               let lng2 = Number(el[2]);
+              let pharmacistName = el[3];
 
               //cal distance(km) between 2 coordinates
               let distance = calDistance(lat, lng, lat2, lng2);
@@ -85,6 +104,7 @@ async function main() {
                 nearbyLatLng = [];
                 nearbyLatLng.push(lat2, lng2);
                 nearbyLatLng.push(address);
+                nearbyLatLng.push(pharmacistName);
               }
             }
 
@@ -95,6 +115,14 @@ async function main() {
               routingControl = null;
             };
 
+            //extract all destination info to be used later
+            let destiLat = nearbyLatLng[0];
+            let destiLng = nearbyLatLng[1];
+            let addressArray = nearbyLatLng[2].split(",");
+            let name = addressArray[0];
+            let address = addressArray.slice(1);
+            let pharmacistName = nearbyLatLng[3];
+
 
             routingControl = L.Routing.control({
               lineOptions: {
@@ -104,7 +132,7 @@ async function main() {
               },
               waypoints: [
                 L.latLng(lat, lng),
-                L.latLng(nearbyLatLng[0], nearbyLatLng[1])
+                L.latLng(destiLat, destiLng)
               ],
 
               //https://gis.stackexchange.com/questions/236934/leaflet-routing-control-change-marker-icon
@@ -130,9 +158,6 @@ async function main() {
                 if (i == 0) {
                   marker.bindPopup("You are here!");
                 }
-                if (i == n - 1) {
-                  marker.bindPopup("destination");
-                }
                 return marker
               },
             });
@@ -140,13 +165,12 @@ async function main() {
 
             // it is diffcult to get twoway point to open pop up
             //Path overlays like polylines also have a bindPopup method. Here's a more complicated way to open a popup on a map:
-            console.log("address", nearbyLatLng[2]);
             let pop1 = L.popup()
             .setLatLng([nearbyLatLng[0], nearbyLatLng[1]])
-            .setContent('destination point')
+            .setContent(createPopUpContent(name, pharmacistName, address))
             .openOn(map);
 
-            map.flyTo([lat, lng], 13);
+            map.flyTo([lat, lng], 10);
           }
 
           function error(err) {
@@ -175,21 +199,6 @@ async function main() {
           searchByAddressBar.classList.add("borderRadiusNone");
           resultDiv.innerHTML = "";
 
-          function createPopUpContent(name, pharmacistName, address){
-            let htmlString = `
-            <h1 class="m-0">${name}</h1>
-            <div class="d-flex align-items-center my-2">
-              <i class="fa-solid fa-user-nurse markerAvatar me-3"></i>
-              <section>
-                <p class="fw-bold m-0">Registered Pharmacist</p>
-                <p class="my-1">Name: <span class="keyInfo"> ${pharmacistName} </span> </p>
-                <p class="m-0 p-0">Experience: <i class="fa-solid fa-ellipsis keyInfo"></i></p>
-              </section/>
-            </div>
-            <p class="address subText"><i class="fa-solid fa-location-dot"></i> ${address}</p>
-            `;
-            return htmlString;
-          }
 
           for (el of filteredResult) {
             //create marker based on filteredResult;
@@ -201,20 +210,7 @@ async function main() {
             let pharmacistName = el[3];
             let marker = L.marker([lat, lng], { icon: pharmacyIcon });
 
-            let popUpElement = document.createElement("div");
-            popUpElement.classList.add("makerPopUp");
-            popUpElement.innerHTML = `
-            <h1 class="m-0">${name}</h1>
-            <div class="d-flex align-items-center my-2">
-              <i class="fa-solid fa-user-nurse markerAvatar me-3"></i>
-              <section>
-                <p class="fw-bold m-0">Registered Pharmacist</p>
-                <p class="my-1">Name: <span class="keyInfo"> ${pharmacistName} </span> </p>
-                <p class="m-0 p-0">Experience: <i class="fa-solid fa-ellipsis keyInfo"></i></p>
-              </section/>
-            </div>
-            <p class="address subText"><i class="fa-solid fa-location-dot"></i> ${address}</p>
-            `;
+            popUpElement.innerHTML = createPopUpContent(name, pharmacistName, address);
 
             let directionDivElement = document.createElement("div");
             // directionButton.classList.add("ms-auto");
