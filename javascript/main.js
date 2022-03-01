@@ -30,8 +30,10 @@ async function main() {
       options: {
         //iconsize - width and height
         iconSize: [37, 40],
-        iconAnchor: [22, 94],
-        popupAnchor: [-3, -76]
+        //iconAnchor: x axis in pixel, y axis in pixel (based on left up corner of image as 0,0 coord)
+        iconAnchor: [0, 0],
+        //popupachor: x axis in pixel, y axis in pixel (based on image anchor)
+        popupAnchor: [16, -3]
       }
     });
 
@@ -39,8 +41,8 @@ async function main() {
       iconUrl: './images/pharmacy.png',
     })
 
-    let startingWalkingIcon = new icon({
-      iconUrl: "./images/walking.gif"
+    let startingPoint = new icon({
+      iconUrl: "./images/start.png"
     })
 
     window.addEventListener("DOMContentLoaded", async function () {
@@ -70,6 +72,7 @@ async function main() {
             let nearbyLatLng = [];
             let minDistance = Infinity;
             for (let el of searchDataArray) {
+              let address = el[0];
               let lat2 = Number(el[1]);
               let lng2 = Number(el[2]);
 
@@ -81,49 +84,67 @@ async function main() {
                 minDistance = distance;
                 nearbyLatLng = [];
                 nearbyLatLng.push(lat2, lng2);
+                nearbyLatLng.push(address);
               }
             }
 
             //if there is routing machine layer, remove it and add a new layer
-            if(routingControl!==null){
+            if (routingControl !== null) {
               map.removeControl(routingControl);
-              
+
               routingControl = null;
             };
-    
+
 
             routingControl = L.Routing.control({
+              lineOptions: {
+                styles: [
+                  { color: '#17a2b8', opacity: 1, weight: 5 }
+                ]
+              },
               waypoints: [
                 L.latLng(lat, lng),
                 L.latLng(nearbyLatLng[0], nearbyLatLng[1])
               ],
-              createMarker: function (i, start, n){
+
+              //https://gis.stackexchange.com/questions/236934/leaflet-routing-control-change-marker-icon
+              createMarker: function (i, start, n) {
                 let marker_icon = null
                 if (i == 0) {
-                    // This is the first marker, indicating start
-                    marker_icon = startingWalkingIcon
-                } else if (i == n -1) {
-                    //This is the last marker indicating destination
-                    marker_icon =pharmacyIcon
+                  // This is the first marker, indicating start
+                  marker_icon = startingPoint
+                } else if (i == n - 1) {
+                  //This is the last marker indicating destination
+                  marker_icon = pharmacyIcon
                 }
-                let marker = L.marker (start.latLng, {
-                            draggable: true,
-                            bounceOnAdd: false,
-                            bounceOnAddOptions: {
-                                duration: 1000,
-                                height: 800, 
-                                function(){
-                                    (bindPopup("myPopup").openOn(map))
-                                }
-                            },
-                            icon: marker_icon
+                let marker = L.marker(start.latLng, {
+                  draggable: true,
+                  bounceOnAdd: false,
+                  bounceOnAddOptions: {
+                    duration: 1000,
+                    height: 800,
+                  },
+                  icon: marker_icon
                 })
-                return marker},
-
-              // routeWhileDragging: true
+                //below addes pop up only to the destination
+                if (i == 0) {
+                  marker.bindPopup("You are here!");
+                }
+                if (i == n - 1) {
+                  marker.bindPopup("destination");
+                }
+                return marker
+              },
             });
-            // console.log("Routing machine", routingControl);
             routingControl.addTo(map);
+
+            // it is diffcult to get twoway point to open pop up
+            //Path overlays like polylines also have a bindPopup method. Here's a more complicated way to open a popup on a map:
+            console.log("address", nearbyLatLng[2]);
+            let pop1 = L.popup()
+            .setLatLng([nearbyLatLng[0], nearbyLatLng[1]])
+            .setContent('destination point')
+            .openOn(map);
 
             map.flyTo([lat, lng], 13);
           }
@@ -153,6 +174,22 @@ async function main() {
           let searchByAddressBar = document.querySelector("#searchByAddressBar");
           searchByAddressBar.classList.add("borderRadiusNone");
           resultDiv.innerHTML = "";
+
+          function createPopUpContent(name, pharmacistName, address){
+            let htmlString = `
+            <h1 class="m-0">${name}</h1>
+            <div class="d-flex align-items-center my-2">
+              <i class="fa-solid fa-user-nurse markerAvatar me-3"></i>
+              <section>
+                <p class="fw-bold m-0">Registered Pharmacist</p>
+                <p class="my-1">Name: <span class="keyInfo"> ${pharmacistName} </span> </p>
+                <p class="m-0 p-0">Experience: <i class="fa-solid fa-ellipsis keyInfo"></i></p>
+              </section/>
+            </div>
+            <p class="address subText"><i class="fa-solid fa-location-dot"></i> ${address}</p>
+            `;
+            return htmlString;
+          }
 
           for (el of filteredResult) {
             //create marker based on filteredResult;
