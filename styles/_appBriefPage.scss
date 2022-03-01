@@ -1,17 +1,22 @@
 /* other pages, grey base */
 .greyContainer {
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(57, 57, 57, 0.5);
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  /* clickable area to hide the page */
+  .hideClickArea {
+    width: 30%;
     height: 100vh;
-    width: 100vw;
-    background-color: rgba(57, 57, 57, 0.5);
-    position: absolute;
-    top: 0;
-    z-index: 3;
   }
-  
-  /* white text area */
-  .secondaryPageBackground {
-    height: 100vh;
-    overflow-y: auto;
-    background-color: rgba(255, 255, 255, 0.9);
-    width: 70%;
-  }
+}
+
+/* white text area */
+.secondaryPageBackground {
+  height: 100vh;
+  overflow-y: auto;
+  background-color: rgba(255, 255, 255, 0.95);
+  width: 100%;
+}

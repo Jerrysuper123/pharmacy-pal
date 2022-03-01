@@ -22,33 +22,33 @@ document
   });
 
 //show drug page
-document.querySelector("#searchOTCBtn").addEventListener("click", function () {
-  let page = document.querySelector("#searchOTCPage");
+document.querySelector("#drugAdvisorBtn").addEventListener("click", function () {
+  let page = document.querySelector("#drugAdvisorPage");
   page.classList.remove("hideLeft");
   page.classList.add("show");
 });
 
 //hide drug page through back button
 document
-  .querySelector("#otcPageBackBtn")
+  .querySelector("#closeAdvisorPage")
   .addEventListener("click", function () {
-    let page = document.querySelector("#searchOTCPage");
+    let page = document.querySelector("#drugAdvisorPage");
     page.classList.remove("show");
     page.classList.add("hideLeft");
   });
 
-//show pharmacy page
-document.querySelector("#ePharmacyBtn").addEventListener("click", function () {
-  let page = document.querySelector("#ePharmacyPage");
-  page.classList.remove("hideLeft");
-  page.classList.add("show");
-});
+// //show pharmacy page
+// document.querySelector("#ePharmacyBtn").addEventListener("click", function () {
+//   let page = document.querySelector("#ePharmacyPage");
+//   page.classList.remove("hideLeft");
+//   page.classList.add("show");
+// });
 
-//hide epharmacy page through back button
-document
-  .querySelector("#ePharmacyBackBtn")
-  .addEventListener("click", function () {
-    let page = document.querySelector("#ePharmacyPage");
-    page.classList.remove("show");
-    page.classList.add("hideLeft");
-  });
+// //hide epharmacy page through back button
+// document
+//   .querySelector("#ePharmacyBackBtn")
+//   .addEventListener("click", function () {
+//     let page = document.querySelector("#ePharmacyPage");
+//     page.classList.remove("show");
+//     page.classList.add("hideLeft");
+//   });

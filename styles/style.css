@@ -57,14 +57,14 @@ body {
 
 /* search bar and returned result */
 #navBar {
-  margin-left: 4rem;
+  margin-left: 0.7rem;
   margin-top: 1rem;
   z-index: 2;
   position: absolute;
 }
 
 #result {
-  margin-left: 4rem;
+  margin-left: 0.7rem;
   margin-top: 5rem;
   position: absolute;
   background-color: white;
@@ -108,7 +108,58 @@ body {
   height: 4rem;
   color: grey;
 }
+.primaryNavBtn:hover {
+  color: #8fb095 !important;
+}
 
+/* css rules for devices from 0 to 480px */
+@media screen and (max-width: 480px) {
+  #searchString {
+    width: 60vw;
+  }
+
+  #searchByAddressBar {
+    width: 90vw;
+  }
+
+  #result {
+    width: 90vw;
+  }
+
+  .leaflet-routing-container {
+    display: none;
+  }
+
+  #mobileBottomNav {
+    position: fixed;
+    bottom: 0vh;
+    left: 0;
+    z-index: 4;
+    width: 100vw;
+    background-color: #fcfafa;
+    justify-content: center;
+  }
+  #mobileBottomNav .primaryNavBtn {
+    border: none;
+    box-shadow: none !important;
+    background-color: #fcfafa !important;
+    font-size: 0.7rem;
+    margin-left: 3rem !important;
+    margin-right: 3rem !important;
+  }
+
+  .hideClickArea {
+    width: 0%;
+  }
+}
+/* css rules for devices from 481 to 768px */
+@media screen and (max-width: 768px) {
+  .leaflet-routing-container {
+    display: none;
+  }
+}
+/* css rules for devices from 769 to 1279px */
+/* css rules for devices screen larger than 1279px */
 /* other pages, grey base */
 .greyContainer {
   height: 100vh;
@@ -116,15 +167,20 @@ body {
   background-color: rgba(57, 57, 57, 0.5);
   position: absolute;
   top: 0;
-  z-index: 3;
+  z-index: 2;
+  /* clickable area to hide the page */
+}
+.greyContainer .hideClickArea {
+  width: 30%;
+  height: 100vh;
 }
 
 /* white text area */
 .secondaryPageBackground {
   height: 100vh;
   overflow-y: auto;
-  background-color: rgba(255, 255, 255, 0.9);
-  width: 70%;
+  background-color: rgba(255, 255, 255, 0.95);
+  width: 100%;
 }
 
 #singaporeMap {
@@ -141,13 +197,7 @@ body {
   width: 100%;
   height: 100vh;
   overflow-y: auto;
-  background-color: rgba(255, 255, 255, 0.9);
-}
-
-/* clickable area to hide the page */
-.hideClickArea {
-  width: 30%;
-  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.95);
 }
 
 .hideLeft {
@@ -158,4 +208,8 @@ body {
 .show {
   transform: translateX(0);
   transition: transform 0.5s;
+}
+
+.leaflet-bar {
+  margin-top: 6rem !important;
 }/*# sourceMappingURL=style.css.map */

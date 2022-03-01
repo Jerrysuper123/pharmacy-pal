@@ -17,14 +17,10 @@
   width: 100%;
   height: 100vh;
   overflow-y: auto;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.95);
 }
 
-/* clickable area to hide the page */
-.hideClickArea {
-  width: 30%;
-  height: 100vh;
-}
+
 
 .hideLeft {
   transform: translateX(-100%);
@@ -35,3 +31,9 @@
   transform: translateX(0);
   transition: transform 0.5s;
 }
+
+// this reposition the default leaflet zoom in/out
+.leaflet-bar{
+  margin-top: 6rem !important;
+}
+

@@ -1,56 +1,116 @@
-
 /* search bar and returned result */
 #navBar {
-    margin-left: 4rem;
-    margin-top: 1rem;
-    z-index: 2;
-    position: absolute;
+  margin-left: 0.7rem;
+  margin-top: 1rem;
+  z-index: 2;
+  position: absolute;
+}
+
+#result {
+  margin-left: 0.7rem;
+  margin-top: 5rem;
+  position: absolute;
+  background-color: white;
+  z-index: 2;
+  font-size: 0.8rem;
+  color: grey;
+  width: 23rem;
+}
+
+/* search drug store nearby */
+#searchByAddressBar {
+  border-radius: 1rem;
+  height: 4rem;
+  width: 23rem;
+  button {
+    font-size: 1.5rem;
+    color: $colorPrimary;
   }
-  
-  #result {
-    margin-left: 4rem;
-    margin-top: 5rem;
-    position: absolute;
-    background-color: white;
-    z-index: 2;
-    font-size: 0.8rem;
-    color: grey;
-    width: 23rem;
+}
+
+#searchString {
+  width: 16rem;
+}
+
+.borderRadiusNone {
+  border-radius: 0 !important;
+}
+
+/* all the boxes setting*/
+.primaryNavBtn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 1rem;
+  padding-top: 1rem;
+  font-size: 0.8rem;
+  margin-left: 1rem;
+  width: 5rem;
+  height: 4rem;
+  color: grey;
+  &:hover{
+    color: $colorAccentThree !important;
   }
-  
-  /* search drug store nearby */
+}
+
+/* css rules for devices from 0 to 480px */
+@media screen and (max-width: 480px) {
+  // below shrink search bar according to the screen
+  #searchString {
+    width: 60vw;
+  }
+
   #searchByAddressBar {
-    border-radius: 1rem;
-    height: 4rem;
-    width: 23rem;
-    button {
-      font-size: 1.5rem;
-      color: $colorPrimary
-    }
-   
+    width: 90vw;
   }
 
-  #searchString{
-    width: 16rem;
+  #result {
+    width: 90vw;
   }
 
-  .borderRadiusNone{
-    border-radius: 0 !important;
+  // hide routing machine direction instructions when small screen
+  .leaflet-routing-container {
+    display: none;
   }
-  
-  /* all the boxes setting*/
-  .primaryNavBtn {
-    display: flex;
-    flex-direction: column;
+
+  // below creates a bottom b
+  #mobileBottomNav {
+    position: fixed;
+    bottom: 0vh;
+    left: 0;
+    z-index: 4;
+    width: 100vw;
+    background-color: rgb(252, 250, 250);
     justify-content: center;
-    align-items: center;
-    text-align: center;
-    border-radius: 1rem;
-    padding-top: 1rem;
-    font-size: 0.8rem;
-    margin-left: 1rem;
-    width: 5rem;
-    height: 4rem;
-    color: grey;
+    .primaryNavBtn {
+      border: none;
+      box-shadow: none !important;
+      background-color:  rgb(252, 250, 250) !important;
+      font-size: 0.7rem;
+      margin-left: 3rem !important;
+      margin-right: 3rem !important;
+    }
   }
-  
+
+  //
+  .hideClickArea{
+    width: 0%;
+  }
+}
+
+/* css rules for devices from 481 to 768px */
+@media screen and (max-width: 768px) {
+  .leaflet-routing-container {
+    display: none;
+  }
+}
+
+/* css rules for devices from 769 to 1279px */
+@media screen and (max-width: 1279px) {
+}
+
+/* css rules for devices screen larger than 1279px */
+@media screen and (min-width: 1279px) {
+}
