@@ -25,30 +25,28 @@ async function main() {
   async function init() {
     let map = initMap();
 
-    //change the marker
-    let LeafIcon = L.Icon.extend({
+    //customized pharmacy location marker
+    let drugIcon = L.Icon.extend({
       options: {
-        //width and height
+        //iconsize - width and height
         iconSize: [37, 40],
         iconAnchor: [22, 94],
         popupAnchor: [-3, -76]
       }
     });
 
-    let pharmacyIcon = new LeafIcon({
+    let pharmacyIcon = new drugIcon({
       iconUrl: './images/pharmacy.png',
     })
-
-    // L.marker([1.35, 103.81], {icon: pharmacyIcon}).addTo(map);
 
     window.addEventListener("DOMContentLoaded", async function () {
       let searchDataArray = await extractAddressForSearch();
       let searchResultLayer = L.layerGroup();
 
+      let routingControl = null;
       //find the nearby pharmacy
       document.querySelector("#searchNearByBtn")
         .addEventListener("click", function () {
-
           let options = {
             enableHighAccuracy: true,
             timeout: 5000,
@@ -82,14 +80,23 @@ async function main() {
               }
             }
 
-            //draw the route, add to map
-            L.Routing.control({
+            //if there is routing machine layer, remove it and add a new layer
+            if(routingControl!==null){
+              map.removeControl(routingControl);
+              
+              routingControl = null;
+            };
+    
+
+            routingControl = L.Routing.control({
               waypoints: [
                 L.latLng(lat, lng),
                 L.latLng(nearbyLatLng[0], nearbyLatLng[1])
               ],
               routeWhileDragging: true
-            }).addTo(map);
+            });
+            console.log("Routing machine", routingControl);
+            routingControl.addTo(map);
 
             map.flyTo([lat, lng], 13);
           }
