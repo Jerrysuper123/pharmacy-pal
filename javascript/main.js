@@ -26,7 +26,7 @@ async function main() {
     let map = initMap();
 
     //customized pharmacy location marker
-    let drugIcon = L.Icon.extend({
+    let icon = L.Icon.extend({
       options: {
         //iconsize - width and height
         iconSize: [37, 40],
@@ -35,8 +35,12 @@ async function main() {
       }
     });
 
-    let pharmacyIcon = new drugIcon({
+    let pharmacyIcon = new icon({
       iconUrl: './images/pharmacy.png',
+    })
+
+    let startingWalkingIcon = new icon({
+      iconUrl: "./images/walking.gif"
     })
 
     window.addEventListener("DOMContentLoaded", async function () {
@@ -93,9 +97,32 @@ async function main() {
                 L.latLng(lat, lng),
                 L.latLng(nearbyLatLng[0], nearbyLatLng[1])
               ],
-              routeWhileDragging: true
+              createMarker: function (i, start, n){
+                let marker_icon = null
+                if (i == 0) {
+                    // This is the first marker, indicating start
+                    marker_icon = startingWalkingIcon
+                } else if (i == n -1) {
+                    //This is the last marker indicating destination
+                    marker_icon =pharmacyIcon
+                }
+                let marker = L.marker (start.latLng, {
+                            draggable: true,
+                            bounceOnAdd: false,
+                            bounceOnAddOptions: {
+                                duration: 1000,
+                                height: 800, 
+                                function(){
+                                    (bindPopup("myPopup").openOn(map))
+                                }
+                            },
+                            icon: marker_icon
+                })
+                return marker},
+
+              // routeWhileDragging: true
             });
-            console.log("Routing machine", routingControl);
+            // console.log("Routing machine", routingControl);
             routingControl.addTo(map);
 
             map.flyTo([lat, lng], 13);
