@@ -119,11 +119,41 @@
 
         <!-- search OTC drug -->
         <aside id="drugAdvisorPage" class="greyContainer hideLeft">
-            <article class="primaryPageBackground p-4">
-
-                <div id="closeAdvisorPage" class="ms-auto display-6 text-secondary">
-                    <i class="fa-solid fa-xmark"></i>
+            <article class="primaryPageBackground">
+                <div>
+                    <i id="closeAdvisorPage" class="fa-solid fa-xmark"></i>
                 </div>
+                <p>Choose below services to find out more</p>
+                <!-- navbar -->
+      
+                <nav id="drugNavBar">
+                    <!-- must always data-sth -->
+                    <button id="page1-btn" data-page="1">
+                        <i class="fa-solid fa-spinner"></i>
+                        symptop checker
+                    </button>
+                    <button id="page2-btn" data-page="2">
+                        <i class="fa-solid fa-prescription-bottle-medical"></i>
+                        drug match-disease
+                    </button>
+                    <button id="page3-btn" data-page="3">
+                        <i class="fa-solid fa-head-side-cough-slash"></i>
+                        drug side-effects
+                    </button>
+                </nav>
+
+                <div id="all-pages">
+                    <div class="page" id="page-1">
+                        <h1>symptops checker</h1>
+                    </div>
+                    <div class="page" id="page-2">
+                        <h1>drug match-disease/h1>
+                    </div>
+                    <div class="page" id="page-3">
+                        <h1>drug side-effects</h1>
+                    </div>
+                </div>
+       
 
                 <h1>Check if an OTC drug is available</h1>
                 <input id="queryDrugNameInput" class="form-control" type="text" placeholder="search by drug name...">

@@ -37,18 +37,26 @@ document
     page.classList.add("hideLeft");
   });
 
-// //show pharmacy page
-// document.querySelector("#ePharmacyBtn").addEventListener("click", function () {
-//   let page = document.querySelector("#ePharmacyPage");
-//   page.classList.remove("hideLeft");
-//   page.classList.add("show");
-// });
-
-// //hide epharmacy page through back button
-// document
-//   .querySelector("#ePharmacyBackBtn")
-//   .addEventListener("click", function () {
-//     let page = document.querySelector("#ePharmacyPage");
-//     page.classList.remove("show");
-//     page.classList.add("hideLeft");
-//   });
+  let allButtons = document.querySelectorAll("#drugNavBar button");
+  // console.log(allButtons);
+  for (let btn of allButtons) {
+    btn.addEventListener("click", function (event) {
+      let selectedBtn = event.target;
+      //data-page="1";
+      //dataset = {page: '1'};
+      let pageNumber = selectedBtn.dataset.page;
+      console.log("click pagenumber" + pageNumber);
+  
+      let pages = document.querySelectorAll(".page");
+      for (let p of pages) {
+        //it is okay to remove non existing class
+        p.classList.remove("show");
+        p.classList.add("hidden");
+      }
+  
+      let page = document.querySelector("#page-" + pageNumber);
+      page.classList.remove("hidden");
+      page.classList.add("show");
+    });
+  }
+  
