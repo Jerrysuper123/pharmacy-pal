@@ -22,7 +22,6 @@ function initMap() {
 
 function createPopUpContent(name, pharmacistName, address){
   let htmlString = `
-  <div class="makerPopUp">
   <h1 class="m-0">${name}</h1>
   <div class="d-flex align-items-center my-2">
     <i class="fa-solid fa-user-nurse markerAvatar me-3"></i>
@@ -33,35 +32,35 @@ function createPopUpContent(name, pharmacistName, address){
     </section/>
   </div>
   <p class="address subText"><i class="fa-solid fa-location-dot"></i> ${address}</p>
-  </div>
   `;
   return htmlString;
 };
 
+function createCustomMarkerIcon(imageUrl) {
+  //customized pharmacy location marker
+  let icon = L.Icon.extend({
+    options: {
+      //iconsize - width and height
+      iconSize: [37, 40],
+      //iconAnchor: x axis in pixel, y axis in pixel (based on left up corner of image as 0,0 coord)
+      iconAnchor: [0, 0],
+      //popupachor: x axis in pixel, y axis in pixel (based on image anchor)
+      popupAnchor: [16, -3]
+    }
+  });
+
+  let customIcon = new icon({
+    iconUrl: imageUrl,
+  })
+  return customIcon;
+}
 
 async function main() {
   async function init() {
     let map = initMap();
 
-    //customized pharmacy location marker
-    let icon = L.Icon.extend({
-      options: {
-        //iconsize - width and height
-        iconSize: [37, 40],
-        //iconAnchor: x axis in pixel, y axis in pixel (based on left up corner of image as 0,0 coord)
-        iconAnchor: [0, 0],
-        //popupachor: x axis in pixel, y axis in pixel (based on image anchor)
-        popupAnchor: [16, -3]
-      }
-    });
-
-    let pharmacyIcon = new icon({
-      iconUrl: './images/pharmacy.png',
-    })
-
-    let startingPoint = new icon({
-      iconUrl: "./images/start.png"
-    })
+    let pharmacyIcon = createCustomMarkerIcon('./images/pharmacy.png')
+    let startingPoint = createCustomMarkerIcon("./images/start.png");
 
     window.addEventListener("DOMContentLoaded", async function () {
       let searchDataArray = await extractAddressForSearch();
@@ -123,6 +122,9 @@ async function main() {
             let address = addressArray.slice(1);
             let pharmacistName = nearbyLatLng[3];
 
+            let popUpElement = document.createElement("div");
+            popUpElement.classList.add("makerPopUp");
+            popUpElement.innerHTML = createPopUpContent(name, pharmacistName, address);
 
             routingControl = L.Routing.control({
               lineOptions: {
@@ -157,6 +159,9 @@ async function main() {
                 //below addes pop up only to the destination
                 if (i == 0) {
                   marker.bindPopup("You are here!");
+                }else if (i == n - 1) {
+                  //This is the last marker indicating destination
+                  marker.bindPopup(popUpElement);
                 }
                 return marker
               },
@@ -167,7 +172,7 @@ async function main() {
             //Path overlays like polylines also have a bindPopup method. Here's a more complicated way to open a popup on a map:
             let pop1 = L.popup()
             .setLatLng([nearbyLatLng[0], nearbyLatLng[1]])
-            .setContent(createPopUpContent(name, pharmacistName, address))
+            .setContent(popUpElement)
             .openOn(map);
 
             map.flyTo([lat, lng], 10);
@@ -186,7 +191,7 @@ async function main() {
         .querySelector("#searchBtn")
         .addEventListener("click", function (event) {
           event.preventDefault();
-
+          console.log("clicked");
           searchResultLayer.clearLayers();
           let searchString = document.querySelector("#searchString").value;
           let filteredResult = searchDataArray.filter((el) =>
@@ -210,6 +215,8 @@ async function main() {
             let pharmacistName = el[3];
             let marker = L.marker([lat, lng], { icon: pharmacyIcon });
 
+            let popUpElement = document.createElement("div");
+            popUpElement.classList.add("makerPopUp");
             popUpElement.innerHTML = createPopUpContent(name, pharmacistName, address);
 
             let directionDivElement = document.createElement("div");
