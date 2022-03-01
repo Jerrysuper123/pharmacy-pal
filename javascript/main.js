@@ -122,6 +122,9 @@ async function main() {
           );
 
           let resultDiv = document.querySelector("#result");
+          //this remove border radius, so that search resulted can come visually merge with search bar
+          let searchByAddressBar = document.querySelector("#searchByAddressBar");
+          searchByAddressBar.classList.add("borderRadiusNone");
           resultDiv.innerHTML = "";
 
           for (el of filteredResult) {
@@ -142,8 +145,8 @@ async function main() {
               <i class="fa-solid fa-user-nurse markerAvatar me-3"></i>
               <section>
                 <p class="fw-bold m-0">Registered Pharmacist</p>
-                <p class="my-1">Name: ${pharmacistName}</p>
-                <p class="m-0 p-0">Experience: <i class="fa-solid fa-ellipsis"></i></p>
+                <p class="my-1">Name: <span class="keyInfo"> ${pharmacistName} </span> </p>
+                <p class="m-0 p-0">Experience: <i class="fa-solid fa-ellipsis keyInfo"></i></p>
               </section/>
             </div>
             <p class="address subText"><i class="fa-solid fa-location-dot"></i> ${address}</p>
@@ -167,8 +170,14 @@ async function main() {
 
             //create search result list and add event listener to each result
             let divElement = document.createElement("div");
-            divElement.innerHTML = el[0].split(",")[0];
+            divElement.classList.add("m-3")
+            divElement.innerHTML = `
+            <i class="fa-solid fa-magnifying-glass me-1"></i>
+            ${el[0].split(",")[0]}
+            `;
             divElement.addEventListener("click", function () {
+              //give border radius to searchbar again when user chose the locaiton
+              searchByAddressBar.classList.remove("borderRadiusNone");
               resultDiv.innerHTML = "";
               map.flyTo([lat, lng], 13);
               marker.openPopup();
