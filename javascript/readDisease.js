@@ -4,6 +4,65 @@
 //2. decide kind of drug
 //3. whether available in pharmacy
 
+async function readSymptomsData() {
+    let response = await axios.get("../localData/diseaseAndSymptoms.csv");
+    //   console.log(response.data.split("\r\n"));
+    return response.data.split("\r\n");
+    // return response.data.result.records;
+  }
+
+function symptomsDataTransform(results){
+    //remove column headers of csv
+    let arrayData = [];
+    let oneArray = [];
+    let finalResults = [];
+    //create a set to contain unique symptoms
+    let symptomsSet = new Set();
+    results.shift();
+  
+    for (let el of results){
+        //split one string into elements of an array
+        arrayData.push(el.split(","));
+    }
+
+    //trim and remove empty spaces
+    for(let el of arrayData){
+        oneArray = [];
+        for(let string of el){
+            let oneString = string.trim();
+            if(oneString!==""){
+                oneArray.push(oneString);
+            }
+        }
+        finalResults.push(oneArray);
+    }
+
+    //making final objects
+    //[{disease: symptoms..},{...}]
+    let objArray = [];
+    for(el of finalResults){
+        let diseaseName = el[0];
+        // console.log(diseaseName)
+        let symptoms = el.slice(1);
+
+        //create symptom for searching
+        for(oneSymptom of symptoms){
+            symptomsSet.add(oneSymptom);
+        }
+        let obj = {};
+        obj[diseaseName] = symptoms;
+        // console.log(obj);
+        objArray.push(obj);
+    }
+   
+    return [objArray,symptomsSet];
+}
+
+async function getSymptomsDataTransformed(){
+    let results = await readSymptomsData();
+    return symptomsDataTransform(results);
+}
+
 async function readDisease(diseaseName) {
     const endpoint = 'https://en.wikipedia.org/w/api.php?';
     const params = {

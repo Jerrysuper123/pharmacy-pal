@@ -1,3 +1,15 @@
+//symptom checker page
+//load the data first [disease-symptom object dataset, symptom set]
+window.addEventListener("DOMContentLoaded",async function(){
+  let symptomData = await getSymptomsDataTransformed();
+  console.log(symptomData);
+
+})
+
+document.querySelector("#searchSymptomInput")
+        .addEventListener("change", function(){
+          console.log(symptomData)
+        })
 
 //Drug match-disease page
 document.querySelector("#searchMatchDrugBtn")
@@ -140,4 +152,5 @@ document.querySelector("#searchEffectBtn").addEventListener("click", async funct
   
   const barChart = new ApexCharts(document.querySelector("#barChart"), barOptions);
   barChart.render();
-  
+
+

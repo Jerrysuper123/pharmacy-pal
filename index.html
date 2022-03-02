@@ -75,7 +75,7 @@
                 </div> -->
             </nav>
             <section>
-                <div id="result"></div>
+                <div id="result" class="result"></div>
             </section>
             <div id="singaporeMap"></div>
 
@@ -144,9 +144,27 @@
                 </nav>
 
                 <div id="all-pages">
-                    <!-- <div class="page" id="page-1">
-                        <h1>symptops checker</h1>
-                    </div> -->
+                    <div class="page" id="page-1">
+                        <div class="container">
+                            <h1>symptom checker</h1>
+                            <p>selected symptoms for matching disease</p>
+                            <div id="searchDrugBtn" class="advisorSearchBar d-flex align-items-center shadow customBorder bg-light px-3 py-2">
+                                <form action="" class="d-flex ms-1">
+                                    <i class="primaryIconStyle fa-solid fa-magnifying-glass"></i>
+                                    <input id="searchSymptomInput" type="text" class="searchString border-0" placeholder="disease or illness...">
+                                </form>
+                            </div>
+                            <section>
+                                <div id="symptomSearchResults" class="result">haha</div>
+                            </section>
+                            
+                            <article class="d-flex bg-light">
+                                <section id="drugResults" class="mt-3 ps-2"></section>
+                                <section id="drugDetails" class="mt-3 p-4"></section>
+                            </article>
+
+                        </div>
+                    </div>
 
                     <div class="page" id="page-2">
                         <div class="container">
