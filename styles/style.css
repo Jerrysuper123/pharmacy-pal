@@ -19,7 +19,7 @@ body {
 }
 
 /* border setting */
-.customBorder {
+.customBorder, .drugList {
   border: 1px solid rgba(140, 140, 140, 0.7);
 }
 
@@ -75,17 +75,17 @@ body {
 }
 
 /* search drug store nearby */
-#searchByAddressBar {
+#searchByAddressBar, .advisorSearchBar {
   border-radius: 1rem;
   height: 4rem;
   width: 23rem;
 }
-#searchByAddressBar button {
+#searchByAddressBar button, .advisorSearchBar button {
   font-size: 1.5rem;
   color: #ab5e69;
 }
 
-#searchString {
+.searchString {
   width: 16rem;
 }
 
@@ -114,11 +114,11 @@ body {
 
 /* css rules for devices from 0 to 480px */
 @media screen and (max-width: 480px) {
-  #searchString {
+  .searchString {
     width: 60vw;
   }
 
-  #searchByAddressBar {
+  #searchByAddressBar, .advisorSearchBar {
     width: 90vw;
   }
 
@@ -196,7 +196,7 @@ body {
 }
 
 #page-2 {
-  background-color: blue;
+  background-color: white;
 }
 
 #page-3 {
@@ -216,6 +216,18 @@ body {
 .show {
   transform: translateX(0);
   transition: transform 1s;
+}
+
+.advisorSearchBar {
+  width: 21rem;
+}
+
+.drugList {
+  background-color: #c2fbcd;
+  width: 20rem;
+  padding: 1rem;
+  margin-top: 0.3rem;
+  color: grey;
 }
 
 #singaporeMap {

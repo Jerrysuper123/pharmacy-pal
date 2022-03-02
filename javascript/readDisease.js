@@ -74,9 +74,30 @@ async function getDrug(symptom) {
         params: {
             api_key: OPENFDA_API_KEY,
             search: "purpose:" + symptom,
-            limit: 5
+            limit: 10
         }
     });
 
     return response.data.results;
 }
+
+function transformDrugData(results){
+    let transformed = [];
+    let count = 0;
+    for(let el of results){
+        if(count===3){
+            break;
+        }
+        if(el.openfda.brand_name){
+            transformed.push(el);
+            count++;
+        }
+    }
+    return transformed;
+}
+
+async function getTransformedDrug(symptom){
+     let results = await getDrug(symptom);
+     return transformDrugData(results);
+}
+

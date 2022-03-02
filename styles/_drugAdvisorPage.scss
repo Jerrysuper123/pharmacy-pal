@@ -10,7 +10,7 @@
     background-color: aliceblue;
   }
   #page-2 {
-    background-color: blue;
+    background-color: white;
   }
   
   #page-3 {
@@ -32,3 +32,16 @@
     transition: transform 1s;
   }
   
+  .advisorSearchBar{
+    @extend #searchByAddressBar;
+    width: 21rem;
+  }
+
+  .drugList{
+    background-color: $colorSecondary;
+    width: 20rem;
+    padding: 1rem;
+    margin-top: 0.3rem;
+    color: grey;
+    @extend .customBorder;
+  }
