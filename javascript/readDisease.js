@@ -54,8 +54,9 @@ function symptomsDataTransform(results){
         // console.log(obj);
         objArray.push(obj);
     }
-   
-    return [objArray,symptomsSet];
+    
+    // convert set back to array
+    return [objArray,Array.from(symptomsSet)];
 }
 
 async function getSymptomsDataTransformed(){

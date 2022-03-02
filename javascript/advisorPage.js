@@ -1,15 +1,40 @@
 //symptom checker page
 //load the data first [disease-symptom object dataset, symptom set]
+let symptomData = [];
 window.addEventListener("DOMContentLoaded",async function(){
-  let symptomData = await getSymptomsDataTransformed();
-  console.log(symptomData);
+  symptomData = await getSymptomsDataTransformed();
+  let diseaseSymptomArray = symptomData[0];
+  let symptomSet = symptomData[1];
+  // console.log(symptomData);
 
+  document.querySelector("#searchSymptomInput")
+        .addEventListener("keypress", function(){
+          let searchSymptomString = document.querySelector("#searchSymptomInput").value;
+          // console.log(searchSymptomString);
+          let filterList = symptomSet.filter(el=>el.includes(searchSymptomString));
+          
+          //or show top 5 searched results
+          let symptomSearchResults = document.querySelector("#symptomSearchResults");
+          // clear when users key press again
+          symptomSearchResults.innerHTML = "";
+          for(let el of filterList){
+            let oneSymptomElement = document.createElement("div");
+            oneSymptomElement.innerHTML = el!==undefined? `${el}<span class="ms-5">Add</span>`: "";
+
+            oneSymptomElement.addEventListener("click", function(){
+              let symptomList = document.querySelector("#symptomList");
+              let element = document.createElement("div");
+              element.innerHTML = `
+                ${el} <i class="fa-solid fa-trash"></i>
+              `;
+              symptomList.appendChild(element);
+            })
+              symptomSearchResults.appendChild(oneSymptomElement)
+          }
+        })
 })
 
-document.querySelector("#searchSymptomInput")
-        .addEventListener("change", function(){
-          console.log(symptomData)
-        })
+
 
 //Drug match-disease page
 document.querySelector("#searchMatchDrugBtn")
