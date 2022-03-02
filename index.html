@@ -41,7 +41,8 @@
                     <div id="barIcon" class="mx-1 primaryIconStyle"><i class="fa-solid fa-bars"></i></div>
 
                     <form action="" class="d-flex ms-1">
-                        <input id="searchString" type="text" class="searchString border-0" placeholder="search by address...">
+                        <input id="searchString" type="text" class="searchString border-0"
+                            placeholder="search by address...">
 
                         <button id="searchBtn" class="ms-2 bg-light border-0">
                             <i class="primaryIconStyle fa-solid fa-magnifying-glass-location"></i>
@@ -125,7 +126,7 @@
                 </div>
                 <p>Choose below services to find out more</p>
                 <!-- navbar -->
-      
+
                 <nav id="drugNavBar">
                     <!-- must always data-sth -->
                     <button id="page1-btn" data-page="1">
@@ -146,6 +147,7 @@
                     <!-- <div class="page" id="page-1">
                         <h1>symptops checker</h1>
                     </div> -->
+
                     <div class="page" id="page-2">
                         <div class="container">
                             <h1>drug match-disease</h1>
@@ -166,15 +168,35 @@
                             </article>
                             
                         </div>
-
-                       
                     </div>
-                    <!-- <div class="page" id="page-3">
-                        <h1>drug side-effects</h1>
-                    </div> -->
+
+                    <div class="page" id="page-3">
+                        <div class="container">
+                            <h1>drug side-effects</h1>
+                            <p>type the drugname below to see the adverse events. try popular search = "BioNTech, Pfizer vaccine"</p>
+                            <div id="searchDrugBtn"
+                                class="advisorSearchBar d-flex align-items-center shadow customBorder bg-light px-3 py-2">
+                                <form action="" class="d-flex ms-1">
+                                    <input id="searchEffectString" type="text" class="searchString border-0"
+                                        placeholder="drug name...">
+
+                                    <button id="searchEffectBtn" class="ms-2 bg-light border-0">
+                                        <i class="primaryIconStyle fa-solid fa-magnifying-glass"></i>
+                                    </button>
+                                </form>
+                            </div>
+
+                            <article class="bg-light d-flex">
+                                <div id="lineChart" style="height:30vh"></div>
+                                <div id="barChart" style="height:30vh"></div>
+                            </article>
+
+                        </div>
+
+                    </div>
                 </div>
-       
-<!-- 
+
+                <!-- 
                 <h1>Check if an OTC drug is available</h1>
                 <input id="queryDrugNameInput" class="form-control" type="text" placeholder="search by drug name...">
                 <button id="searchDrugBtn" class="btn btn-primary">Search</button>
@@ -221,12 +243,16 @@
         integrity="sha512-/Q6t3CASm04EliI1QyIDAA/nDo9R8FQ/BULoUFyN4n/BDdyIxeH7u++Z+eobdmr11gG5D/6nPFyDlnisDwhpYA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+    <!-- apex chart plug in -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    <!-- own JS -->
     <script src="./javascript/readATC.js"></script>
     <script src="./javascript/readDisease.js"></script>
     <script src="./javascript/calculateDistance.js"></script>
     <script src="./javascript/getUserLocation.js"></script>
     <script src="./javascript/readStoreLocation.js"></script>
-    <script src="./javascript/readLocation.js"></script>
+    <!-- <script src="./javascript/readLocation.js"></script> -->
     <script src="./javascript/drugData.js"></script>
     <script src="./javascript/pharmacistData.js"></script>
     <script src="./javascript/advisorPage.js"></script>

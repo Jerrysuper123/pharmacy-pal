@@ -1,5 +1,5 @@
 
-
+//Drug match-disease page
 document.querySelector("#searchMatchDrugBtn")
     .addEventListener("click", async function (event) {
         event.preventDefault();
@@ -59,3 +59,85 @@ document.querySelector("#searchMatchDrugBtn")
         }
 
     })
+
+
+//drug side effects chart
+  // {x: month, y: total amount}, transform data into this format
+document.querySelector("#searchEffectBtn").addEventListener("click", async function (event) {
+    //1 function only does 1 function
+    // let data = await loadData();
+    // let transformed = transformData(data, null, null);
+    // updateChart(chart, transformed, "sales");
+    event.preventDefault();
+    let searchEffectString = document.querySelector("#searchEffectString").value;
+    
+    let lineData = await getEffectDataTranformed(searchEffectString);
+    let barData = await getEventsTransformed(searchEffectString);
+    console.log(barData);
+    updateChart(lineChart, lineData, `${searchEffectString} adverse events reported`);
+    updateChart(barChart, barData, `advese events reported`);
+
+
+    // // document.querySelector("#search-btn").addEventListener("click", function () {
+    // //   let country = document.querySelector("#search-terms").value;
+    // //   let transformed = transformData(data, country, null);
+    // //   updateChart(chart, transformed, "sales");
+    // });
+  });
+  
+  function updateChart(chart, newSeries, newSeriesName) {
+    chart.updateSeries([
+      {
+        name: newSeriesName,
+        data: newSeries,
+      },
+    ]);
+  }
+  
+  const options = {
+    chart: {
+      type: "line",
+      height: "100%",
+    },
+    // not working now
+    title:{
+        text: "Adverse events reported over time",
+        align: 'left',
+        margin: 10,
+        offsetX: 0,
+        offsetY: 0,
+        floating: false,
+        style: {
+          fontSize:  '14px',
+          fontWeight:  'bold',
+          fontFamily:  undefined,
+          color:  '#263238'
+        },
+    },
+    series: [],
+    noData: {
+      text: "loading",
+    },
+  };
+  
+  const lineChart = new ApexCharts(document.querySelector("#lineChart"), options);
+  lineChart.render();
+
+  const barOptions = {
+    chart: {
+      type: "bar",
+      height: "100%",
+    },
+    // not working now
+    title:{
+        text: "Top 5 adverse events reported",
+    },
+    series: [],
+    noData: {
+      text: "loading",
+    },
+  };
+  
+  const barChart = new ApexCharts(document.querySelector("#barChart"), barOptions);
+  barChart.render();
+  
