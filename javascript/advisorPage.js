@@ -89,7 +89,24 @@ window.addEventListener("DOMContentLoaded", async function () {
         let diseaseName = Object.keys(el)[0];
         diseaseArray.push(diseaseName);
       }
-      console.log(diseaseArray)
+      
+      let diseaseList = document.querySelector("#diseaseList");
+      for(let el of diseaseArray){
+        let diseaseElement = document.createElement('div');
+        diseaseElement.innerHTML = `${el}`;
+        diseaseElement.addEventListener("click", async function(){
+          let titleBodyImg = await getTitleBodyImg(el);
+          let diseaseDescription = document.querySelector("#diseaseDescription");
+          diseaseDescription.innerHTML = "";
+          console.log(titleBodyImg[2]);
+          diseaseDescription.innerHTML = `
+            <h1>${titleBodyImg[0][0]}</h1>
+            <p>${titleBodyImg[0][1]}</p>
+            <img src=${titleBodyImg[1]} alt=${titleBodyImg[0][0]}/>
+          `;
+        })
+        diseaseList.appendChild(diseaseElement);
+      }
     })
 
 

@@ -83,18 +83,21 @@ async function readDisease(diseaseName) {
 
     params.gsrsearch = diseaseName;
     let response = await axios.get(endpoint, { params });
-    console.log(response);
-
+    let pageObject = response.data.query.pages;
+    let pageInfo = Object.values(pageObject)[0];
+    let title = pageInfo.title;
+    let body = pageInfo.extract;
+    return [title, body];
 }
 
-async function getImage() {
+async function getImage(diseaseName) {
     //credit to pexels
     // <a href="https://www.pexels.com">Photos provided by Pexels</a>
     const PEXEL_API_KEY = "563492ad6f91700001000001b48bc8b04e5c404db7fbfccf0d8824a2";
     const endpoint = 'https://api.pexels.com/v1/search';
     let response = await axios.get(endpoint, {
         params: {
-            query: "cough",
+            query: diseaseName,
             per_page: 1,
             size: "small"
         },
@@ -103,7 +106,16 @@ async function getImage() {
             Authorization: PEXEL_API_KEY,
         },
     });
-    console.log(response);
+    //return medium image size url
+    return response.data.photos[0].src.medium;
+}
+
+async function getTitleBodyImg(diseaseName){
+    let titleBody = await readDisease(diseaseName);
+    let image = await getImage(diseaseName);
+
+    //[[title, body], image]
+    return [titleBody, image]
 }
 
 //credit: https://open.fda.gov/apis/drug/event/explore-the-api-with-an-interactive-chart/
