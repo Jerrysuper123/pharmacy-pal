@@ -43,7 +43,10 @@ window.addEventListener("DOMContentLoaded", async function () {
 
       for (let el of filterList) {
         let oneSymptomElement = document.createElement("div");
-        oneSymptomElement.innerHTML = el !== undefined ? `${el}<span class="ms-5">Add</span>` : "";
+        oneSymptomElement.classList.add("d-flex");
+        // oneSymptomElement.classList.add("oneSymptomItem");
+        oneSymptomElement.classList.add("p-3");
+        oneSymptomElement.innerHTML = el !== undefined ? `${el}<span class="ms-auto p-1 bg-info text-light">ADD</span>` : "";
 
         oneSymptomElement.addEventListener("click", function () {
           symptomSearchResults.innerHTML = "";

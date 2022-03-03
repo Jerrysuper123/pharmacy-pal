@@ -1,29 +1,19 @@
 .page {
-    height: 80vh;
+    min-height: 80vh;
     /* box-sizing: ; */
-    border: 1px solid black;
+    // border: 1px solid black;
+    @extend .customBorder;
     position: absolute;
     width: 100%;
   }
-  
-  #page-1 {
-    background-color: aliceblue;
-  }
-  #page-2 {
-    background-color: white;
-  }
-  
-  #page-3 {
-    background-color: aqua;
-  }
-  
+
   #all-pages {
     position: relative;
   }
   
   .hidden {
     /* move all page to the right by 100% */
-    transform: translateX(100%);
+    transform: translateX(140%);
     transition: transform 1s;
   }
   
@@ -34,8 +24,78 @@
   
   .advisorSearchBar{
     @extend #searchByAddressBar;
-    width: 21rem;
+    width:
+    21rem;
   }
+
+  .drugAdvisorPage{
+    @extend .greyContainer;
+    // background-color: red !important;
+  }
+
+  .primaryPageBackground {
+    width: 100%;
+    height: 100vh;
+    overflow-y: auto;
+    // background-image: linear-gradient($colorAccentOne, $colorSecondary);
+    background-color: $colorAccentThree;
+  }
+
+  .closeMark{
+    font-size: 3rem;
+    color: white;
+  }
+
+  .drugNavBar{
+    // background-color: white;
+    color: rgb(155, 155, 155);
+    font-size: 1rem;
+    // margin-bottom: -0.5rem;;
+    button{
+      padding: 0.5rem;
+      color: white;
+      border: none;
+      background-color: rgba($color: #000000, $alpha: 0);
+    }
+    i{
+      color: $colorPrimary;
+    }
+  }
+
+  .changeBtnColorToWhite{
+    background-color:#f8f9fa !important;
+    color: #007197!important;
+  }
+
+  .symptomSearchResults{
+    background-color: white;
+    z-index: 2;
+    font-size: 0.8rem;
+    color: grey;
+    width: 21rem;
+    max-height: 20rem;
+    overflow-y: scroll;
+    div{
+      &:hover {
+        background: #cde6d2;
+      }
+    }
+
+  }
+
+
+
+  .symptomList{
+    color: rgb(167, 167, 167);
+    background-color: rgb(236, 236, 236);
+    width: 21rem;
+    i{
+      font-size: 10rem;
+      color: #cde6d2;
+    }
+  }
+
+ 
 
   .drugList{
     background-color: $colorSecondary;

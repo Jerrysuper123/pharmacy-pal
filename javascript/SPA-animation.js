@@ -21,7 +21,7 @@ document
     page.classList.add("hideLeft");
   });
 
-//show drug page
+//show drug advisor page
 document.querySelector("#drugAdvisorBtn").addEventListener("click", function () {
   let page = document.querySelector("#drugAdvisorPage");
   page.classList.remove("hideLeft");
@@ -41,7 +41,11 @@ document
   // console.log(allButtons);
   for (let btn of allButtons) {
     btn.addEventListener("click", function (event) {
+      for(let btn of allButtons){
+        btn.classList.remove("changeBtnColorToWhite");
+      }
       let selectedBtn = event.target;
+      selectedBtn.classList.add("changeBtnColorToWhite");
       //data-page="1";
       //dataset = {page: '1'};
       let pageNumber = selectedBtn.dataset.page;
