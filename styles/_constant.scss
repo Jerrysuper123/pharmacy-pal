@@ -1,6 +1,22 @@
 /* google font */
 @import url('https://fonts.googleapis.com/css2?family=Lora&family=Roboto&display=swap');
 
+//for app logo font
+@import url('https://fonts.googleapis.com/css2?family=Playball&display=swap');
+.appLogo{
+  font-family: 'Playball', cursive;
+  font-size: 2rem;
+  
+}
+
+.appLogoColor{
+  color: rgb(194, 3, 3);
+}
+
+.landPageLogoSize{
+  font-size: 3rem;
+}
+
 /* color setting */
 $colorPrimary: #ab5e69;
 $colorSecondary: #c2fbcd;

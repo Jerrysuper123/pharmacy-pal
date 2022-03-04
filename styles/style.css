@@ -1,5 +1,19 @@
 /* google font */
 @import url("https://fonts.googleapis.com/css2?family=Lora&family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playball&display=swap");
+.appLogo {
+  font-family: "Playball", cursive;
+  font-size: 2rem;
+}
+
+.appLogoColor {
+  color: #c20303;
+}
+
+.landPageLogoSize {
+  font-size: 3rem;
+}
+
 /* color setting */
 /* font family and size setting */
 h1 {
@@ -226,9 +240,9 @@ body {
   background-color: #8fb095;
 }
 
-.closeMark {
-  font-size: 3rem;
-  color: white;
+.topNavDrugAdvisorPage {
+  font-size: 2rem;
+  color: white !important;
 }
 
 .drugNavBar {

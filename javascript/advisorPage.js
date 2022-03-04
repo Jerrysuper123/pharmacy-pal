@@ -31,6 +31,9 @@ window.addEventListener("DOMContentLoaded", async function () {
   let symptomSet = symptomData[1];
   // console.log(symptomData);
 
+  //fill in the chart with vaccine data
+  document.querySelector("#searchEffectBtn").click();
+
   document.querySelector("#searchSymptomInput")
     .addEventListener("click", function () {
       let searchInput = document.querySelector("#searchSymptomBtn");
@@ -266,7 +269,10 @@ document.querySelector("#searchMatchDrugBtn")
 document.querySelector("#searchEffectBtn").addEventListener("click", async function (event) {
   event.preventDefault();
   let searchEffectString = document.querySelector("#searchEffectString").value;
-
+  // console.log(typeof(searchEffectString));
+  if(searchEffectString===""){
+    searchEffectString = "BioNTech, Pfizer vaccine";
+  }
   let lineData = await getEffectDataTranformed(searchEffectString);
   let barData = await getEventsTransformed(searchEffectString);
   console.log(barData);

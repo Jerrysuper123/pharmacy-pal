@@ -49,7 +49,7 @@ document
       //data-page="1";
       //dataset = {page: '1'};
       let pageNumber = selectedBtn.dataset.page;
-      console.log("click pagenumber" + pageNumber);
+      // console.log("click pagenumber" + pageNumber);
   
       let pages = document.querySelectorAll(".page");
       for (let p of pages) {
