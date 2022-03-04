@@ -137,38 +137,46 @@ window.addEventListener("DOMContentLoaded", async function () {
           diseaseArray.push(diseaseName);
         }
 
-        let diseaseList = document.querySelector("#diseaseList");
-        diseaseList.innerHTML = "";
+        //if there is no disease matched, let user know
+        if (diseaseArray.length === 0) {
+          validationSymptomEle.innerHTML = "You symptoms did not match any conditions in our database. Choose your symptoms again!"
+        } else {
+          validationSymptomEle.innerHTML = "";
+          
+          let diseaseList = document.querySelector("#diseaseList");
+          diseaseList.innerHTML = "";
 
-        //adding downarrowicon when user clicked diagnose
-        let downArrowIcon = document.querySelector("#downArrowIcon");
-        downArrowIcon.classList.remove("d-none");
+          //adding downarrowicon when user clicked diagnose
+          let downArrowIcon = document.querySelector("#downArrowIcon");
+          downArrowIcon.classList.remove("d-none");
 
-        for (let el of diseaseArray) {
-          let diseaseElement = document.createElement('div');
-          diseaseElement.innerHTML = returnListItemString(el);
+          for (let el of diseaseArray) {
+            let diseaseElement = document.createElement('div');
+            diseaseElement.innerHTML = returnListItemString(el);
 
-          diseaseElement.classList.add("listItemDesign");
+            diseaseElement.classList.add("listItemDesign");
 
 
-          //retrieve the condition title, text and image
-          diseaseElement.addEventListener("click", async function (event) {
-            addColorScaleToOneElementOnly("listItemDesign", event);
+            //retrieve the condition title, text and image
+            diseaseElement.addEventListener("click", async function (event) {
+              addColorScaleToOneElementOnly("listItemDesign", event);
 
-            let titleBodyImg = await getTitleBodyImg(el);
-            let diseaseDescription = document.querySelector("#diseaseDescription");
-            diseaseDescription.innerHTML = "";
-            diseaseDescription.innerHTML = `
+              let titleBodyImg = await getTitleBodyImg(el);
+              let diseaseDescription = document.querySelector("#diseaseDescription");
+              diseaseDescription.innerHTML = "";
+              diseaseDescription.innerHTML = `
             <h1 class="text-center">${titleBodyImg[0][0]}</h1>
             <img src=${titleBodyImg[1]} class="diseaseImage" alt=${titleBodyImg[0][0]}/>
             <p>${titleBodyImg[0][1]}</p>
           `;
-          })
-          diseaseList.appendChild(diseaseElement);
-        }
+            })
+            diseaseList.appendChild(diseaseElement);
+          }
 
-        //click the first condition to show its details
-        clickFirstChild(diseaseList);
+          //click the first condition to show its details
+          clickFirstChild(diseaseList);
+
+        }
 
       }
 
