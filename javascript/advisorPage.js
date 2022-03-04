@@ -293,27 +293,29 @@ document.querySelector("#searchMatchDrugBtn")
 
   })
 
+let lineData = [];
+let barData = [];
 
 //drug side effects page
 document.querySelector("#searchEffectBtn").addEventListener("click", async function (event) {
   event.preventDefault();
-
-  let lineData=[];
-  let barData=[];
-
   let searchEffectString = document.querySelector("#searchEffectString").value;
-
   let sideEffectUserNote = document.querySelector("#drugSideEffectsValidationResult");
+  sideEffectUserNote.innerHTML = "";
 
-  if (formValidate(searchEffectString)) {
+  /*first load vaccine dummy data, the default is an empty string, so show no error message */
+  if (searchEffectString==="" && (lineData.length === 0 || barData.length === 0)) {
     searchEffectString = "BioNTech, Pfizer vaccine";
 
-    sideEffectUserNote.innerHTML = `${globalValidationResults} We have defaulted the search string to "BioNTech, Pfizer vaccine"`;
+  } else if (searchEffectString==="" && (lineData.length !== 0 || barData.length !== 0)) {
+    if (formValidate(searchEffectString)) {
+      sideEffectUserNote.innerHTML = `${globalValidationResults} We have defaulted the search string to "BioNTech, Pfizer vaccine"`;
+    }
   }
 
   //added parallel loading for both charts
-  loader1 =  getEffectDataTranformed(searchEffectString);
-  loaded2 =  getEventsTransformed(searchEffectString);
+  loader1 = getEffectDataTranformed(searchEffectString);
+  loaded2 = getEventsTransformed(searchEffectString);
 
   lineData = await loader1;
   barData = await loaded2;
