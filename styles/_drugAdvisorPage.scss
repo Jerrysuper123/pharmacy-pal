@@ -158,13 +158,9 @@
 
   .colorAccentTwoAndScale{
     background-color: $colorAccentTwo;
-    transform: scale(1.1);
+    transform: scale(1.05);
   }
 
-  .greyOut{
-    background-color: rgb(212, 212, 212) !important;
-    // transform: scale(0.9);
-  }
 
   .drugResultsBox{
     width: 21rem;
