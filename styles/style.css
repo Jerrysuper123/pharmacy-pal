@@ -110,6 +110,8 @@ body {
   font-size: 0.8rem;
   color: grey;
   width: 23rem;
+  max-height: 50vh;
+  overflow-y: scroll;
 }
 
 /* search drug store nearby */
