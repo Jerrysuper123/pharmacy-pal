@@ -13,7 +13,7 @@
   
   .hidden {
     /* move all page to the right by 100% */
-    transform: translateX(140%);
+    transform: translateX(-140%);
     transition: transform 1s;
   }
   
