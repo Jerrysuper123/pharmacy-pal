@@ -122,11 +122,18 @@ window.addEventListener("DOMContentLoaded", async function () {
       }
 
       let diseaseList = document.querySelector("#diseaseList");
+
       for (let el of diseaseArray) {
         let diseaseElement = document.createElement('div');
         diseaseElement.innerHTML = returnListItemString(el);
+
         diseaseElement.classList.add("listItemDesign");
-        diseaseElement.addEventListener("click", async function () {
+
+
+        //retrieve the condition title, text and image
+        diseaseElement.addEventListener("click", async function (event) {
+          addColorScaleToOneElementOnly("listItemDesign",event);
+          
           let titleBodyImg = await getTitleBodyImg(el);
           let diseaseDescription = document.querySelector("#diseaseDescription");
           diseaseDescription.innerHTML = "";
@@ -138,11 +145,16 @@ window.addEventListener("DOMContentLoaded", async function () {
         })
         diseaseList.appendChild(diseaseElement);
       }
+
+      //click the first condition to show its details
+      clickFirstChild(diseaseList);
     })
+
+
 })
 
 //create list item html string for inner html
-function returnListItemString(elValue){
+function returnListItemString(elValue) {
   let stringHTML = `
   <span class="itemItem">${elValue}</span>
     <i class="expandIcon fa-solid fa-angle-right"></i>`;
@@ -159,7 +171,7 @@ function clickFirstChild(parentElement) {
 
 //when use click one item, change its color and greyout the rest
 //1 arg is the item class, 2 arg is the event (being clicked);
-function addColorScaleToOneElementOnly(elementClass, event){
+function addColorScaleToOneElementOnly(elementClass, event) {
   let currentElement = event.target;
   elementClassQuerySelector = `.${elementClass}`;
   let items = document.querySelectorAll(elementClassQuerySelector);
@@ -173,7 +185,7 @@ function addColorScaleToOneElementOnly(elementClass, event){
     if (parentElement.classList[0] === elementClass) {
       parentElement.classList.add("colorAccentTwoAndScale");
     }
-  }  
+  }
 }
 
 
@@ -203,7 +215,7 @@ document.querySelector("#searchMatchDrugBtn")
     //     console.log("cannot find a drug")
     // }
 
-    
+
 
     for (let drug of results) {
       let eachDrugElement = document.createElement("div");
