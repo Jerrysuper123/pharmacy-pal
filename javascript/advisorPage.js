@@ -38,7 +38,7 @@ window.addEventListener("DOMContentLoaded", async function () {
   let symptomSet = symptomData[1];
   // console.log(symptomData);
 
-  //fill in the chart with vaccine data
+  //fill in the chart with sample vaccine data
   document.querySelector("#searchEffectBtn").click();
 
   document.querySelector("#searchSymptomInput")
@@ -297,12 +297,26 @@ document.querySelector("#searchMatchDrugBtn")
 //drug side effects page
 document.querySelector("#searchEffectBtn").addEventListener("click", async function (event) {
   event.preventDefault();
+
+  let lineData=[];
+  let barData=[];
+
   let searchEffectString = document.querySelector("#searchEffectString").value;
-  if (searchEffectString === "") {
+
+  let sideEffectUserNote = document.querySelector("#drugSideEffectsValidationResult");
+
+  if (formValidate(searchEffectString)) {
     searchEffectString = "BioNTech, Pfizer vaccine";
+
+    sideEffectUserNote.innerHTML = `${globalValidationResults} We have defaulted the search string to "BioNTech, Pfizer vaccine"`;
   }
-  let lineData = await getEffectDataTranformed(searchEffectString);
-  let barData = await getEventsTransformed(searchEffectString);
+
+  //added parallel loading for both charts
+  loader1 =  getEffectDataTranformed(searchEffectString);
+  loaded2 =  getEventsTransformed(searchEffectString);
+
+  lineData = await loader1;
+  barData = await loaded2;
 
   updateChart(lineChart, lineData, `${searchEffectString} adverse events reported`);
   updateChart(barChart, barData, `adverse events reported`);
