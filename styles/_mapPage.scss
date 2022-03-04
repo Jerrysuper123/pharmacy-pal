@@ -6,6 +6,14 @@
   position: absolute;
 }
 
+.validationResult{
+  @extend .navBar;
+  margin-left: 1.3rem;
+  margin-top: 5rem !important;
+  color: red;
+  font-size: 1.3rem;
+}
+
 .result {
   margin-left: 0.7rem;
   margin-top: 5rem;
