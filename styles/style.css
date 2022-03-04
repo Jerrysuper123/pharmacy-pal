@@ -323,7 +323,7 @@ body {
   display: flex;
   margin-top: 0.3rem;
 }
-.listItemDesign .drugNameTitle {
+.listItemDesign .itemItem {
   color: #274d58;
 }
 .listItemDesign .expandIcon {

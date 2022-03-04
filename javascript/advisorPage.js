@@ -124,7 +124,8 @@ window.addEventListener("DOMContentLoaded", async function () {
       let diseaseList = document.querySelector("#diseaseList");
       for (let el of diseaseArray) {
         let diseaseElement = document.createElement('div');
-        diseaseElement.innerHTML = `${el}`;
+        diseaseElement.innerHTML = returnListItemString(el);
+        diseaseElement.classList.add("listItemDesign");
         diseaseElement.addEventListener("click", async function () {
           let titleBodyImg = await getTitleBodyImg(el);
           let diseaseDescription = document.querySelector("#diseaseDescription");
@@ -140,8 +141,40 @@ window.addEventListener("DOMContentLoaded", async function () {
     })
 })
 
+//create list item html string for inner html
+function returnListItemString(elValue){
+  let stringHTML = `
+  <span class="itemItem">${elValue}</span>
+    <i class="expandIcon fa-solid fa-angle-right"></i>`;
+  return stringHTML;
+}
+
+//when program load will alway click the first child of the a parent element
+function clickFirstChild(parentElement) {
+  let firstChild = parentElement.firstChild;
+  firstChild.classList.add("colorAccentTwoAndScale");
+  firstChild.click();
+}
 
 
+//when use click one item, change its color and greyout the rest
+//1 arg is the item class, 2 arg is the event (being clicked);
+function addColorScaleToOneElementOnly(elementClass, event){
+  let currentElement = event.target;
+  elementClassQuerySelector = `.${elementClass}`;
+  let items = document.querySelectorAll(elementClassQuerySelector);
+  for (let el of items) {
+    el.classList.remove("colorAccentTwoAndScale");
+  }
+  if (currentElement.classList[0] === elementClass) {
+    currentElement.classList.add("colorAccentTwoAndScale")
+  } else {
+    let parentElement = currentElement.parentElement;
+    if (parentElement.classList[0] === elementClass) {
+      parentElement.classList.add("colorAccentTwoAndScale");
+    }
+  }  
+}
 
 
 
@@ -170,37 +203,18 @@ document.querySelector("#searchMatchDrugBtn")
     //     console.log("cannot find a drug")
     // }
 
+    
+
     for (let drug of results) {
       let eachDrugElement = document.createElement("div");
 
       eachDrugElement.classList.add("listItemDesign");
       eachDrugElement.classList.add("shadow-1");
       let drugName = drug.openfda.brand_name[0];
-      eachDrugElement.innerHTML = `
-      <span class="drugNameTitle">${drugName}</span>
-        <i class="expandIcon fa-solid fa-angle-right"></i>`;
+      eachDrugElement.innerHTML = returnListItemString(drugName);
 
       eachDrugElement.addEventListener("click", function (event) {
         // let purpose = drug.openfda.brand_name !==  undefined ? `<h1>${drug.openfda.brand_name[0]}</h1>` : "";
-
-
-
-        function addColorScaleToOneElementOnly(elementClass, event){
-          let currentElement = event.target;
-          elementClassQuerySelector = `.${elementClass}`;
-          let items = document.querySelectorAll(elementClassQuerySelector);
-          for (let el of items) {
-            el.classList.remove("colorAccentTwoAndScale");
-          }
-          if (currentElement.classList[0] === elementClass) {
-            currentElement.classList.add("colorAccentTwoAndScale")
-          } else {
-            let parentElement = currentElement.parentElement;
-            if (parentElement.classList[0] === elementClass) {
-              parentElement.classList.add("colorAccentTwoAndScale");
-            }
-          }  
-        }
 
         addColorScaleToOneElementOnly("listItemDesign", event);
 
@@ -224,14 +238,7 @@ document.querySelector("#searchMatchDrugBtn")
       drugResultsElement.appendChild(eachDrugElement);
       //highlight the first child
 
-      function clickFirstChild(parentElement) {
-        let firstChild = parentElement.firstChild;
-        firstChild.classList.add("colorAccentTwoAndScale");
-        firstChild.click();
-      }
-
       clickFirstChild(drugResultsElement);
-
     }
 
   })
