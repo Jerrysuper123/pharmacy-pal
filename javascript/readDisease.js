@@ -89,7 +89,7 @@ async function readDisease(diseaseName) {
     } catch (error){
         if(error.response){
             document.querySelector("#symptomsValidationResult").innerHTML = `
-                Wikipedia disease API Failed: ${error.response.status}
+                Wikipedia disease API Failed : ${error.response.status}
             `;
         }
     }
@@ -106,7 +106,10 @@ async function getImage(diseaseName) {
     // <a href="https://www.pexels.com">Photos provided by Pexels</a>
     const PEXEL_API_KEY = "563492ad6f91700001000001b48bc8b04e5c404db7fbfccf0d8824a2";
     const endpoint = 'https://api.pexels.com/v1/search';
-    let response = await axios.get(endpoint, {
+    let response;
+
+    try{
+        response = await axios.get(endpoint, {
         params: {
             query: diseaseName,
             per_page: 1,
@@ -117,6 +120,13 @@ async function getImage(diseaseName) {
             Authorization: PEXEL_API_KEY,
         },
     });
+    }
+    catch(error){
+        document.querySelector("#symptomsValidationResult").innerHTML = `
+                Pexels Picture API Failed : ${error.response.status}
+            `;
+    }
+   
     //return medium image size url
     return response.data.photos[0].src.medium;
 }
