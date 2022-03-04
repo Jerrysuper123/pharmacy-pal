@@ -27,10 +27,10 @@ let symptomSearchResults = document.querySelector("#symptomSearchResults");
 
 //landing page get my direction
 document.querySelector("#landPageBtn")
-        .addEventListener("click", function(){
-          document.querySelector("#appBrief").classList.add("hideLeft");
-          document.querySelector("#searchNearByBtn").click();
-        })
+  .addEventListener("click", function () {
+    document.querySelector("#appBrief").classList.add("hideLeft");
+    document.querySelector("#searchNearByBtn").click();
+  })
 
 window.addEventListener("DOMContentLoaded", async function () {
   symptomData = await getSymptomsDataTransformed();
@@ -108,61 +108,71 @@ window.addEventListener("DOMContentLoaded", async function () {
         symptomArray.push(el.innerHTML);
       }
 
-      // console.log(symptomArray);
-      //check if symptomArray is a subset of diseaseSymptomArray
-      //find only 3 matched item for time optimization [{disease: symptom}]
-      let arrayResult = [];
-      let count = 0;
-      for (let el of diseaseSymptomArray) {
-        let arr1 = Object.values(el)[0];
-        let arr2 = symptomArray;
-        if (isSubSet(arr1, arr2)) {
-          if (count === 3) break;
-          arrayResult.push(el);
-          count++;
+      let validationSymptomEle = document.querySelector("#symptomsValidationResult");
+      //validation on if uses have selected symptoms
+      if (symptomArray.length === 0) {
+        validationSymptomEle.innerHTML = "You have not selected any symptoms!"
+      } else {
+        validationSymptomEle.innerHTML = "";
+        // console.log(symptomArray);
+        //check if symptomArray is a subset of diseaseSymptomArray
+        //find only 3 matched item for time optimization [{disease: symptom}]
+        let arrayResult = [];
+        let count = 0;
+        for (let el of diseaseSymptomArray) {
+          let arr1 = Object.values(el)[0];
+          let arr2 = symptomArray;
+          if (isSubSet(arr1, arr2)) {
+            if (count === 3) break;
+            arrayResult.push(el);
+            count++;
+          }
         }
-      }
 
-      // console.log(arrayResult);
-      // extract key and put it into an array
-      let diseaseArray = [];
-      for (let el of arrayResult) {
-        let diseaseName = Object.keys(el)[0];
-        diseaseArray.push(diseaseName);
-      }
+        // console.log(arrayResult);
+        // extract key and put it into an array
+        let diseaseArray = [];
+        for (let el of arrayResult) {
+          let diseaseName = Object.keys(el)[0];
+          diseaseArray.push(diseaseName);
+        }
 
-      let diseaseList = document.querySelector("#diseaseList");
-      diseaseList.innerHTML = "";
+        let diseaseList = document.querySelector("#diseaseList");
+        diseaseList.innerHTML = "";
 
-      //adding downarrowicon when user clicked diagnose
-      let downArrowIcon = document.querySelector("#downArrowIcon");
-      downArrowIcon.classList.remove("d-none");
+        //adding downarrowicon when user clicked diagnose
+        let downArrowIcon = document.querySelector("#downArrowIcon");
+        downArrowIcon.classList.remove("d-none");
 
-      for (let el of diseaseArray) {
-        let diseaseElement = document.createElement('div');
-        diseaseElement.innerHTML = returnListItemString(el);
+        for (let el of diseaseArray) {
+          let diseaseElement = document.createElement('div');
+          diseaseElement.innerHTML = returnListItemString(el);
 
-        diseaseElement.classList.add("listItemDesign");
+          diseaseElement.classList.add("listItemDesign");
 
 
-        //retrieve the condition title, text and image
-        diseaseElement.addEventListener("click", async function (event) {
-          addColorScaleToOneElementOnly("listItemDesign",event);
+          //retrieve the condition title, text and image
+          diseaseElement.addEventListener("click", async function (event) {
+            addColorScaleToOneElementOnly("listItemDesign", event);
 
-          let titleBodyImg = await getTitleBodyImg(el);
-          let diseaseDescription = document.querySelector("#diseaseDescription");
-          diseaseDescription.innerHTML = "";
-          diseaseDescription.innerHTML = `
+            let titleBodyImg = await getTitleBodyImg(el);
+            let diseaseDescription = document.querySelector("#diseaseDescription");
+            diseaseDescription.innerHTML = "";
+            diseaseDescription.innerHTML = `
             <h1 class="text-center">${titleBodyImg[0][0]}</h1>
             <img src=${titleBodyImg[1]} class="diseaseImage" alt=${titleBodyImg[0][0]}/>
             <p>${titleBodyImg[0][1]}</p>
           `;
-        })
-        diseaseList.appendChild(diseaseElement);
+          })
+          diseaseList.appendChild(diseaseElement);
+        }
+
+        //click the first condition to show its details
+        clickFirstChild(diseaseList);
+
       }
 
-      //click the first condition to show its details
-      clickFirstChild(diseaseList);
+
     })
 
 
@@ -208,6 +218,9 @@ function addColorScaleToOneElementOnly(elementClass, event) {
 //Drug match-disease page
 document.querySelector("#searchMatchDrugBtn")
   .addEventListener("click", async function (event) {
+
+
+
     event.preventDefault();
     document.querySelector("#matchedDrugBG").classList.add("hide");
     let searchDrugString = document.querySelector("#searchDrugString").value;
@@ -220,15 +233,6 @@ document.querySelector("#searchMatchDrugBtn")
     let drugDetailsElement = document.querySelector("#drugDetails");
     drugDetailsElement.innerHTML = "";
 
-
-    //clear details when user search again
-    // drugDetailsElement.innerHTML = "";
-
-    //below is not working
-    // if(results===){
-    //     drugResultsElement.innerHTML = "Could not find a matched drug";
-    //     console.log("cannot find a drug")
-    // }
 
 
 
@@ -277,7 +281,7 @@ document.querySelector("#searchEffectBtn").addEventListener("click", async funct
   event.preventDefault();
   let searchEffectString = document.querySelector("#searchEffectString").value;
   // console.log(typeof(searchEffectString));
-  if(searchEffectString===""){
+  if (searchEffectString === "") {
     searchEffectString = "BioNTech, Pfizer vaccine";
   }
   let lineData = await getEffectDataTranformed(searchEffectString);
@@ -286,8 +290,8 @@ document.querySelector("#searchEffectBtn").addEventListener("click", async funct
   updateChart(lineChart, lineData, `${searchEffectString} adverse events reported`);
   updateChart(barChart, barData, `adverse events reported`);
 
-  document.querySelector("#lineChartTitle").innerHTML = `${searchEffectString} trend over time`; 
-  document.querySelector("#barChartTitle").innerHTML = `${searchEffectString} key side-effects`; 
+  document.querySelector("#lineChartTitle").innerHTML = `${searchEffectString} trend over time`;
+  document.querySelector("#barChartTitle").innerHTML = `${searchEffectString} key side-effects`;
 });
 
 function updateChart(chart, newSeries, newSeriesName) {
