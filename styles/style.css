@@ -239,6 +239,13 @@ body {
   width: 100%;
 }
 
+#page-1 {
+  background-image: url("../images/humanBody.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-size: 30%;
+}
+
 #all-pages {
   position: relative;
 }
