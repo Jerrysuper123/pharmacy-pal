@@ -29,6 +29,7 @@ let symptomSearchResults = document.querySelector("#symptomSearchResults");
 document.querySelector("#landPageBtn")
         .addEventListener("click", function(){
           document.querySelector("#appBrief").classList.add("hideLeft");
+          document.querySelector("#searchNearByBtn").click();
         })
 
 window.addEventListener("DOMContentLoaded", async function () {
