@@ -353,6 +353,11 @@ body {
   color: #9acea6;
 }
 
+#downArrowIcon {
+  font-size: 1rem;
+  color: #c5c5c5;
+}
+
 #singaporeMap {
   height: 100vh;
   z-index: 1;

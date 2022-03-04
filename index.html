@@ -152,7 +152,10 @@
                             <h3>what are your symptoms?</h3>
                             <div id="searchSymptomBtn"
                                 class="advisorSearchBar shadow customBorder bg-light px-3 py-2">
-                                    <input id="searchSymptomInput" type="text"
+                                    <input 
+                                        autocomplete="off"    
+                                        id="searchSymptomInput" 
+                                        type="text"
                                         class="searchSymptomInput searchString border-0"
                                         placeholder="search your main symptoms here...">
 
@@ -179,7 +182,7 @@
 
                                     <button id="diagnoseBtn" class="hideDiagnoseBtn btn btn-danger">Diagnose</button>
                                 </section>
-
+                                <div id="downArrowIcon" class="d-none mt-4"><i class="fa-solid fa-angle-down"></i></div>
                                 <section id="diseaseList" class="mt-3 p-4"></section>
                                 <section id="diseaseDescription" class="mt-3 p-4"></section>
                             </article>

@@ -122,6 +122,11 @@ window.addEventListener("DOMContentLoaded", async function () {
       }
 
       let diseaseList = document.querySelector("#diseaseList");
+      diseaseList.innerHTML = "";
+
+      //adding downarrowicon when user clicked diagnose
+      let downArrowIcon = document.querySelector("#downArrowIcon");
+      downArrowIcon.classList.remove("d-none");
 
       for (let el of diseaseArray) {
         let diseaseElement = document.createElement('div');
@@ -133,7 +138,7 @@ window.addEventListener("DOMContentLoaded", async function () {
         //retrieve the condition title, text and image
         diseaseElement.addEventListener("click", async function (event) {
           addColorScaleToOneElementOnly("listItemDesign",event);
-          
+
           let titleBodyImg = await getTitleBodyImg(el);
           let diseaseDescription = document.querySelector("#diseaseDescription");
           diseaseDescription.innerHTML = "";
