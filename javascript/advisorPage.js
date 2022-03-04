@@ -227,52 +227,51 @@ function addColorScaleToOneElementOnly(elementClass, event) {
 document.querySelector("#searchMatchDrugBtn")
   .addEventListener("click", async function (event) {
     event.preventDefault();
- 
-    let searchDrugString = document.querySelector("#searchDrugString").value;
-    // console.log(searchDrugString);
 
+    let drugResultsElement = document.querySelector("#drugResults");
+    // clear results when user search again
+    drugResultsElement.innerHTML = "";
+
+    let drugDetailsElement = document.querySelector("#drugDetails");
+    drugDetailsElement.innerHTML = "";
+
+    let searchDrugString = document.querySelector("#searchDrugString").value;
     let userErrorNote = document.querySelector("#diseaseMatchDrugValidationResult");
     //input validation
     if (formValidate(searchDrugString)) {
       userErrorNote.innerHTML = globalValidationResults;
     } else {
 
- 
       let results = await getTransformedDrug(searchDrugString);
 
       // let user know if there is no matched results
-      if(results.length===0){
+      if (results.length === 0) {
         userErrorNote.innerHTML = `You condition did not match anything in our database.
         Try a different name for the same condition.
         `;
       } else {
         document.querySelector("#matchedDrugBG").classList.add("hide");
-        let drugResultsElement = document.querySelector("#drugResults");
-      // clear results when user search again
-      drugResultsElement.innerHTML = "";
-      let drugDetailsElement = document.querySelector("#drugDetails");
-      drugDetailsElement.innerHTML = "";
 
-      for (let drug of results) {
-        let eachDrugElement = document.createElement("div");
+        for (let drug of results) {
+          let eachDrugElement = document.createElement("div");
 
-        eachDrugElement.classList.add("listItemDesign");
-        eachDrugElement.classList.add("shadow-1");
-        let drugName = drug.openfda.brand_name[0];
-        eachDrugElement.innerHTML = returnListItemString(drugName);
+          eachDrugElement.classList.add("listItemDesign");
+          eachDrugElement.classList.add("shadow-1");
+          let drugName = drug.openfda.brand_name[0];
+          eachDrugElement.innerHTML = returnListItemString(drugName);
 
-        eachDrugElement.addEventListener("click", function (event) {
-          // let purpose = drug.openfda.brand_name !==  undefined ? `<h1>${drug.openfda.brand_name[0]}</h1>` : "";
+          eachDrugElement.addEventListener("click", function (event) {
+            // let purpose = drug.openfda.brand_name !==  undefined ? `<h1>${drug.openfda.brand_name[0]}</h1>` : "";
 
-          addColorScaleToOneElementOnly("listItemDesign", event);
+            addColorScaleToOneElementOnly("listItemDesign", event);
 
-          let purpose = drug.purpose !== undefined ? `<p class="text-center">${drug.purpose[0]}</p>` : "";
-          let detailedpurpose = drug.indications_and_usage !== undefined ? `<h2>Drug use</h2><p>${drug.indications_and_usage[0]}</p>` : "";
-          let admin = drug.dosage_and_administration !== undefined ? `<h2>Admin</h2><p>${drug.dosage_and_administration[0]}</p>` : "";
-          let whenUse = drug.when_using !== undefined ? `<h2>How to use</h2><p>${drug.when_using[0]}</p>` : "";
-          let stopUse = drug.stop_use !== undefined ? `<p>${drug.stop_use[0]}</p>` : "";
-          let activeIngredient = drug.active_ingredient !== undefined ? ` <h2>Ingredient</h2><p>${drug.active_ingredient[0]}</p>` : "";
-          drugDetailsElement.innerHTML = `
+            let purpose = drug.purpose !== undefined ? `<p class="text-center">${drug.purpose[0]}</p>` : "";
+            let detailedpurpose = drug.indications_and_usage !== undefined ? `<h2>Drug use</h2><p>${drug.indications_and_usage[0]}</p>` : "";
+            let admin = drug.dosage_and_administration !== undefined ? `<h2>Admin</h2><p>${drug.dosage_and_administration[0]}</p>` : "";
+            let whenUse = drug.when_using !== undefined ? `<h2>How to use</h2><p>${drug.when_using[0]}</p>` : "";
+            let stopUse = drug.stop_use !== undefined ? `<p>${drug.stop_use[0]}</p>` : "";
+            let activeIngredient = drug.active_ingredient !== undefined ? ` <h2>Ingredient</h2><p>${drug.active_ingredient[0]}</p>` : "";
+            drugDetailsElement.innerHTML = `
                       <h1 class="text-center drugDetailHeader">${drugName}</h1>
                       ${purpose}
                     ${detailedpurpose}
@@ -281,32 +280,30 @@ document.querySelector("#searchMatchDrugBtn")
                       ${stopUse}
                       ${activeIngredient}
             `;
-        })
+          })
 
-        drugResultsElement.appendChild(eachDrugElement);
-        //highlight the first child
+          drugResultsElement.appendChild(eachDrugElement);
+          //highlight the first child
 
-        clickFirstChild(drugResultsElement);
+          clickFirstChild(drugResultsElement);
+        }
       }
-      }
-      
+
     }
 
   })
 
 
-//drug side effects chart
-// {x: month, y: total amount}, transform data into this format
+//drug side effects page
 document.querySelector("#searchEffectBtn").addEventListener("click", async function (event) {
   event.preventDefault();
   let searchEffectString = document.querySelector("#searchEffectString").value;
-  // console.log(typeof(searchEffectString));
   if (searchEffectString === "") {
     searchEffectString = "BioNTech, Pfizer vaccine";
   }
   let lineData = await getEffectDataTranformed(searchEffectString);
   let barData = await getEventsTransformed(searchEffectString);
-  console.log(barData);
+
   updateChart(lineChart, lineData, `${searchEffectString} adverse events reported`);
   updateChart(barChart, barData, `adverse events reported`);
 
@@ -323,25 +320,15 @@ function updateChart(chart, newSeries, newSeriesName) {
   ]);
 }
 
+/*Line chart */
 const options = {
   chart: {
     type: "line",
     height: "100%",
   },
-  // not working now
+
   title: {
-    text: "Adverse events reported over time",
-    align: 'left',
-    margin: 10,
-    offsetX: 0,
-    offsetY: 0,
-    floating: false,
-    style: {
-      fontSize: '14px',
-      fontWeight: 'bold',
-      fontFamily: undefined,
-      color: '#263238'
-    },
+    text: "Adverse events reported over time"
   },
   series: [],
   noData: {
@@ -352,12 +339,13 @@ const options = {
 const lineChart = new ApexCharts(document.querySelector("#lineChart"), options);
 lineChart.render();
 
+/*bar chart */
 const barOptions = {
   chart: {
     type: "bar",
     height: "100%",
   },
-  // not working now
+
   title: {
     text: "Top 5 adverse events reported",
   },

@@ -226,8 +226,8 @@ async function getDrug(symptom) {
             `;
         }
     }
- 
-    if(response && response.data && response.results){
+    
+    if(response.data.results){
           return response.data.results;
     } else {
         return [];
