@@ -135,7 +135,8 @@ function transformAdverseEventData(results) {
 
     const d = new Date();
     let currentYear = d.getFullYear();
-    for (let year = 2004; year <= currentYear; year++) {
+    let startingYear = currentYear - 4;
+    for (let year = startingYear; year <= currentYear; year++) {
         for (let el of results) {
             if (Number(el.time.slice(0, 4)) === year) {
                 count = count + Number(el.count);

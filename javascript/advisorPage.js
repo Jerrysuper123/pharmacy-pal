@@ -271,8 +271,10 @@ document.querySelector("#searchEffectBtn").addEventListener("click", async funct
   let barData = await getEventsTransformed(searchEffectString);
   console.log(barData);
   updateChart(lineChart, lineData, `${searchEffectString} adverse events reported`);
-  updateChart(barChart, barData, `advese events reported`);
+  updateChart(barChart, barData, `adverse events reported`);
 
+  document.querySelector("#lineChartTitle").innerHTML = `${searchEffectString} trend over time`; 
+  document.querySelector("#barChartTitle").innerHTML = `${searchEffectString} key side-effects`; 
 });
 
 function updateChart(chart, newSeries, newSeriesName) {
