@@ -9,9 +9,9 @@ async function readSymptomsData() {
     //   console.log(response.data.split("\r\n"));
     return response.data.split("\r\n");
     // return response.data.result.records;
-  }
+}
 
-function symptomsDataTransform(results){
+function symptomsDataTransform(results) {
     //remove column headers of csv
     let arrayData = [];
     let oneArray = [];
@@ -19,18 +19,18 @@ function symptomsDataTransform(results){
     //create a set to contain unique symptoms
     let symptomsSet = new Set();
     results.shift();
-  
-    for (let el of results){
+
+    for (let el of results) {
         //split one string into elements of an array
         arrayData.push(el.split(","));
     }
 
     //trim and remove empty spaces
-    for(let el of arrayData){
+    for (let el of arrayData) {
         oneArray = [];
-        for(let string of el){
+        for (let string of el) {
             let oneString = string.trim();
-            if(oneString!==""){
+            if (oneString !== "") {
                 oneArray.push(oneString);
             }
         }
@@ -40,13 +40,13 @@ function symptomsDataTransform(results){
     //making final objects
     //[{disease: symptoms..},{...}]
     let objArray = [];
-    for(el of finalResults){
+    for (el of finalResults) {
         let diseaseName = el[0];
         // console.log(diseaseName)
         let symptoms = el.slice(1);
 
         //create symptom for searching
-        for(oneSymptom of symptoms){
+        for (oneSymptom of symptoms) {
             symptomsSet.add(oneSymptom);
         }
         let obj = {};
@@ -54,12 +54,12 @@ function symptomsDataTransform(results){
         // console.log(obj);
         objArray.push(obj);
     }
-    
+
     // convert set back to array
-    return [objArray,Array.from(symptomsSet)];
+    return [objArray, Array.from(symptomsSet)];
 }
 
-async function getSymptomsDataTransformed(){
+async function getSymptomsDataTransformed() {
     let results = await readSymptomsData();
     return symptomsDataTransform(results);
 }
@@ -84,10 +84,10 @@ async function readDisease(diseaseName) {
     params.gsrsearch = diseaseName;
     let response;
 
-    try{
-            response = await axios.get(endpoint, { params });
-    } catch (error){
-        if(error.response){
+    try {
+        response = await axios.get(endpoint, { params });
+    } catch (error) {
+        if (error.response) {
             document.querySelector("#symptomsValidationResult").innerHTML = `
                 Wikipedia disease API Failed : ${error.response.status}
             `;
@@ -108,30 +108,30 @@ async function getImage(diseaseName) {
     const endpoint = 'https://api.pexels.com/v1/search';
     let response;
 
-    try{
+    try {
         response = await axios.get(endpoint, {
-        params: {
-            query: diseaseName,
-            per_page: 1,
-            size: "small"
-        },
+            params: {
+                query: diseaseName,
+                per_page: 1,
+                size: "small"
+            },
 
-        headers: {
-            Authorization: PEXEL_API_KEY,
-        },
-    });
+            headers: {
+                Authorization: PEXEL_API_KEY,
+            },
+        });
     }
-    catch(error){
+    catch (error) {
         document.querySelector("#symptomsValidationResult").innerHTML = `
                 Pexels Picture API Failed : ${error.response.status}
             `;
     }
-   
+
     //return medium image size url
     return response.data.photos[0].src.medium;
 }
 
-async function getTitleBodyImg(diseaseName){
+async function getTitleBodyImg(diseaseName) {
     let titleBody = await readDisease(diseaseName);
     let image = await getImage(diseaseName);
 
@@ -175,23 +175,23 @@ async function getEffectDataTranformed(drugName) {
 
 
 //below gets the side effects type reported from 2014 to current date
-async function getAdverseEventType(drugName="BioNTech, Pfizer vaccine") {
+async function getAdverseEventType(drugName = "BioNTech, Pfizer vaccine") {
     const DRUGEVENT_BASE_URL = "https://api.fda.gov/drug/event.json";
     let response = await axios.get(`https://api.fda.gov/drug/event.json?search=(receivedate:[20040101+TO+20220226])+AND+${drugName}&count=patient.reaction.reactionmeddrapt.exact`);
     return response.data.results;
 }
 
 
-function getTopFiveEvent(results){
+function getTopFiveEvent(results) {
     let arrayData = [];
-    for(let i=0; i<5; i++){
-        let oneEvent = {x: results[i].term, y: Number(results[i].count)}
+    for (let i = 0; i < 5; i++) {
+        let oneEvent = { x: results[i].term, y: Number(results[i].count) }
         arrayData.push(oneEvent);
     }
-    return arrayData   
+    return arrayData
 }
 
-async function getEventsTransformed(drugName){
+async function getEventsTransformed(drugName) {
     let results = await getAdverseEventType(drugName);
     return getTopFiveEvent(results);
 }
@@ -201,15 +201,37 @@ async function getDrug(symptom) {
     const OPENFDA_API_KEY = "IIkjoiok33N5aEpSrb9XDMHXw7PPdiXZc2NFfYHL";
     const DRUGLABEL_BASE_URL = "https://api.fda.gov/drug/label.json";
 
-    let response = await axios.get(DRUGLABEL_BASE_URL, {
-        params: {
-            api_key: OPENFDA_API_KEY,
-            search: "purpose:" + symptom,
-            limit: 10
-        }
-    });
+    let response;
 
-    return response.data.results;
+    try {
+        response = await axios.get(DRUGLABEL_BASE_URL, {
+            params: {
+                api_key: OPENFDA_API_KEY,
+                search: "purpose:" + symptom,
+                limit: 10
+            }
+        });
+
+    } catch (error) {
+        let statusCode = Number(error.response.status);
+        let userNote = document.querySelector("#diseaseMatchDrugValidationResult");
+        if (statusCode === 404) {
+            userNote.innerHTML = `
+                You condition did not match anything in our database.
+        Try a different name for the same condition.
+            `;
+        } else {
+            userNote.innerHTML = `
+            Open FDA drug match disease API Failed: ${statusCode}
+            `;
+        }
+    }
+ 
+    if(response && response.data && response.results){
+          return response.data.results;
+    } else {
+        return [];
+    }
 }
 
 function transformDrugData(results) {
