@@ -82,7 +82,18 @@ async function readDisease(diseaseName) {
     };
 
     params.gsrsearch = diseaseName;
-    let response = await axios.get(endpoint, { params });
+    let response;
+
+    try{
+            response = await axios.get(endpoint, { params });
+    } catch (error){
+        if(error.response){
+            document.querySelector("#symptomsValidationResult").innerHTML = `
+                Wikipedia disease API Failed: ${error.response.status}
+            `;
+        }
+    }
+
     let pageObject = response.data.query.pages;
     let pageInfo = Object.values(pageObject)[0];
     let title = pageInfo.title;
