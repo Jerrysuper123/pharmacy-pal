@@ -36,8 +36,9 @@
 
     <main class="mainContainer">
         <section>
-            <nav id="navBar" class="d-flex align-items-center">
-                <div id="searchByAddressBar" class="d-flex align-items-center shadow customBorder bg-light px-3 py-2">
+            <nav id="navBar" class="navBar d-flex align-items-center">
+                <div id="searchByAddressBar"
+                    class="searchByAddressBar d-flex align-items-center shadow customBorder bg-light px-3 py-2">
                     <div id="barIcon" class="mx-1 primaryIconStyle"><i class="fa-solid fa-bars"></i></div>
 
                     <form action="" class="d-flex ms-1">
@@ -51,7 +52,7 @@
 
                 </div>
 
-                <div id="mobileBottomNav" class="d-flex">
+                <div id="mobileBottomNav" class="mobileBottomNav d-flex">
                     <div id="searchNearByBtn" class="primaryNavBtn bg-light shadow customBorder">
                         <div class="primaryIconStyle">
                             <i class="fa-solid fa-mortar-pestle"></i>
@@ -119,10 +120,10 @@
                         <!-- not working the font -->
                         <i class="fa-thin fa-xmark"></i>
                         <!-- <p>Choose below services to find out more</p> -->
-                    </span>  
+                    </span>
                 </div>
-        
-                
+
+
                 <!-- navbar -->
 
                 <div id="all-pages" class="container">
@@ -144,29 +145,41 @@
                         </button>
                     </nav>
                     <div class="page bg-light shadow p-3" id="page-1">
-                        <div class="container">
-                            <!-- <h1>symptom checker</h1> -->
-                            <h1>what are your symptoms?</h1>
-                            <div id="searchDrugBtn" class="advisorSearchBar d-flex align-items-center shadow customBorder bg-light px-3 py-2">
-                                <form action="" class="d-flex ms-1">
-                                    <i class="primaryIconStyle fa-solid fa-magnifying-glass"></i>
-                                    <input id="searchSymptomInput" type="text" class="searchString border-0" placeholder="type your main symptoms here...">
-                                </form>
+                        <div class="container d-flex flex-column align-items-center">
+                            <h1>pharmacy-pal</h1>
+                            <h2>Symptom Checker</h2>
+                            <p>Identify possible conditions related to your symptoms</p>
+                            <h3>what are your symptoms?</h3>
+                            <div id="searchSymptomBtn"
+                                class="advisorSearchBar shadow customBorder bg-light px-3 py-2">
+                                    <input id="searchSymptomInput" type="text"
+                                        class="searchSymptomInput searchString border-0"
+                                        placeholder="search your main symptoms here...">
+
+                             
                             </div>
                             <section>
                                 <div id="symptomSearchResults" class="symptomSearchResults"></div>
                             </section>
-                            
-                            <article class="bg-light mt-5">
-                                <section id="symptomList" class="symptomList mt-3 ps-2 text-center p-5">
 
-                                        <i class="fa-solid fa-list-ul"></i>
-                                
-                                    <p>
-                                        no symptoms added
-                                    </p>
+                            <article class="bg-light mt-5 d-flex flex-column align-items-center">
+                                <section id="symptomList" class="symptomList p-3 mt-2 text-center">
+
+                                    <h3>My Symptoms</h3>
+
+                                    <section class="symptomListBox">
+                                        <div id="symptomBG" class="symptomBG">
+                                            <i class="fa-solid fa-list-ul"></i>
+                                            <p>
+                                                no symptoms added
+                                            </p>
+                                        </div>
+                                        <section id="symptomAdded" class="symptomAdded"></section>
+                                    </section>
+
+                                    <button id="diagnoseBtn" class="hideDiagnoseBtn btn btn-danger">Diagnose</button>
                                 </section>
-                                <button id="diagnoseBtn" class="btn btn-info">Diagnose</button>
+
                                 <section id="diseaseList" class="mt-3 p-4"></section>
                                 <section id="diseaseDescription" class="mt-3 p-4"></section>
                             </article>
@@ -174,31 +187,50 @@
                     </div>
 
                     <div class="page bg-light shadow p-3 hidden" id="page-2">
-                        <div class="container">
-                            <h1>drug match-disease</h1>
-                            <p>type the disease below to find matching medication</p>
-                            <div id="searchDrugBtn" class="advisorSearchBar d-flex align-items-center shadow customBorder bg-light px-3 py-2">
+                        <div class="container d-flex flex-column align-items-center">
+                            <h1>pharmacy-pal</h1>
+                            <h2>Drug Match-Disease</h2>
+                            <p>Identify possible drug match to your symptoms</p>
+                            <h3>Enter a condition below?</h3>
+                            <div id="searchDrugBtn"
+                                class="advisorSearchBar d-flex align-items-center shadow customBorder bg-light px-3 py-2">
                                 <form action="" class="d-flex ms-1">
-                                    <input id="searchDrugString" type="text" class="searchString border-0" placeholder="disease or illness...">
-            
+                                    <input id="searchDrugString" type="text" class="searchString border-0"
+                                        placeholder="disease or illness...">
+
                                     <button id="searchMatchDrugBtn" class="ms-2 bg-light border-0">
                                         <i class="primaryIconStyle fa-solid fa-magnifying-glass"></i>
                                     </button>
                                 </form>
                             </div>
-                            
-                            <article class="d-flex bg-light">
-                                <section id="drugResults" class="mt-3 ps-2"></section>
+
+                            <article class="d-flex flex-column align-items-center">
+                                    <section id="symptomList" class="d-flex flex-column align-items-center symptomList p-3 mt-5 text-center">
+                                        <h3>Drugs that match your conditions</h3>
+                                        <section class="symptomListBox"> 
+                                            <section class="symptomListBox">
+                                                <div id="matchedDrugBG" class="symptomBG">
+                                                    <i class="fa-solid fa-circle-question"></i>
+                                                    <p>
+                                                        no matched drug yet
+                                                    </p>
+                                                </div>
+                                                <div id="drugResults"></div>
+                                            </section>
+                                          
+                                        </section>
+                                    </section>
                                 <section id="drugDetails" class="mt-3 p-4"></section>
                             </article>
-                            
+
                         </div>
                     </div>
 
                     <div class="page bg-light shadow p-3 hidden" id="page-3">
-                        <div class="container">
+                        <div class="container d-flex flex-column align-items-center">
                             <h1>drug side-effects</h1>
-                            <p>type the drugname below to see the adverse events. try popular search = "BioNTech, Pfizer vaccine"</p>
+                            <p>type the drugname below to see the adverse events. try popular search = "BioNTech, Pfizer
+                                vaccine"</p>
                             <div id="searchDrugBtn"
                                 class="advisorSearchBar d-flex align-items-center shadow customBorder bg-light px-3 py-2">
                                 <form action="" class="d-flex ms-1">
@@ -221,7 +253,7 @@
                     </div>
                 </div>
 
-                
+
                 <!-- <h1>Check if an OTC drug is available</h1>
                 <input id="queryDrugNameInput" class="form-control" type="text" placeholder="search by drug name...">
                 <button id="searchDrugBtn" class="btn btn-primary">Search</button>

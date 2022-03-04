@@ -202,7 +202,7 @@ async function main() {
         .querySelector("#searchBtn")
         .addEventListener("click", function (event) {
           event.preventDefault();
-          console.log("clicked");
+          // console.log("clicked");
           searchResultLayer.clearLayers();
           let searchString = document.querySelector("#searchString").value;
           let filteredResult = searchDataArray.filter((el) =>

@@ -23,40 +23,68 @@ function isSubSet(arr1, arr2, m = arr1.length, n = arr2.length) {
 }
 
 let symptomData = [];
+let symptomSearchResults = document.querySelector("#symptomSearchResults");
+
 window.addEventListener("DOMContentLoaded", async function () {
   symptomData = await getSymptomsDataTransformed();
   let diseaseSymptomArray = symptomData[0];
   let symptomSet = symptomData[1];
   // console.log(symptomData);
 
+  document.querySelector("#searchSymptomInput")
+    .addEventListener("click", function () {
+      let searchInput = document.querySelector("#searchSymptomBtn");
+      //this removes border radius when user click into the input
+      searchInput.classList.add("borderRadiusNone");
+    })
 
   document.querySelector("#searchSymptomInput")
-    .addEventListener("keypress", function (event) {
-      event.preventDefault();
+    .addEventListener("keypress", function () {
+    
       let searchSymptomString = document.querySelector("#searchSymptomInput").value;
       // console.log(searchSymptomString);
-      let filterList = symptomSet.filter(el => el.includes(searchSymptomString));
 
-      //or show top 5 searched results
-      let symptomSearchResults = document.querySelector("#symptomSearchResults");
-      // clear when users key press again
+      let filterList = symptomSet.filter(el => el.includes(searchSymptomString));
+      console.log(filterList);
+
+      symptomSearchResults.innerHTML = "";
 
       for (let el of filterList) {
+        //create one element [symptom Add]
         let oneSymptomElement = document.createElement("div");
         oneSymptomElement.classList.add("d-flex");
-        // oneSymptomElement.classList.add("oneSymptomItem");
         oneSymptomElement.classList.add("p-3");
         oneSymptomElement.innerHTML = el !== undefined ? `${el}<span class="ms-auto p-1 bg-info text-light">ADD</span>` : "";
 
         oneSymptomElement.addEventListener("click", function () {
+          //remove the background in the symptom list
+          let symptomBG = document.querySelector("#symptomBG");
+          symptomBG.innerHTML = "";
+
+          //this addd border radius when user selected symptom
+          let searchInput = document.querySelector("#searchSymptomBtn");
+          searchInput.classList.remove("borderRadiusNone");
+
+          //this shows the diagnose button when user clicked added symptom;
+          document.querySelector("#diagnoseBtn").classList.remove("hideDiagnoseBtn");
+
+          //below add symptoms to the symtomAdded basket
           symptomSearchResults.innerHTML = "";
-          let symptomList = document.querySelector("#symptomList");
+          let symptomAdded = document.querySelector("#symptomAdded");
           let element = document.createElement("div");
+          element.classList.add("oneSymptomStyle");
           element.innerHTML = `
-                <span class="symptomSelected">${el}</span> <i class="fa-solid fa-trash"></i>
+                <span class="symptomSelected">${el}</span> 
+                <i class="fa-solid fa-trash"></i>
               `;
-          symptomList.appendChild(element);
+
+          element.addEventListener("click", function () {
+            element.classList.remove("oneSymptomStyle");
+            element.innerHTML = "";
+          });
+          symptomAdded.appendChild(element);
         })
+
         symptomSearchResults.appendChild(oneSymptomElement)
       }
     })
@@ -78,41 +106,38 @@ window.addEventListener("DOMContentLoaded", async function () {
       for (let el of diseaseSymptomArray) {
         let arr1 = Object.values(el)[0];
         let arr2 = symptomArray;
-        if (isSubSet(arr1, arr2) ){
+        if (isSubSet(arr1, arr2)) {
           if (count === 3) break;
           arrayResult.push(el);
           count++;
         }
       }
-      
+
       // console.log(arrayResult);
       // extract key and put it into an array
       let diseaseArray = [];
-      for(let el of arrayResult){
+      for (let el of arrayResult) {
         let diseaseName = Object.keys(el)[0];
         diseaseArray.push(diseaseName);
       }
-      
+
       let diseaseList = document.querySelector("#diseaseList");
-      for(let el of diseaseArray){
+      for (let el of diseaseArray) {
         let diseaseElement = document.createElement('div');
         diseaseElement.innerHTML = `${el}`;
-        diseaseElement.addEventListener("click", async function(){
+        diseaseElement.addEventListener("click", async function () {
           let titleBodyImg = await getTitleBodyImg(el);
           let diseaseDescription = document.querySelector("#diseaseDescription");
           diseaseDescription.innerHTML = "";
-          console.log(titleBodyImg[2]);
           diseaseDescription.innerHTML = `
-            <h1>${titleBodyImg[0][0]}</h1>
+            <h1 class="text-center">${titleBodyImg[0][0]}</h1>
+            <img src=${titleBodyImg[1]} class="diseaseImage" alt=${titleBodyImg[0][0]}/>
             <p>${titleBodyImg[0][1]}</p>
-            <img src=${titleBodyImg[1]} alt=${titleBodyImg[0][0]}/>
           `;
         })
         diseaseList.appendChild(diseaseElement);
       }
     })
-
-
 })
 
 
@@ -124,6 +149,7 @@ window.addEventListener("DOMContentLoaded", async function () {
 document.querySelector("#searchMatchDrugBtn")
   .addEventListener("click", async function (event) {
     event.preventDefault();
+    document.querySelector("#matchedDrugBG").classList.add("hide");
     let searchDrugString = document.querySelector("#searchDrugString").value;
     // console.log(searchDrugString);
     let results = await getTransformedDrug(searchDrugString);
@@ -141,7 +167,6 @@ document.querySelector("#searchMatchDrugBtn")
     //     drugResultsElement.innerHTML = "Could not find a matched drug";
     //     console.log("cannot find a drug")
     // }
-    drugDetailsElement.innerHTML = `<p>Drugs that match the disease</p>`;
 
     for (let drug of results) {
       let eachDrugElement = document.createElement("div");
@@ -149,30 +174,32 @@ document.querySelector("#searchMatchDrugBtn")
       eachDrugElement.classList.add("drugList");
       eachDrugElement.classList.add("shadow-1");
       let drugName = drug.openfda.brand_name[0];
-      eachDrugElement.innerHTML = `<span>${drugName}</span><span class="expandIcon"><i class="fa-solid fa-angle-right"></i></span>`;
-      eachDrugElement.addEventListener("click", function () {
-        console.log("click brand name");
-
-
+      eachDrugElement.innerHTML = `
+      <span class="drugNameTitle">${drugName}</span>
+      <span class="expandIcon">
+        <i class="fa-solid fa-angle-right"></i>
+      </span>`;
+      eachDrugElement.addEventListener("click", function (event) {
         // let purpose = drug.openfda.brand_name !==  undefined ? `<h1>${drug.openfda.brand_name[0]}</h1>` : "";
-        let purpose = drug.purpose !== undefined ? `<p>${drug.purpose[0]}</p>` : "";
-        let detailedpurpose = drug.indications_and_usage !== undefined ? `<p>${drug.indications_and_usage[0]}</p>` : "";
-        let admin = drug.dosage_and_administration !== undefined ? `<p>${drug.dosage_and_administration[0]}</p>` : "";
-        let whenUse = drug.when_using !== undefined ? `<p>${drug.when_using[0]}</p>` : "";
+        let drugItems = document.querySelectorAll(".drugList");
+        for(let el of drugItems){
+          el.classList.add("greyOut");
+        }
+        event.target.classList.remove("greyOut");
+        let purpose = drug.purpose !== undefined ? `<p class="text-center">${drug.purpose[0]}</p>` : "";
+        let detailedpurpose = drug.indications_and_usage !== undefined ? `<h2>Drug use</h2><p>${drug.indications_and_usage[0]}</p>` : "";
+        let admin = drug.dosage_and_administration !== undefined ? `<h2>Admin</h2><p>${drug.dosage_and_administration[0]}</p>` : "";
+        let whenUse = drug.when_using !== undefined ? `<h2>How to use</h2><p>${drug.when_using[0]}</p>` : "";
         let stopUse = drug.stop_use !== undefined ? `<p>${drug.stop_use[0]}</p>` : "";
-        let activeIngredient = drug.active_ingredient !== undefined ? `<p>${drug.active_ingredient[0]}</p>` : "";
+        let activeIngredient = drug.active_ingredient !== undefined ? ` <h2>Ingredient</h2><p>${drug.active_ingredient[0]}</p>` : "";
         drugDetailsElement.innerHTML = `
-                    <h1>${drugName}</h1>
-                    ${purpose}
-                    <h2>Drug use</h2>
-                   ${detailedpurpose}
-                   <h2>Admin</h2>
-                 ${admin}
-                 <h2>How to use</h2>
-                ${whenUse}
-            ${stopUse}
-            <h2>Ingredient</h2>
-                    ${activeIngredient}
+                      <h1 class="text-center drugDetailHeader">${drugName}</h1>
+                      ${purpose}
+                    ${detailedpurpose}
+                    ${admin}
+                    ${whenUse}
+                      ${stopUse}
+                      ${activeIngredient}
             `;
       })
 
