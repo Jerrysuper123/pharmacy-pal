@@ -367,6 +367,10 @@ body {
   background-color: #f0f0f0;
 }
 
+#lineChartTitle, #barChartTitle {
+  color: #e05858 !important;
+}
+
 #singaporeMap {
   height: 100vh;
   z-index: 1;
