@@ -207,8 +207,8 @@ async function main() {
 
           let validationResult = document.querySelector("#searchAddressValidationResult");
           //data validation for user input
-          if (searchString === "") {
-            validationResult.innerHTML = "You have entered an empty string!"
+          if (formValidate(searchString)) {
+            validationResult.innerHTML = globalValidationResults;
           } else {
             validationResult.innerHTML = "";
             let filteredResult = searchDataArray.filter((el) =>
