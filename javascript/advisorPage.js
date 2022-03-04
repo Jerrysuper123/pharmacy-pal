@@ -142,7 +142,7 @@ window.addEventListener("DOMContentLoaded", async function () {
           validationSymptomEle.innerHTML = "You symptoms did not match any conditions in our database. Choose your symptoms again!"
         } else {
           validationSymptomEle.innerHTML = "";
-          
+
           let diseaseList = document.querySelector("#diseaseList");
           diseaseList.innerHTML = "";
 
@@ -165,7 +165,7 @@ window.addEventListener("DOMContentLoaded", async function () {
               let diseaseDescription = document.querySelector("#diseaseDescription");
               diseaseDescription.innerHTML = "";
               diseaseDescription.innerHTML = `
-            <h1 class="text-center">${titleBodyImg[0][0]}</h1>
+            <h1 class="text-center drugDetailHeader">${titleBodyImg[0][0]}</h1>
             <img src=${titleBodyImg[1]} class="diseaseImage" alt=${titleBodyImg[0][0]}/>
             <p>${titleBodyImg[0][1]}</p>
           `;
@@ -226,44 +226,47 @@ function addColorScaleToOneElementOnly(elementClass, event) {
 //Drug match-disease page
 document.querySelector("#searchMatchDrugBtn")
   .addEventListener("click", async function (event) {
-
-
-
     event.preventDefault();
-    document.querySelector("#matchedDrugBG").classList.add("hide");
+ 
     let searchDrugString = document.querySelector("#searchDrugString").value;
     // console.log(searchDrugString);
-    let results = await getTransformedDrug(searchDrugString);
-    console.log(results);
-    let drugResultsElement = document.querySelector("#drugResults");
-    // clear results when user search again
-    drugResultsElement.innerHTML = "";
-    let drugDetailsElement = document.querySelector("#drugDetails");
-    drugDetailsElement.innerHTML = "";
+
+    //input validation
+    if (formValidate(searchDrugString)) {
+      document.querySelector("#diseaseMatchDrugValidationResult").innerHTML = globalValidationResults;
+    } else {
+      document.querySelector("#matchedDrugBG").classList.add("hide");
+      let results = await getTransformedDrug(searchDrugString);
+      console.log(results);
+      let drugResultsElement = document.querySelector("#drugResults");
+      // clear results when user search again
+      drugResultsElement.innerHTML = "";
+      let drugDetailsElement = document.querySelector("#drugDetails");
+      drugDetailsElement.innerHTML = "";
 
 
 
 
-    for (let drug of results) {
-      let eachDrugElement = document.createElement("div");
+      for (let drug of results) {
+        let eachDrugElement = document.createElement("div");
 
-      eachDrugElement.classList.add("listItemDesign");
-      eachDrugElement.classList.add("shadow-1");
-      let drugName = drug.openfda.brand_name[0];
-      eachDrugElement.innerHTML = returnListItemString(drugName);
+        eachDrugElement.classList.add("listItemDesign");
+        eachDrugElement.classList.add("shadow-1");
+        let drugName = drug.openfda.brand_name[0];
+        eachDrugElement.innerHTML = returnListItemString(drugName);
 
-      eachDrugElement.addEventListener("click", function (event) {
-        // let purpose = drug.openfda.brand_name !==  undefined ? `<h1>${drug.openfda.brand_name[0]}</h1>` : "";
+        eachDrugElement.addEventListener("click", function (event) {
+          // let purpose = drug.openfda.brand_name !==  undefined ? `<h1>${drug.openfda.brand_name[0]}</h1>` : "";
 
-        addColorScaleToOneElementOnly("listItemDesign", event);
+          addColorScaleToOneElementOnly("listItemDesign", event);
 
-        let purpose = drug.purpose !== undefined ? `<p class="text-center">${drug.purpose[0]}</p>` : "";
-        let detailedpurpose = drug.indications_and_usage !== undefined ? `<h2>Drug use</h2><p>${drug.indications_and_usage[0]}</p>` : "";
-        let admin = drug.dosage_and_administration !== undefined ? `<h2>Admin</h2><p>${drug.dosage_and_administration[0]}</p>` : "";
-        let whenUse = drug.when_using !== undefined ? `<h2>How to use</h2><p>${drug.when_using[0]}</p>` : "";
-        let stopUse = drug.stop_use !== undefined ? `<p>${drug.stop_use[0]}</p>` : "";
-        let activeIngredient = drug.active_ingredient !== undefined ? ` <h2>Ingredient</h2><p>${drug.active_ingredient[0]}</p>` : "";
-        drugDetailsElement.innerHTML = `
+          let purpose = drug.purpose !== undefined ? `<p class="text-center">${drug.purpose[0]}</p>` : "";
+          let detailedpurpose = drug.indications_and_usage !== undefined ? `<h2>Drug use</h2><p>${drug.indications_and_usage[0]}</p>` : "";
+          let admin = drug.dosage_and_administration !== undefined ? `<h2>Admin</h2><p>${drug.dosage_and_administration[0]}</p>` : "";
+          let whenUse = drug.when_using !== undefined ? `<h2>How to use</h2><p>${drug.when_using[0]}</p>` : "";
+          let stopUse = drug.stop_use !== undefined ? `<p>${drug.stop_use[0]}</p>` : "";
+          let activeIngredient = drug.active_ingredient !== undefined ? ` <h2>Ingredient</h2><p>${drug.active_ingredient[0]}</p>` : "";
+          drugDetailsElement.innerHTML = `
                       <h1 class="text-center drugDetailHeader">${drugName}</h1>
                       ${purpose}
                     ${detailedpurpose}
@@ -272,13 +275,16 @@ document.querySelector("#searchMatchDrugBtn")
                       ${stopUse}
                       ${activeIngredient}
             `;
-      })
+        })
 
-      drugResultsElement.appendChild(eachDrugElement);
-      //highlight the first child
+        drugResultsElement.appendChild(eachDrugElement);
+        //highlight the first child
 
-      clickFirstChild(drugResultsElement);
+        clickFirstChild(drugResultsElement);
+      }
     }
+
+
 
   })
 
