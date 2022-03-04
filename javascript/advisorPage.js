@@ -231,21 +231,27 @@ document.querySelector("#searchMatchDrugBtn")
     let searchDrugString = document.querySelector("#searchDrugString").value;
     // console.log(searchDrugString);
 
+    let userErrorNote = document.querySelector("#diseaseMatchDrugValidationResult");
     //input validation
     if (formValidate(searchDrugString)) {
-      document.querySelector("#diseaseMatchDrugValidationResult").innerHTML = globalValidationResults;
+      userErrorNote.innerHTML = globalValidationResults;
     } else {
-      document.querySelector("#matchedDrugBG").classList.add("hide");
+
+ 
       let results = await getTransformedDrug(searchDrugString);
-      console.log(results);
-      let drugResultsElement = document.querySelector("#drugResults");
+
+      // let user know if there is no matched results
+      if(results.length===0){
+        userErrorNote.innerHTML = `You condition did not match anything in our database.
+        Try a different name for the same condition.
+        `;
+      } else {
+        document.querySelector("#matchedDrugBG").classList.add("hide");
+        let drugResultsElement = document.querySelector("#drugResults");
       // clear results when user search again
       drugResultsElement.innerHTML = "";
       let drugDetailsElement = document.querySelector("#drugDetails");
       drugDetailsElement.innerHTML = "";
-
-
-
 
       for (let drug of results) {
         let eachDrugElement = document.createElement("div");
@@ -282,9 +288,9 @@ document.querySelector("#searchMatchDrugBtn")
 
         clickFirstChild(drugResultsElement);
       }
+      }
+      
     }
-
-
 
   })
 
