@@ -264,10 +264,6 @@ document.querySelector("#searchMatchDrugBtn")
 //drug side effects chart
 // {x: month, y: total amount}, transform data into this format
 document.querySelector("#searchEffectBtn").addEventListener("click", async function (event) {
-  //1 function only does 1 function
-  // let data = await loadData();
-  // let transformed = transformData(data, null, null);
-  // updateChart(chart, transformed, "sales");
   event.preventDefault();
   let searchEffectString = document.querySelector("#searchEffectString").value;
 
@@ -277,12 +273,6 @@ document.querySelector("#searchEffectBtn").addEventListener("click", async funct
   updateChart(lineChart, lineData, `${searchEffectString} adverse events reported`);
   updateChart(barChart, barData, `advese events reported`);
 
-
-  // // document.querySelector("#search-btn").addEventListener("click", function () {
-  // //   let country = document.querySelector("#search-terms").value;
-  // //   let transformed = transformData(data, country, null);
-  // //   updateChart(chart, transformed, "sales");
-  // });
 });
 
 function updateChart(chart, newSeries, newSeriesName) {

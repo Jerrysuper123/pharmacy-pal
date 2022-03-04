@@ -358,6 +358,15 @@ body {
   color: #c5c5c5;
 }
 
+#lineChart, #barChart {
+  height: 20rem;
+  width: 20rem;
+}
+
+.chartContainer {
+  background-color: #f0f0f0;
+}
+
 #singaporeMap {
   height: 100vh;
   z-index: 1;
