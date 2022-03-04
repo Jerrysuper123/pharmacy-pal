@@ -10,8 +10,22 @@
   color: #c20303;
 }
 
-.landPageLogoSize {
-  font-size: 3rem;
+.githubLogo {
+  font-size: 2rem;
+  color: #3f1212;
+}
+
+.githubLogoBox {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 1px solid #e2e1e1;
+}
+.githubLogoBox a:hover {
+  color: #c20303;
 }
 
 /* color setting */
