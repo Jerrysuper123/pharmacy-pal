@@ -221,6 +221,15 @@ body {
   width: 100%;
 }
 
+.ctA {
+  color: white !important;
+  min-height: 40%;
+  background-color: #e0e0e0;
+  background-image: url("https://images.pexels.com/photos/66997/pexels-photo-66997.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 .page {
   min-height: 80vh;
   /* box-sizing: ; */

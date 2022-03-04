@@ -25,6 +25,12 @@ function isSubSet(arr1, arr2, m = arr1.length, n = arr2.length) {
 let symptomData = [];
 let symptomSearchResults = document.querySelector("#symptomSearchResults");
 
+//landing page get my direction
+document.querySelector("#landPageBtn")
+        .addEventListener("click", function(){
+          document.querySelector("#appBrief").classList.add("hideLeft");
+        })
+
 window.addEventListener("DOMContentLoaded", async function () {
   symptomData = await getSymptomsDataTransformed();
   let diseaseSymptomArray = symptomData[0];
