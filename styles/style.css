@@ -318,7 +318,6 @@ body {
 }
 
 .drugList {
-  background-color: #E0ffe7;
   width: 20rem;
   padding: 1rem;
   display: flex;
@@ -333,9 +332,13 @@ body {
   margin-left: auto;
 }
 
+.colorAccentTwoAndScale {
+  background-color: #E0ffe7;
+  transform: scale(1.1);
+}
+
 .greyOut {
   background-color: #d4d4d4 !important;
-  transform: scale(0.9);
 }
 
 .drugResultsBox {

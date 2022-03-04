@@ -141,12 +141,10 @@
 
   //for disease match drug page
   .drugList{
-    background-color: $colorAccentTwo;
     width: 20rem;
     padding: 1rem;
     display: flex;
     margin-top: 0.3rem;
-    // color: rgb(136, 136, 136);
     @extend .customBorder;
     .drugNameTitle{
       color:rgb(39, 77, 88);
@@ -158,9 +156,14 @@
     }
   }
 
+  .colorAccentTwoAndScale{
+    background-color: $colorAccentTwo;
+    transform: scale(1.1);
+  }
+
   .greyOut{
     background-color: rgb(212, 212, 212) !important;
-    transform: scale(0.9);
+    // transform: scale(0.9);
   }
 
   .drugResultsBox{

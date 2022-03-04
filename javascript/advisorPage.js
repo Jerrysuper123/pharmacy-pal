@@ -159,6 +159,8 @@ document.querySelector("#searchMatchDrugBtn")
     drugResultsElement.innerHTML = "";
     let drugDetailsElement = document.querySelector("#drugDetails");
     drugDetailsElement.innerHTML = "";
+
+
     //clear details when user search again
     // drugDetailsElement.innerHTML = "";
 
@@ -182,10 +184,10 @@ document.querySelector("#searchMatchDrugBtn")
       eachDrugElement.addEventListener("click", function (event) {
         // let purpose = drug.openfda.brand_name !==  undefined ? `<h1>${drug.openfda.brand_name[0]}</h1>` : "";
         let drugItems = document.querySelectorAll(".drugList");
-        for(let el of drugItems){
-          el.classList.add("greyOut");
-        }
-        event.target.classList.remove("greyOut");
+        // for(let el of drugItems){
+        //   el.classList.add("greyOut");
+        // }
+        // event.target.classList.remove("greyOut");
         let purpose = drug.purpose !== undefined ? `<p class="text-center">${drug.purpose[0]}</p>` : "";
         let detailedpurpose = drug.indications_and_usage !== undefined ? `<h2>Drug use</h2><p>${drug.indications_and_usage[0]}</p>` : "";
         let admin = drug.dosage_and_administration !== undefined ? `<h2>Admin</h2><p>${drug.dosage_and_administration[0]}</p>` : "";
@@ -204,6 +206,16 @@ document.querySelector("#searchMatchDrugBtn")
       })
 
       drugResultsElement.appendChild(eachDrugElement);
+      //highlight the first child
+      
+      function clickFirstChild(parentElement){
+        let firstChild = parentElement.firstChild;
+        firstChild.classList.add("colorAccentTwoAndScale");
+        firstChild.click();
+      }
+
+      clickFirstChild(drugResultsElement);
+    
     }
 
   })
