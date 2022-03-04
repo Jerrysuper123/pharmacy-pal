@@ -208,101 +208,108 @@ async function main() {
           let validationResult = document.querySelector("#searchAddressValidationResult");
           //data validation for user input
           if (searchString === "") {
-            validationResult.innerHTML= "You have entered an empty string!"
+            validationResult.innerHTML = "You have entered an empty string!"
           } else {
             validationResult.innerHTML = "";
             let filteredResult = searchDataArray.filter((el) =>
               el[0].toLowerCase().includes(searchString.toLowerCase())
             );
 
-            let resultDiv = document.querySelector("#result");
-            //this remove border radius, so that search resulted can come visually merge with search bar
-            let searchByAddressBar = document.querySelector("#searchByAddressBar");
-            searchByAddressBar.classList.add("borderRadiusNone");
-            resultDiv.innerHTML = "";
+            //if there is no matched result
+            if (filteredResult.length === 0) {
+              validationResult.innerHTML = "There is no matched result. Try again!"
+            } else {
+              let resultDiv = document.querySelector("#result");
+              //this remove border radius, so that search resulted can come visually merge with search bar
+              let searchByAddressBar = document.querySelector("#searchByAddressBar");
+              searchByAddressBar.classList.add("borderRadiusNone");
+              resultDiv.innerHTML = "";
 
 
-            for (el of filteredResult) {
-              //create marker based on filteredResult;
-              let lat = Number(el[1]);
-              let lng = Number(el[2]);
-              let addressArray = el[0].split(",");
-              let name = addressArray[0];
-              let address = addressArray.slice(1);
-              let pharmacistName = el[3];
-              let marker = L.marker([lat, lng], { icon: pharmacyIcon });
+              for (el of filteredResult) {
+                //create marker based on filteredResult;
+                let lat = Number(el[1]);
+                let lng = Number(el[2]);
+                let addressArray = el[0].split(",");
+                let name = addressArray[0];
+                let address = addressArray.slice(1);
+                let pharmacistName = el[3];
+                let marker = L.marker([lat, lng], { icon: pharmacyIcon });
 
-              let popUpElement = document.createElement("div");
-              popUpElement.classList.add("makerPopUp");
-              popUpElement.innerHTML = createPopUpContent(name, pharmacistName, address);
+                let popUpElement = document.createElement("div");
+                popUpElement.classList.add("makerPopUp");
+                popUpElement.innerHTML = createPopUpContent(name, pharmacistName, address);
 
-              let directionDivElement = document.createElement("div");
-              // directionButton.classList.add("ms-auto");
-              directionDivElement.innerHTML = `
-            <button class="btn btn-info">
-            direction <i class="fa-solid fa-diamond-turn-right"></i>
-            </button>
-            `;
+                let directionDivElement = document.createElement("div");
+                // directionButton.classList.add("ms-auto");
+                directionDivElement.innerHTML = `
+              <button class="btn btn-info">
+              direction <i class="fa-solid fa-diamond-turn-right"></i>
+              </button>
+              `;
 
-              // popUpElement.appendChild(textElement);
-              popUpElement.appendChild(directionDivElement);
+                // popUpElement.appendChild(textElement);
+                popUpElement.appendChild(directionDivElement);
 
-              marker.bindPopup(
-                popUpElement
-              );
-              marker.addTo(searchResultLayer);
+                marker.bindPopup(
+                  popUpElement
+                );
+                marker.addTo(searchResultLayer);
 
-              //create search result list and add event listener to each result
-              let divElement = document.createElement("div");
-              divElement.classList.add("m-3")
-              divElement.innerHTML = `
-            <i class="fa-solid fa-magnifying-glass me-1"></i>
-            ${el[0].split(",")[0]}
-            `;
-              divElement.addEventListener("click", function () {
-                //give border radius to searchbar again when user chose the locaiton
-                searchByAddressBar.classList.remove("borderRadiusNone");
-                resultDiv.innerHTML = "";
-                map.flyTo([lat, lng], 13);
-                marker.openPopup();
-              });
+                //create search result list and add event listener to each result
+                let divElement = document.createElement("div");
+                divElement.classList.add("m-3")
+                divElement.innerHTML = `
+              <i class="fa-solid fa-magnifying-glass me-1"></i>
+              ${el[0].split(",")[0]}
+              `;
+                divElement.addEventListener("click", function () {
+                  //give border radius to searchbar again when user chose the locaiton
+                  searchByAddressBar.classList.remove("borderRadiusNone");
+                  resultDiv.innerHTML = "";
+                  map.flyTo([lat, lng], 13);
+                  marker.openPopup();
+                });
 
-              resultDiv.appendChild(divElement);
+                resultDiv.appendChild(divElement);
 
-              //event listener when user click get direction button from pharmacy store
-              directionDivElement.addEventListener("click", function () {
-                //remove all other pharmacy markers to focus on the drawn route only
-                // searchResultLayer.clearLayers();
-                //has to repeat geolocation because havenot created the function for it
-                let options = {
-                  enableHighAccuracy: true,
-                  timeout: 5000,
-                  maximumAge: 0
-                };
+                //event listener when user click get direction button from pharmacy store
+                directionDivElement.addEventListener("click", function () {
+                  //remove all other pharmacy markers to focus on the drawn route only
+                  // searchResultLayer.clearLayers();
+                  //has to repeat geolocation because havenot created the function for it
+                  let options = {
+                    enableHighAccuracy: true,
+                    timeout: 5000,
+                    maximumAge: 0
+                  };
 
-                //get user location 
-                function success(pos) {
-                  let crd = pos.coords;
-                  console.log("Your current position is:");
-                  console.log(`Latitude : ${crd.latitude}`);
-                  console.log(`Longitude: ${crd.longitude}`);
+                  //get user location 
+                  function success(pos) {
+                    let crd = pos.coords;
+                    console.log("Your current position is:");
+                    console.log(`Latitude : ${crd.latitude}`);
+                    console.log(`Longitude: ${crd.longitude}`);
 
-                  let staringLat = crd.latitude;
-                  let startingLng = crd.longitude;
+                    let staringLat = crd.latitude;
+                    let startingLng = crd.longitude;
 
-                  //extract all destination info to be used later
-                  drawRoute(staringLat, startingLng, lat, lng, popUpElement, startingPointIcon, pharmacyIcon, map);
-                }
+                    //extract all destination info to be used later
+                    drawRoute(staringLat, startingLng, lat, lng, popUpElement, startingPointIcon, pharmacyIcon, map);
+                  }
 
-                function error(err) {
-                  console.warn(`ERROR(${err.code}): ${err.message}`);
-                  alert("Please allow us to access your location to find the pharmacy near you!")
-                }
+                  function error(err) {
+                    console.warn(`ERROR(${err.code}): ${err.message}`);
+                    alert("Please allow us to access your location to find the pharmacy near you!")
+                  }
 
-                navigator.geolocation.getCurrentPosition(success, error, options);
-              });
+                  navigator.geolocation.getCurrentPosition(success, error, options);
+                });
+              }
             }
+
           }
+
 
 
         });

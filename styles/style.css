@@ -94,7 +94,7 @@ body {
 }
 
 /* search bar and returned result */
-.navBar, .validationResult {
+.navBar, #searchAddressValidationResult {
   margin-left: 0.7rem;
   margin-top: 1rem;
   z-index: 2;
@@ -102,10 +102,13 @@ body {
 }
 
 .validationResult {
+  color: red;
+  font-size: 1rem;
+}
+
+#searchAddressValidationResult {
   margin-left: 1.3rem;
   margin-top: 5rem !important;
-  color: red;
-  font-size: 1.3rem;
 }
 
 .result {
