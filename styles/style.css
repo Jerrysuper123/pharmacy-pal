@@ -29,7 +29,7 @@ body {
 }
 
 /* border setting */
-.customBorder, .drugList, .page {
+.customBorder, .listItemDesign, .page {
   border: 1px solid rgba(140, 140, 140, 0.7);
 }
 
@@ -317,16 +317,16 @@ body {
   width: 20rem;
 }
 
-.drugList {
+.listItemDesign {
   width: 20rem;
   padding: 1rem;
   display: flex;
   margin-top: 0.3rem;
 }
-.drugList .drugNameTitle {
+.listItemDesign .drugNameTitle {
   color: #274d58;
 }
-.drugList .expandIcon {
+.listItemDesign .expandIcon {
   color: #c2c2c2;
   width: 20px;
   margin-left: auto;

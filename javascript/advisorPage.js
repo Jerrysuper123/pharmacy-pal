@@ -173,7 +173,7 @@ document.querySelector("#searchMatchDrugBtn")
     for (let drug of results) {
       let eachDrugElement = document.createElement("div");
 
-      eachDrugElement.classList.add("drugList");
+      eachDrugElement.classList.add("listItemDesign");
       eachDrugElement.classList.add("shadow-1");
       let drugName = drug.openfda.brand_name[0];
       eachDrugElement.innerHTML = `
@@ -202,7 +202,7 @@ document.querySelector("#searchMatchDrugBtn")
           }  
         }
 
-        addColorScaleToOneElementOnly("drugList", event);
+        addColorScaleToOneElementOnly("listItemDesign", event);
 
         let purpose = drug.purpose !== undefined ? `<p class="text-center">${drug.purpose[0]}</p>` : "";
         let detailedpurpose = drug.indications_and_usage !== undefined ? `<h2>Drug use</h2><p>${drug.indications_and_usage[0]}</p>` : "";
