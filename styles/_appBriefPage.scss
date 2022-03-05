@@ -24,18 +24,94 @@
 .ctA{
   // width: 100vw;
   color: white! important;
-  min-height: 40%;
-  background-color: #e0e0e0;
-  background-image: url("https://images.pexels.com/photos/66997/pexels-photo-66997.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
-  background-size: cover;
+  min-height: 40vh;
+  // background-color: #e0e0e0;
 
-  background-repeat: no-repeat;
   // background-position: ;
 
 }
 
+
+.ctAText{
+  width: 40%;
+}
+
+.landingPageText{
+  background-color: aliceblue;
+}
+
 .textBoxLanding{
   max-width: 50rem;
+  // border: 1px solid black;
+  p{
+    font-size: 0.7rem;
+  }
+  
 }
+
+.mainContentLanding{
+  // border: 1px solid black;
+  min-height: 50rem;
+  background-image: url("../images/landingPageBg.jpg");
+  // background-size: cover;
+
+  background-repeat: no-repeat;
+}
+
+
+/* css rules for devices screen larger than 1279px */
+@media screen and (min-width: 1279px) {
+  .ctAHeader{
+    font-size: 4rem;
+  }
+  .landPageBtn{
+    font-size: 2rem;
+  }
+}
+
+/* css rules for devices from 769 to 1279px */
+@media screen and (max-width: 1279px) {
+  .ctAHeader{
+    font-size: 2.5rem;
+  }
+
+  .landPageBtn{
+    font-size: 1.5rem;
+  }
+
+}
+
+
+/* css rules for devices from 481 to 768px */
+@media screen and (max-width: 768px) {
+  .ctAHeader{
+    font-size: 1.8rem;
+  }
+
+  .landPageBtn{
+    font-size: 1.3rem;
+  }
+}
+
+/* css rules for devices from 0 to 480px */
+@media screen and (max-width: 480px) {
+  .ctAHeader{
+    font-size: 1.5rem;
+  }
+
+  .landPageBtn{
+    font-size: 1rem;
+  }
+
+  .landingPageNav{
+    font-size: 0.7rem;
+  }
+
+}
+
+
+
+
+
 
 

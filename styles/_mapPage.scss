@@ -117,6 +117,8 @@
   .hideClickArea{
     width: 0%;
   }
+
+
 }
 
 /* css rules for devices from 481 to 768px */
@@ -124,12 +126,15 @@
   .leaflet-routing-container {
     display: none;
   }
+
 }
 
 /* css rules for devices from 769 to 1279px */
 @media screen and (max-width: 1279px) {
+
 }
 
 /* css rules for devices screen larger than 1279px */
 @media screen and (min-width: 1279px) {
+  
 }
