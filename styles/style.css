@@ -94,11 +94,16 @@ body {
 }
 
 /* search bar and returned result */
-.navBar, #searchAddressValidationResult {
+.navBar, #searchAddressValidationResult, #nearMeSpinner {
   margin-left: 0.7rem;
   margin-top: 1rem;
   z-index: 2;
   position: absolute;
+}
+
+#nearMeSpinner {
+  margin-left: 50vw;
+  margin-top: 50vh;
 }
 
 .validationResult {
@@ -407,6 +412,10 @@ body {
 
 .drugDetailHeader {
   color: #6a8d72;
+}
+
+.bodyDetailHeader {
+  color: #3e5744;
 }
 
 #downArrowIcon {

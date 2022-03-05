@@ -159,6 +159,8 @@ async function main() {
       //find the nearby pharmacy
       document.querySelector("#searchNearByBtn")
         .addEventListener("click", function () {
+          let spinner = document.querySelector("#nearMeSpinner");
+          spinner.classList.add("displaySpinner");
           let options = {
             enableHighAccuracy: true,
             timeout: 5000,
@@ -188,6 +190,9 @@ async function main() {
             popUpElement.classList.add("makerPopUp");
             popUpElement.innerHTML = createPopUpContent(name, pharmacistName, address);
             drawRoute(lat, lng, destiLat, destiLng, popUpElement, startingPointIcon, pharmacyIcon, map);
+
+            spinner.classList.remove("displaySpinner");
+
           }
 
           function error(err) {

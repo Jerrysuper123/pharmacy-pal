@@ -173,7 +173,7 @@ window.addEventListener("DOMContentLoaded", async function () {
               diseaseDescription.innerHTML = `
             <h1 class="text-center drugDetailHeader">${titleBodyImg[0][0]}</h1>
             <img src=${titleBodyImg[1]} class="diseaseImage" alt=${titleBodyImg[0][0]}/>
-            <p>${titleBodyImg[0][1]}</p>
+            <p class="bodyDetailHeader">${titleBodyImg[0][1]}</p>
           `;
             })
             diseaseList.appendChild(diseaseElement);
@@ -279,12 +279,16 @@ document.querySelector("#searchMatchDrugBtn")
             let activeIngredient = drug.active_ingredient !== undefined ? ` <h2>Ingredient</h2><p>${drug.active_ingredient[0]}</p>` : "";
             drugDetailsElement.innerHTML = `
                       <h1 class="text-center drugDetailHeader">${drugName}</h1>
-                      ${purpose}
-                    ${detailedpurpose}
+                         ${purpose}
+                      <div class="bodyDetailHeader">
+                       ${detailedpurpose}
                     ${admin}
                     ${whenUse}
                       ${stopUse}
                       ${activeIngredient}
+                      </div>
+                   
+                   
             `;
           })
 

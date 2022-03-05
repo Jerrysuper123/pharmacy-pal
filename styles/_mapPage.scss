@@ -6,6 +6,12 @@
   position: absolute;
 }
 
+#nearMeSpinner{
+  @extend .navBar;
+  margin-left: 50vw;
+  margin-top: 50vh;
+}
+
 .validationResult{
   color: red;
   font-size: 1rem;
