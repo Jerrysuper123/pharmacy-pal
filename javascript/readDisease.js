@@ -1,13 +1,19 @@
 
 /*utility for symptom checker page */
 async function readSymptomsData() {
-    let response = await axios.get("../localData/diseaseAndSymptoms.csv");
-    //   console.log(response.data.split("\r\n"));
-    return response.data.split("\r\n");
-    // return response.data.result.records;
+    let response;
+    try {
+        response = await axios.get("../localData/diseaseAndSymptoms.csv");
+        return response.data.split("\r\n");
+    } catch (error) {
+        console.log("Unable to read local diseaseAndSymptoms.csv file");
+        return [];
+    }
+
 }
 
 function symptomsDataTransform(results) {
+    if (results.length === 0) return;
     //remove column headers of csv
     let arrayData = [];
     let oneArray = [];
@@ -82,19 +88,16 @@ async function readDisease(diseaseName) {
 
     try {
         response = await axios.get(endpoint, { params });
+        let pageObject = response.data.query.pages;
+        let pageInfo = Object.values(pageObject)[0];
+        let title = pageInfo.title;
+        let body = pageInfo.extract;
+        return [title, body];
     } catch (error) {
-        if (error.response) {
-            document.querySelector("#symptomsValidationResult").innerHTML = `
-                Wikipedia disease API Failed : ${error.response.status}
-            `;
-        }
+        catchStatusCodeError(error, "#symptomsValidationResult", "Wikipedia disease API");
+        return [];
     }
 
-    let pageObject = response.data.query.pages;
-    let pageInfo = Object.values(pageObject)[0];
-    let title = pageInfo.title;
-    let body = pageInfo.extract;
-    return [title, body];
 }
 
 async function getImage(diseaseName) {
@@ -116,15 +119,21 @@ async function getImage(diseaseName) {
                 Authorization: PEXEL_API_KEY,
             },
         });
+
+        //return medium image size url
+        try{
+            return response.data.photos[0].src.medium;
+        } catch(error) {
+            console.log(error);
+            //return sample image
+            return "./images/pharmacy.png";
+        }
+        
     }
     catch (error) {
-        document.querySelector("#symptomsValidationResult").innerHTML = `
-                Pexels Picture API Failed : ${error.response.status}
-            `;
+        catchStatusCodeError(error,"#symptomsValidationResult", "Pexels Picture API" );
+        return "";
     }
-
-    //return medium image size url
-    return response.data.photos[0].src.medium;
 }
 
 async function getTitleBodyImg(diseaseName) {
@@ -141,8 +150,8 @@ function catchStatusCodeError(error, useNoteId, APIName) {
         let userNote = document.querySelector(useNoteId);
         if (statusCode === 404) {
             userNote.innerHTML = `
-                You condition did not match anything in our database.
-        Try a different name for the same condition.
+                You search did not match anything in our database.
+        Try a different name for the same search.
             `;
             /*Open FDA adverse events API return 500, if user search for empty string*/
         } else if (statusCode === 500) {
@@ -186,14 +195,10 @@ async function getDrug(symptom) {
                 limit: 10
             }
         });
+        return response.data.results;
 
     } catch (error) {
         catchStatusCodeError(error, "#diseaseMatchDrugValidationResult", "Open FDA drug match disease API");
-    }
-
-    if (response.data.results) {
-        return response.data.results;
-    } else {
         return [];
     }
 }
@@ -265,24 +270,25 @@ async function getAdverseEventType(drugName = "BioNTech, Pfizer vaccine") {
     let response;
     try {
         response = await axios.get(`https://api.fda.gov/drug/event.json?search=(receivedate:[20040101+TO+20220226])+AND+${drugName}&count=patient.reaction.reactionmeddrapt.exact`);
+        // console.log(response.data.results);
+        return response.data.results;
+
     } catch (error) {
         catchStatusCodeError(error, "#drugSideEffectsValidationResult", "Open FDA adverse event type API");
-    }
-
-    if (response.data.results) {
-        return response.data.results;
-    } else {
         return [];
     }
 }
 
 function getTopFiveEvent(results) {
+    if (results.length === 0) {
+        return [];
+    }
     let arrayData = [];
     for (let i = 0; i < 5; i++) {
         let oneEvent = { x: results[i].term, y: Number(results[i].count) }
         arrayData.push(oneEvent);
     }
-    return arrayData
+    return arrayData;
 }
 
 async function getEventsTransformed(drugName) {

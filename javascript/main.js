@@ -1,3 +1,4 @@
+
 function initMap() {
   let singapore = [1.29, 103.85];
 
