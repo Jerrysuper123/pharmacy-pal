@@ -307,6 +307,7 @@ document.querySelector("#searchEffectBtn").addEventListener("click", async funct
   if (searchEffectString==="" && (lineData.length === 0 || barData.length === 0)) {
     searchEffectString = "BioNTech, Pfizer vaccine";
 
+  /*user input empty string for search, output error message */
   } else if (searchEffectString==="" && (lineData.length !== 0 || barData.length !== 0)) {
     if (formValidate(searchEffectString)) {
       sideEffectUserNote.innerHTML = `${globalValidationResults} We have defaulted the search string to "BioNTech, Pfizer vaccine"`;

@@ -1,9 +1,5 @@
 
-//read Includes symptoms, treatment, mode of transmission.
-//1. read symptoms
-//2. decide kind of drug
-//3. whether available in pharmacy
-
+/*utility for symptom checker page */
 async function readSymptomsData() {
     let response = await axios.get("../localData/diseaseAndSymptoms.csv");
     //   console.log(response.data.split("\r\n"));
@@ -139,15 +135,99 @@ async function getTitleBodyImg(diseaseName) {
     return [titleBody, image]
 }
 
-//credit: https://open.fda.gov/apis/drug/event/explore-the-api-with-an-interactive-chart/
-//below shows the most popular API from US FDA
-//credit:https://open.fda.gov/about/statistics/
-//below gets the side effects incidents reported from 2014 to current date
+function catchStatusCodeError(error, useNoteId, APIName){
+     let statusCode = Number(error.response.status);
+        let userNote = document.querySelector(useNoteId);
+        if (statusCode === 404) {
+            userNote.innerHTML = `
+                You condition did not match anything in our database.
+        Try a different name for the same condition.
+            `;
+        } else {
+            userNote.innerHTML = `
+            ${APIName} Failed: ${statusCode}
+            `;
+        }
+}
+
+/*Utility for drug match diseases */
+//return drug name by users' symptoms and disease
+async function getDrug(symptom) {
+    const OPENFDA_API_KEY = "IIkjoiok33N5aEpSrb9XDMHXw7PPdiXZc2NFfYHL";
+    const DRUGLABEL_BASE_URL = "https://api.fda.gov/drug/label.json";
+
+    let response;
+
+    try {
+        response = await axios.get(DRUGLABEL_BASE_URL, {
+            params: {
+                api_key: OPENFDA_API_KEY,
+                search: "purpose:" + symptom,
+                limit: 10
+            }
+        });
+
+    } catch (error) {
+        catchStatusCodeError(error,"#diseaseMatchDrugValidationResult", "Open FDA drug match disease API" );
+    }
+    
+    if(response.data.results){
+          return response.data.results;
+    } else {
+        return [];
+    }
+}
+
+
+function transformDrugData(results) {
+    let transformed = [];
+    let count = 0;
+    for (let el of results) {
+        if (count === 3) {
+            break;
+        }
+        if (el.openfda.brand_name) {
+            transformed.push(el);
+            count++;
+        }
+    }
+    return transformed;
+}
+
+async function getTransformedDrug(symptom) {
+    let results = await getDrug(symptom);
+    return transformDrugData(results);
+}
+
+
+/*ulility for drug side effects page */
 async function getAdverseEventOverTime(drugName) {
     const DRUGEVENT_BASE_URL = "https://api.fda.gov/drug/event.json";
-    let response = await axios.get(`https://api.fda.gov/drug/event.json?search=(receivedate:[20040101+TO+20220225])+AND+${drugName}&count=receivedate`);
+    let response;
 
-    return response.data.results;
+    try{
+        response = await axios.get(`https://api.fda.gov/drug/event.json?search=(receivedate:[20040101+TO+20220225])+AND+${drugName}&count=receivedate`);
+    } catch(error){
+        // let statusCode = Number(error.response.status);
+        // let statusCode = Number(error.response.status);
+        // let userNote = document.querySelector("#diseaseMatchDrugValidationResult");
+        // if (statusCode === 404) {
+        //     userNote.innerHTML = `
+        //         You condition did not match anything in our database.
+        // Try a different name for the same condition.
+        //     `;
+        // } else {
+        //     userNote.innerHTML = `
+        //     Open FDA drug match disease API Failed: ${statusCode}
+        //     `;
+        // }
+    }
+  
+    if(response.data.results){
+        return response.data.results;
+    } else {
+        return [];
+    }
 }
 
 function transformAdverseEventData(results) {
@@ -156,6 +236,7 @@ function transformAdverseEventData(results) {
 
     const d = new Date();
     let currentYear = d.getFullYear();
+    /*only get yearly data for the past five years */
     let startingYear = currentYear - 4;
     for (let year = startingYear; year <= currentYear; year++) {
         for (let el of results) {
@@ -194,63 +275,5 @@ function getTopFiveEvent(results) {
 async function getEventsTransformed(drugName) {
     let results = await getAdverseEventType(drugName);
     return getTopFiveEvent(results);
-}
-
-//return drug name by users' symptoms and disease
-async function getDrug(symptom) {
-    const OPENFDA_API_KEY = "IIkjoiok33N5aEpSrb9XDMHXw7PPdiXZc2NFfYHL";
-    const DRUGLABEL_BASE_URL = "https://api.fda.gov/drug/label.json";
-
-    let response;
-
-    try {
-        response = await axios.get(DRUGLABEL_BASE_URL, {
-            params: {
-                api_key: OPENFDA_API_KEY,
-                search: "purpose:" + symptom,
-                limit: 10
-            }
-        });
-
-    } catch (error) {
-        let statusCode = Number(error.response.status);
-        let userNote = document.querySelector("#diseaseMatchDrugValidationResult");
-        if (statusCode === 404) {
-            userNote.innerHTML = `
-                You condition did not match anything in our database.
-        Try a different name for the same condition.
-            `;
-        } else {
-            userNote.innerHTML = `
-            Open FDA drug match disease API Failed: ${statusCode}
-            `;
-        }
-    }
-    
-    if(response.data.results){
-          return response.data.results;
-    } else {
-        return [];
-    }
-}
-
-function transformDrugData(results) {
-    let transformed = [];
-    let count = 0;
-    for (let el of results) {
-        if (count === 3) {
-            break;
-        }
-        if (el.openfda.brand_name) {
-            transformed.push(el);
-            count++;
-        }
-    }
-    return transformed;
-}
-
-async function getTransformedDrug(symptom) {
-    let results = await getDrug(symptom);
-    return transformDrugData(results);
 }
 
