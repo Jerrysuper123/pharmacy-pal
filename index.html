@@ -53,7 +53,7 @@
 
                 </div>
 
-           
+
                 <div id="mobileBottomNav" class="mobileBottomNav d-flex">
                     <div id="searchNearByBtn" class="primaryNavBtn bg-light shadow customBorder">
                         <div class="primaryIconStyle">
@@ -73,7 +73,7 @@
             <!-- data input validation -->
             <div class="loader" id="nearMeSpinner"></div>
             <div class="validationResult" id="searchAddressValidationResult"></div>
-          
+
             <section>
                 <div id="result" class="result"></div>
             </section>
@@ -83,63 +83,81 @@
 
         <!-- application brief -->
         <aside id="appBrief" class="greyContainer d-flex">
-            <article class="secondaryPageBackground p-4">
-                <div class="d-flex">
-                    <h1 class="appLogo appLogoColor">pharmacy-pal</h1>
-                    <div class="githubLogoBox shadow ms-3">
-                        <a class="githubLogo" href="https://github.com/Jerrysuper123/visitPharmacy" target=”_blank”>
-                            <i class="fa-brands fa-github"></i>
-                        </a>
+            <article class="secondaryPageBackground">
+                <div class="container">
+
+                    <div class="d-flex">
+                        <h1 class="appLogo appLogoColor">pharmacy-pal</h1>
+                        <div class="githubLogoBox shadow ms-3">
+                            <a class="githubLogo" href="https://github.com/Jerrysuper123/visitPharmacy" target=”_blank”>
+                                <i class="fa-brands fa-github"></i>
+                            </a>
+                        </div>
+
+                        <div id="closeAppBriefBtn" class="appLogoColor appLogo ms-auto me-4">
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
                     </div>
 
-                    <div id="closeAppBriefBtn" class="appLogoColor appLogo ms-auto me-4">
-                        <i class="fa-solid fa-xmark"></i>
-                    </div>
+                    <main class="mainContentLanding">
+                        <Section class="ctA mt-2 d-flex flex-column align-items-center justify-content-center">
+                            <h1>Get me a nearest pharmacy</h1>
+                            <p class="subText text-light text-center">Pharmacy-pal is designed to aid "self-care through
+                                pharmacy" in the midst of Covid19, while giving you the peace of mind needed when one is
+                                feeling unwell.
+                            </p>
+                            <div>
+                                <button id="landPageBtn" class="btn btn-danger text-light">
+                                    Direction
+                                    <i class="fa-solid fa-diamond-turn-right">
+                                    </i>
+                                </button>
+                            </div>
+                        </Section>
+
+                        <article class="landingPageText mt-5">
+                            <div class="textBoxLanding">
+                                <section class="d-flex justify-content-center">
+                                    <i class="primaryIconStyle fa-solid fa-location-dot me-4"></i>
+                                    <div>
+                                        <h3 class="bodyDetailHeader">Pharmacy geolocation & pharmacist info</h3>
+                                        <p class="mt-3 text-secondary">
+                                            Location algorithm to find nearby pharmacy, together with pharmacist info
+                                        </p>
+                                    </div>
+                                </section>
+    
+                                <section class="d-flex justify-content-center">
+                                    <i class="primaryIconStyle fa-solid fa-stethoscope me-4"></i>
+                                    <div>
+                                        <h3 class="bodyDetailHeader">Symptom diagnosis & medication recommendation</h3>
+                                        <p class="mt-3 text-secondary">
+                                            Sophisticated system for symptom checking &
+                                            diagnosis and medication recommendation
+                                        </p>
+                                    </div>
+                                </section>
+    
+                                <section class="d-flex justify-content-center">
+                                    <i class="primaryIconStyle fa-solid fa-circle-exclamation me-4"></i>
+                                    <div>
+                                        <h3 class="bodyDetailHeader">Disclaimer</h3>
+                                        <p class="mt-3 text-secondary">
+                                            Recommendations are for reference ONLY and consult your
+                                            doctors/pharmacist
+                                            before taking any medications.
+                                        </p>
+                                    </div>
+                                </section>
+                            </div>
+                            
+
+                        </article>
+
+                    </main>
+
                 </div>
 
-
-
-                <Section class="ctA mt-2 d-flex flex-column align-items-center justify-content-center">
-                    <h1>Get me a nearest pharmacy</h1>
-                    <p class="subText text-light text-center">Pharmacy-pal is designed to aid "self-care through
-                        pharmacy" in the midst of Covid19, especially one is
-                        feeling unwell.
-                    </p>
-                    <div>
-                        <button id="landPageBtn" class="btn btn-danger text-light">
-                            Direction
-                            <i class="fa-solid fa-diamond-turn-right">
-                            </i>
-                        </button>
-                    </div>
-                </Section>
-
-                <article class="text-center">
-                    <p class="mt-3 text-secondary">
-                        You could easily access the nearby pharmacy location through this app, together with the
-                        registered
-                        pharmacist in service.
-
-                    </p>
-
-
-                    <P class="text-secondary">
-                        We hope to give you the same peace of mind when visiting clinics/hospitals, strained by covid19,
-                        has
-                        become less accessible.
-                    </P>
-
-                    <p class="text-secondary">Our drug advisor feature also allows you to do symptom checking &
-                        diagnosis and recommends
-                        appropriate medications.
-
-                    </p>
-                    <p class="subText">
-                        Please note that our recommendations are for reference ONLY and consult your doctors/pharmacist
-                        before taking any medications.
-                    </p>
-
-                </article>
 
 
 
@@ -189,13 +207,13 @@
                             <p class="text-center">Identify possible conditions related to your symptoms</p>
                             <p class="subText">credit: Kaggle, Wikipedia, Pexels</p>
                             <h3>what are your symptoms?</h3>
-                
+
                             <div id="searchSymptomBtn" class="advisorSearchBar shadow customBorder bg-light px-3 py-2">
                                 <input autocomplete="off" id="searchSymptomInput" type="text"
                                     class="searchSymptomInput searchString border-0"
                                     placeholder="search your main symptoms here...">
                             </div>
-                           
+
 
 
                             <section>
@@ -221,7 +239,7 @@
                                 </section>
                                 <!-- data input if there are symptoms selected -->
                                 <div class="validationResult" id="symptomsValidationResult"></div>
-                                
+
                                 <div id="downArrowIcon" class="d-none mt-4"><i class="fa-solid fa-angle-down"></i></div>
                                 <section id="diseaseList" class="mt-3 p-4"></section>
                                 <div class="loader" id="diseaseResultLoader"></div>

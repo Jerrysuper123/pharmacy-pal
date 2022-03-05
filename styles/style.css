@@ -247,6 +247,10 @@ body {
   background-repeat: no-repeat;
 }
 
+.textBoxLanding {
+  max-width: 50rem;
+}
+
 .page {
   min-height: 80vh;
   /* box-sizing: ; */
