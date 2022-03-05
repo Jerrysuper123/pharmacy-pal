@@ -206,6 +206,10 @@ body {
   .hideClickArea {
     width: 0%;
   }
+
+  .ctASubtext {
+    font-size: 0.7rem !important;
+  }
 }
 /* css rules for devices from 481 to 768px */
 @media screen and (max-width: 768px) {
@@ -214,7 +218,17 @@ body {
   }
 }
 /* css rules for devices from 769 to 1279px */
+@media screen and (max-width: 1279px) {
+  .ctASubtext {
+    font-size: 0.9rem;
+  }
+}
 /* css rules for devices screen larger than 1279px */
+@media screen and (min-width: 1279px) {
+  .ctASubtext {
+    font-size: 1rem;
+  }
+}
 /* other pages, grey base */
 .greyContainer, .drugAdvisorPage {
   height: 100vh;
@@ -305,7 +319,7 @@ body {
   }
 
   .landingPageNav {
-    font-size: 0.7rem;
+    font-size: 0.6rem;
   }
 }
 .page {

@@ -118,6 +118,10 @@
     width: 0%;
   }
 
+  .ctASubtext{
+    font-size: 0.7rem !important;
+  }
+
 
 }
 
@@ -126,15 +130,19 @@
   .leaflet-routing-container {
     display: none;
   }
-
 }
 
 /* css rules for devices from 769 to 1279px */
 @media screen and (max-width: 1279px) {
+  .ctASubtext{
+    font-size: 0.9rem;
+  }
 
 }
 
 /* css rules for devices screen larger than 1279px */
 @media screen and (min-width: 1279px) {
-  
+  .ctASubtext{
+    font-size: 1rem;
+  }
 }
