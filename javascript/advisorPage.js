@@ -304,11 +304,11 @@ document.querySelector("#searchEffectBtn").addEventListener("click", async funct
   sideEffectUserNote.innerHTML = "";
 
   /*first load vaccine dummy data, the default is an empty string, so show no error message */
-  if (searchEffectString==="" && (lineData.length === 0 || barData.length === 0)) {
+  if (searchEffectString === "" && (lineData.length === 0 || barData.length === 0)) {
     searchEffectString = "BioNTech, Pfizer vaccine";
 
-  /*user input empty string for search, output error message */
-  } else if (searchEffectString==="" && (lineData.length !== 0 || barData.length !== 0)) {
+    /*user input empty string for search, output error message */
+  } else if (searchEffectString === "" && (lineData.length !== 0 || barData.length !== 0)) {
     if (formValidate(searchEffectString)) {
       sideEffectUserNote.innerHTML = `${globalValidationResults} We have defaulted the search string to "BioNTech, Pfizer vaccine"`;
     }
@@ -321,11 +321,18 @@ document.querySelector("#searchEffectBtn").addEventListener("click", async funct
   lineData = await loader1;
   barData = await loaded2;
 
-  updateChart(lineChart, lineData, `${searchEffectString} adverse events reported`);
-  updateChart(barChart, barData, `adverse events reported`);
+  //no matched results, output to user
+  if (lineData.length === 0 || barData === 0) {
+    sideEffectUserNote.innerHTML = `
+      There are no matched results in our database. Try a different name for the same drug!
+    `;
+  } else {
+    updateChart(lineChart, lineData, `${searchEffectString} adverse events reported`);
+    updateChart(barChart, barData, `adverse events reported`);
 
-  document.querySelector("#lineChartTitle").innerHTML = `${searchEffectString} trend over time`;
-  document.querySelector("#barChartTitle").innerHTML = `${searchEffectString} key side-effects`;
+    document.querySelector("#lineChartTitle").innerHTML = `${searchEffectString} trend over time`;
+    document.querySelector("#barChartTitle").innerHTML = `${searchEffectString} key side-effects`;
+  }
 });
 
 function updateChart(chart, newSeries, newSeriesName) {

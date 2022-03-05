@@ -135,19 +135,39 @@ async function getTitleBodyImg(diseaseName) {
     return [titleBody, image]
 }
 
-function catchStatusCodeError(error, useNoteId, APIName){
-     let statusCode = Number(error.response.status);
+function catchStatusCodeError(error, useNoteId, APIName) {
+    if (error.response) {
+        let statusCode = Number(error.response.status);
         let userNote = document.querySelector(useNoteId);
         if (statusCode === 404) {
             userNote.innerHTML = `
                 You condition did not match anything in our database.
         Try a different name for the same condition.
             `;
+            /*Open FDA adverse events API return 500, if user search for empty string*/
+        } else if (statusCode === 500) {
+            console.log("500 error")
+            userNote.innerHTML = `
+                You have entered an empty string.
+            `;
         } else {
             userNote.innerHTML = `
             ${APIName} Failed: ${statusCode}
             `;
         }
+        /*credit:https://gist.github.com/fgilio/230ccd514e9381fafa51608fcf137253 */
+    } else if (error.request) {
+        /*
+         * The request was made but no response was received, `error.request`
+         * is an instance of XMLHttpRequest in the browser and an instance
+         * of http.ClientRequest in Node.js
+         */
+        console.log(error.request);
+    } else {
+        // Something happened in setting up the request and triggered an Error
+        console.log('Error', error.message);
+    }
+    console.log(error);
 }
 
 /*Utility for drug match diseases */
@@ -168,11 +188,11 @@ async function getDrug(symptom) {
         });
 
     } catch (error) {
-        catchStatusCodeError(error,"#diseaseMatchDrugValidationResult", "Open FDA drug match disease API" );
+        catchStatusCodeError(error, "#diseaseMatchDrugValidationResult", "Open FDA drug match disease API");
     }
-    
-    if(response.data.results){
-          return response.data.results;
+
+    if (response.data.results) {
+        return response.data.results;
     } else {
         return [];
     }
@@ -205,27 +225,12 @@ async function getAdverseEventOverTime(drugName) {
     const DRUGEVENT_BASE_URL = "https://api.fda.gov/drug/event.json";
     let response;
 
-    try{
+    try {
         response = await axios.get(`https://api.fda.gov/drug/event.json?search=(receivedate:[20040101+TO+20220225])+AND+${drugName}&count=receivedate`);
-    } catch(error){
-        // let statusCode = Number(error.response.status);
-        // let statusCode = Number(error.response.status);
-        // let userNote = document.querySelector("#diseaseMatchDrugValidationResult");
-        // if (statusCode === 404) {
-        //     userNote.innerHTML = `
-        //         You condition did not match anything in our database.
-        // Try a different name for the same condition.
-        //     `;
-        // } else {
-        //     userNote.innerHTML = `
-        //     Open FDA drug match disease API Failed: ${statusCode}
-        //     `;
-        // }
-    }
-  
-    if(response.data.results){
         return response.data.results;
-    } else {
+
+    } catch (error) {
+        catchStatusCodeError(error, "#drugSideEffectsValidationResult", "Open FDA adverse event count over time API");
         return [];
     }
 }
@@ -254,14 +259,22 @@ async function getEffectDataTranformed(drugName) {
     return transformAdverseEventData(results);
 }
 
-
 //below gets the side effects type reported from 2014 to current date
 async function getAdverseEventType(drugName = "BioNTech, Pfizer vaccine") {
     const DRUGEVENT_BASE_URL = "https://api.fda.gov/drug/event.json";
-    let response = await axios.get(`https://api.fda.gov/drug/event.json?search=(receivedate:[20040101+TO+20220226])+AND+${drugName}&count=patient.reaction.reactionmeddrapt.exact`);
-    return response.data.results;
-}
+    let response;
+    try {
+        response = await axios.get(`https://api.fda.gov/drug/event.json?search=(receivedate:[20040101+TO+20220226])+AND+${drugName}&count=patient.reaction.reactionmeddrapt.exact`);
+    } catch (error) {
+        catchStatusCodeError(error, "#drugSideEffectsValidationResult", "Open FDA adverse event type API");
+    }
 
+    if (response.data.results) {
+        return response.data.results;
+    } else {
+        return [];
+    }
+}
 
 function getTopFiveEvent(results) {
     let arrayData = [];
