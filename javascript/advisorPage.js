@@ -101,6 +101,8 @@ window.addEventListener("DOMContentLoaded", async function () {
 
   document.querySelector("#diagnoseBtn")
     .addEventListener("click", function () {
+
+
       let symptomElements = document.querySelectorAll(".symptomSelected");
       // console.log(symptomElements);
       let symptomArray = [];
@@ -160,9 +162,13 @@ window.addEventListener("DOMContentLoaded", async function () {
             //retrieve the condition title, text and image
             diseaseElement.addEventListener("click", async function (event) {
               addColorScaleToOneElementOnly("listItemDesign", event);
-
-              let titleBodyImg = await getTitleBodyImg(el);
               let diseaseDescription = document.querySelector("#diseaseDescription");
+              diseaseDescription.innerHTML = "";
+              let spinner = document.querySelector("#diseaseResultLoader");
+              spinner.classList.add("displaySpinner");
+              let titleBodyImg = await getTitleBodyImg(el);
+              spinner.classList.remove("displaySpinner");
+
               diseaseDescription.innerHTML = "";
               diseaseDescription.innerHTML = `
             <h1 class="text-center drugDetailHeader">${titleBodyImg[0][0]}</h1>

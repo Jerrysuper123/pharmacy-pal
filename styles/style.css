@@ -449,4 +449,12 @@ body {
 
 .leaflet-bar {
   margin-top: 6rem !important;
+}
+
+.loader {
+  display: none;
+}
+
+.displaySpinner {
+  display: block !important;
 }/*# sourceMappingURL=style.css.map */

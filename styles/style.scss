@@ -15,9 +15,6 @@
 }
 
 
-
-
-
 .hideLeft {
   transform: translateX(-100%);
   transition: transform 0.5s;
@@ -33,3 +30,10 @@
   margin-top: 6rem !important;
 }
 
+.loader{
+  display: none;
+}
+
+.displaySpinner{
+  display: block !important;
+}
