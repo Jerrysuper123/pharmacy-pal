@@ -273,7 +273,7 @@ async function main() {
                   //give border radius to searchbar again when user chose the locaiton
                   searchByAddressBar.classList.remove("borderRadiusNone");
                   resultDiv.innerHTML = "";
-                  map.flyTo([lat, lng], 13);
+                  map.flyTo([lat, lng], 14);
                   marker.openPopup();
                 });
 
