@@ -38,15 +38,17 @@
 
 .landingPageText{
   background-color: aliceblue;
+  width: 100%;
+
 }
 
 .textBoxLanding{
-  max-width: 50rem;
-  // border: 1px solid black;
+  .landingPageListItem{
+    width: 100%;
+  };
   p{
     font-size: 0.7rem;
   }
-  
 }
 
 .mainContentLanding{
