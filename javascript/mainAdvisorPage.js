@@ -262,6 +262,7 @@ async function mainAdvisorPage() {
     .addEventListener("click", async function (event) {
       event.preventDefault();
 
+     
       let drugResultsElement = document.querySelector("#drugResults");
       //clear results when user search again
       drugResultsElement.innerHTML = "";
@@ -271,6 +272,7 @@ async function mainAdvisorPage() {
 
       let searchDrugString = document.querySelector("#searchDrugString").value;
       let userErrorNote = document.querySelector("#diseaseMatchDrugValidationResult");
+       userErrorNote.innerHTML = "";
       //input validation
       if (formValidate(searchDrugString)) {
         userErrorNote.innerHTML = globalValidationResults;
