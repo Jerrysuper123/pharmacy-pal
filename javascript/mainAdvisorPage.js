@@ -21,46 +21,39 @@ function isSubSet(arr1, arr2, m = arr1.length, n = arr2.length) {
   }
 }
 
-//symptom checker page
-//load the data first [disease-symptom object dataset, symptom set]
-let symptomData = [];
-let symptomSearchResults = document.querySelector("#symptomSearchResults");
-
 
 async function mainAdvisorPage() {
-
-  //landing page get my direction
-  document.querySelector("#landPageBtn")
-    .addEventListener("click", function () {
-      document.querySelector("#appBrief").classList.add("hideLeft");
-      document.querySelector("#searchNearByBtn").click();
-    })
-
   window.addEventListener("DOMContentLoaded", async function () {
+    //fill in the chart with sample vaccine data
+    document.querySelector("#searchEffectBtn").click();
+    
+    /*Landing page - for users to hide the page or click get direction to nearby pharmacy */
+    document.querySelector("#landPageBtn")
+      .addEventListener("click", function () {
+        document.querySelector("#appBrief").classList.add("hideLeft");
+        document.querySelector("#searchNearByBtn").click();
+      })
+
+    /*symptom checker page*/
+    //load the data first [disease-symptom object dataset, symptom set]
+    let symptomData = [];
+    let symptomSearchResults = document.querySelector("#symptomSearchResults");
+
     symptomData = await getSymptomsDataTransformed();
     let diseaseSymptomArray = symptomData[0];
     let symptomSet = symptomData[1];
-    // console.log(symptomData);
 
-    //fill in the chart with sample vaccine data
-    document.querySelector("#searchEffectBtn").click();
-
+    //when user started typing, change the border raidus of the input element
     document.querySelector("#searchSymptomInput")
       .addEventListener("click", function () {
         let searchInput = document.querySelector("#searchSymptomBtn");
-        //this removes border radius when user click into the input
         searchInput.classList.add("borderRadiusNone");
       })
 
     document.querySelector("#searchSymptomInput")
       .addEventListener("keypress", function () {
-
         let searchSymptomString = document.querySelector("#searchSymptomInput").value;
-        // console.log(searchSymptomString);
-
         let filterList = symptomSet.filter(el => el.includes(searchSymptomString));
-        console.log(filterList);
-
         symptomSearchResults.innerHTML = "";
 
         for (let el of filterList) {
@@ -108,7 +101,6 @@ async function mainAdvisorPage() {
 
 
         let symptomElements = document.querySelectorAll(".symptomSelected");
-        // console.log(symptomElements);
         let symptomArray = [];
         for (let el of symptomElements) {
           symptomArray.push(el.innerHTML);
@@ -120,7 +112,6 @@ async function mainAdvisorPage() {
           validationSymptomEle.innerHTML = "You have not selected any symptoms!"
         } else {
           validationSymptomEle.innerHTML = "";
-          // console.log(symptomArray);
           //check if symptomArray is a subset of diseaseSymptomArray
           //find only 3 matched item for time optimization [{disease: symptom}]
           let arrayResult = [];
@@ -135,7 +126,7 @@ async function mainAdvisorPage() {
             }
           }
 
-          // console.log(arrayResult);
+
           // extract key and put it into an array
           let diseaseArray = [];
           for (let el of arrayResult) {
@@ -372,7 +363,7 @@ async function mainAdvisorPage() {
       // colors: ['#2E93fA']
     },
     grid: {
-    show: false
+      show: false
     },
     dataLabels: {
       enabled: true,
@@ -400,9 +391,9 @@ async function mainAdvisorPage() {
       type: 'gradient',
     },
     grid: {
-    show: false
-},
- 
+      show: false
+    },
+
     colors: ['#ab5e69'],
     plotOptions: {
       bar: {
