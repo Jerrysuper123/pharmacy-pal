@@ -158,6 +158,8 @@ Icon
 
 table here
 
+Algorithm used
+
 
 ## testing
 
@@ -172,24 +174,26 @@ limitation and future implementations
 
 ## 7. Credit
 
-What are the visual credits? icon image
-data source credit
+We have to give both visual and data-set credits below.
 
 ### Icons and images:
+1. [Fontawesome icon](https://fontawesome.com/) - to embelish the website with icons throughout for better UI UX
+2. [Google fronts](https://www.google.com/search?q=google+fonts&oq=google+front&aqs=chrome.1.69i57j0i10j0i512l2j0i10l6.4333j0j4&sourceid=chrome&ie=UTF-8) - to set the primary and secondary font types 
+3. [Unsplash images](https://unsplash.com/) - to use it as the landing page background image
+4. [Flaticon icons](https://www.flaticon.com/) - to customize the map markers
 
-xxxx
 ### DataSets:
 
-1. [Pharmacy geoJson data from data.gov.sg](https://data.gov.sg/dataset/retail-pharmacy-locations?resource_id=ae46281d-8ee1-4fa3-ab07-03ab409946d8) - to plot the markers on the map and acess the address info
+1. [Pharmacy geoJson CSV data from data.gov.sg](https://data.gov.sg/dataset/retail-pharmacy-locations?resource_id=ae46281d-8ee1-4fa3-ab07-03ab409946d8) - to plot the markers on the map and acess the address info
 
-2. [Liscensed pharmacists from data.gov.sg](https://data.gov.sg/dataset/listing-of-licensed-pharmacies) - to identify the names of the registered pharmacists
+2. [Liscensed pharmacists API from data.gov.sg](https://data.gov.sg/dataset/listing-of-licensed-pharmacies) - to identify the names of the registered pharmacists
 
-2. [Liscensed pharmacists from data.gov.sg](https://data.gov.sg/dataset/listing-of-licensed-pharmacies) - to identify the names of the registered pharmacists
+2. [Kaggle disease symptom CSV dataset - credit to Pranay Patil](https://www.kaggle.com/itachi9604/disease-symptom-description-dataset) - to predict users' conditions/diseases based on symptoms selected
 
-2. [Liscensed pharmacists from data.gov.sg](https://data.gov.sg/dataset/listing-of-licensed-pharmacies) - to identify the names of the registered pharmacists
+2. [Wikipedia API](https://www.mediawiki.org/wiki/API:Main_page) - to retrieve the extract of disease info to display to users
 
-2. [Liscensed pharmacists from data.gov.sg](https://data.gov.sg/dataset/listing-of-licensed-pharmacies) - to identify the names of the registered pharmacists
+2. [Pexels API](https://www.pexels.com/api/) - to retrieve disease image and display to users
 
-2. [Liscensed pharmacists from data.gov.sg](https://data.gov.sg/dataset/listing-of-licensed-pharmacies) - to identify the names of the registered pharmacists
+2. [Disease match drug API from Open FDA](https://open.fda.gov/apis/drug/label/) - to match drug for users' conditions
 
-2. [Liscensed pharmacists from data.gov.sg](https://data.gov.sg/dataset/listing-of-licensed-pharmacies) - to identify the names of the registered pharmacists
+2. [Adverse events data API from Open FDA](https://open.fda.gov/apis/drug/event/) - to plot the trends of drug side effects reported on charts
