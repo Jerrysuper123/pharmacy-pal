@@ -1,6 +1,6 @@
 # pharmacy-pal
 
-****Nice picture layout of the app.
+![brand](./READMESources/readMeFrontImg.png)
 
 Access the live demo [here](https://jerrysuper123.github.io/pharmacy-pal/).
 
@@ -121,12 +121,12 @@ site map
 
 Briefly describe the structure ****
 
-![site map](./READMESources/siteMap.jpeg.png)
+![site map](./READMESources/siteMap.jpeg)
 
 ## 4. Skeleton
 Access the wireframes for mobile, tablet, and laptop display for the website here.****
 
-![wireframe](./READMESources/wireframe.pdf)
+![wireframe](./READMESources/wireframe.png)
 
 most important is map to make it the background
 
