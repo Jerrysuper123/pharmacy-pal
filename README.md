@@ -167,22 +167,23 @@ Algorithm used
 Github
 
 ## 9. Limitations and future implementations
-limitation and future implementations
-- passive touch
-- leeflet touring machine issue
-- dataset
+- [Use passive event listener](https://web.dev/uses-passive-event-listeners/) - not implemented currently, but could significantly improve the mobile scrolling experience especally on a map
+
+- Leeflet Routing Machine is an open-source project, not suitable for production use. Its server could be stopped without prior notice. To commercialize this project, we might consider paid services.
+
+- The disease and symptom dataset is rather small - less than 50 disease types currently. To improve the predictive accuracy, we might need a larger dataset or implement a back-end server to collect users' info. 
 
 ## 10. Credits
 
 We have to give both visual and data-set credits below.
 
-### Icons and images:
+Icons and images:
 1. [Fontawesome icon](https://fontawesome.com/) - to embelish the website with icons throughout for better UI UX
 2. [Google fronts](https://www.google.com/search?q=google+fonts&oq=google+front&aqs=chrome.1.69i57j0i10j0i512l2j0i10l6.4333j0j4&sourceid=chrome&ie=UTF-8) - to set the primary and secondary font types 
 3. [Unsplash images](https://unsplash.com/) - to use it as the landing page background image
 4. [Flaticon icons](https://www.flaticon.com/) - to customize the map markers
 
-### DataSets:
+DataSets:
 
 1. [Pharmacy geoJson CSV data from data.gov.sg](https://data.gov.sg/dataset/retail-pharmacy-locations?resource_id=ae46281d-8ee1-4fa3-ab07-03ab409946d8) - to plot the markers on the map and acess the address info
 
