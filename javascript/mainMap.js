@@ -1,4 +1,3 @@
-
 function initMap() {
   let singapore = [1.29, 103.85];
 
@@ -67,6 +66,7 @@ function removeRouteDrawn(map) {
   };
 }
 
+//this is an ugly function with many parameters due to lack of leaflet routing machine documentation
 function drawRoute(lat, lng, destiLat, destiLng, popUpElement, startingPointIcon, pharmacyIcon, map) {
   removeRouteDrawn(map);
   routingControl = L.Routing.control({
@@ -133,6 +133,7 @@ function getNearestPharmacyInfo(lat, lng, searchDataArray) {
     let distance = calDistance(lat, lng, lat2, lng2);
 
     //get the coordinates of the min-distanced pharmacy
+    //time complexity this is taking some time
     if (distance < minDistance) {
       minDistance = distance;
       nearbyLatLng = [];
@@ -144,7 +145,28 @@ function getNearestPharmacyInfo(lat, lng, searchDataArray) {
   return nearbyLatLng;
 }
 
-async function main() {
+//user location setting
+const userLocationOptions = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0
+};
+
+//return error message if unable to get user's location
+function error(err) {
+  console.warn(`ERROR(${err.code}): ${err.message}`);
+  alert("Please allow us to access your location to find the pharmacy near you!")
+}
+
+function createDirectionBtn(btnValue) {
+  return `
+          <button class="btn btn-info">
+          ${btnValue} <i class="fa-solid fa-diamond-turn-right"></i>
+          </button>
+          `
+}
+
+async function mainMap() {
   async function init() {
     let map = initMap();
 
@@ -155,28 +177,19 @@ async function main() {
       let searchDataArray = await extractAddressForSearch();
       let searchResultLayer = L.layerGroup();
 
+      //leave spinner element as a global varibale to be accessed later
+      let spinner = document.querySelector("#nearMeSpinner");
 
       //find the nearby pharmacy
       document.querySelector("#searchNearByBtn")
         .addEventListener("click", function () {
-          let spinner = document.querySelector("#nearMeSpinner");
           spinner.classList.add("displaySpinner");
-          let options = {
-            enableHighAccuracy: true,
-            timeout: 5000,
-            maximumAge: 0
-          };
 
           //get user location 
           function success(pos) {
             let crd = pos.coords;
-            console.log("Your current position is:");
-            console.log(`Latitude : ${crd.latitude}`);
-            console.log(`Longitude: ${crd.longitude}`);
-
             let lat = crd.latitude;
             let lng = crd.longitude;
-
             let nearbyLatLng = getNearestPharmacyInfo(lat, lng, searchDataArray);
 
             //extract all destination info to be used later
@@ -190,20 +203,12 @@ async function main() {
             popUpElement.classList.add("makerPopUp");
             popUpElement.innerHTML = createPopUpContent(name, pharmacistName, address);
             drawRoute(lat, lng, destiLat, destiLng, popUpElement, startingPointIcon, pharmacyIcon, map);
-
             spinner.classList.remove("displaySpinner");
-
           }
-
-          function error(err) {
-            console.warn(`ERROR(${err.code}): ${err.message}`);
-            alert("Please allow us to access your location to find the pharmacy near you!")
-          }
-
-          navigator.geolocation.getCurrentPosition(success, error, options);
+          navigator.geolocation.getCurrentPosition(success, error, userLocationOptions);
         })
 
-      // search for pharmacy through address
+      //search for pharmacy through address
       document
         .querySelector("#searchBtn")
         .addEventListener("click", function (event) {
@@ -226,11 +231,10 @@ async function main() {
               validationResult.innerHTML = "There is no matched result. Try again!"
             } else {
               let resultDiv = document.querySelector("#result");
-              //this remove border radius, so that search resulted can come visually merge with search bar
+              //UI UX: remove border radius
               let searchByAddressBar = document.querySelector("#searchByAddressBar");
               searchByAddressBar.classList.add("borderRadiusNone");
               resultDiv.innerHTML = "";
-
 
               for (el of filteredResult) {
                 //create marker based on filteredResult;
@@ -241,20 +245,13 @@ async function main() {
                 let address = addressArray.slice(1);
                 let pharmacistName = el[3];
                 let marker = L.marker([lat, lng], { icon: pharmacyIcon });
-
                 let popUpElement = document.createElement("div");
                 popUpElement.classList.add("makerPopUp");
                 popUpElement.innerHTML = createPopUpContent(name, pharmacistName, address);
 
                 let directionDivElement = document.createElement("div");
-                // directionButton.classList.add("ms-auto");
-                directionDivElement.innerHTML = `
-              <button class="btn btn-info">
-              direction <i class="fa-solid fa-diamond-turn-right"></i>
-              </button>
-              `;
 
-                // popUpElement.appendChild(textElement);
+                directionDivElement.innerHTML = createDirectionBtn("direction");
                 popUpElement.appendChild(directionDivElement);
 
                 marker.bindPopup(
@@ -266,14 +263,14 @@ async function main() {
                 let divElement = document.createElement("div");
                 divElement.classList.add("m-3")
                 divElement.innerHTML = `
-              <i class="fa-solid fa-magnifying-glass me-1"></i>
-              ${el[0].split(",")[0]}
+                  <i class="fa-solid fa-magnifying-glass me-1"></i>
+                  ${el[0].split(",")[0]}
               `;
                 divElement.addEventListener("click", function () {
                   //give border radius to searchbar again when user chose the locaiton
                   searchByAddressBar.classList.remove("borderRadiusNone");
                   resultDiv.innerHTML = "";
-                  map.flyTo([lat, lng], 14);
+                  map.flyTo([lat, lng], 13);
                   marker.openPopup();
                 });
 
@@ -281,43 +278,20 @@ async function main() {
 
                 //event listener when user click get direction button from pharmacy store
                 directionDivElement.addEventListener("click", function () {
-                  //remove all other pharmacy markers to focus on the drawn route only
-                  // searchResultLayer.clearLayers();
-                  //has to repeat geolocation because havenot created the function for it
-                  let options = {
-                    enableHighAccuracy: true,
-                    timeout: 5000,
-                    maximumAge: 0
-                  };
-
+                  spinner.classList.add("displaySpinner");
                   //get user location 
                   function success(pos) {
                     let crd = pos.coords;
-                    console.log("Your current position is:");
-                    console.log(`Latitude : ${crd.latitude}`);
-                    console.log(`Longitude: ${crd.longitude}`);
-
                     let staringLat = crd.latitude;
                     let startingLng = crd.longitude;
-
-                    //extract all destination info to be used later
                     drawRoute(staringLat, startingLng, lat, lng, popUpElement, startingPointIcon, pharmacyIcon, map);
+                    spinner.classList.remove("displaySpinner");
                   }
-
-                  function error(err) {
-                    console.warn(`ERROR(${err.code}): ${err.message}`);
-                    alert("Please allow us to access your location to find the pharmacy near you!")
-                  }
-
-                  navigator.geolocation.getCurrentPosition(success, error, options);
+                  navigator.geolocation.getCurrentPosition(success, error, userLocationOptions);
                 });
               }
             }
-
           }
-
-
-
         });
       searchResultLayer.addTo(map);
     });
@@ -325,5 +299,5 @@ async function main() {
   init();
 }
 
-main();
+mainMap();
 
