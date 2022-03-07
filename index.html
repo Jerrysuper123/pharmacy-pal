@@ -23,7 +23,6 @@
         integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-
     <!-- own css -->
     <link rel="stylesheet" href="./styles/spinner.css">
     <link rel="stylesheet" href="./styles/style.css">
@@ -31,11 +30,10 @@
 </head>
 
 <body>
-
-
     <main class="mainContainer">
         <section>
             <nav id="navBar" class="navBar d-flex align-items-center">
+                <!-- map page search by Address input -->
                 <div id="searchByAddressBar"
                     class="searchByAddressBar d-flex align-items-center shadow customBorder bg-light px-3 py-2">
                     <div id="barIcon" class="mx-1 primaryIconStyle"><i class="fa-solid fa-bars"></i></div>
@@ -48,11 +46,11 @@
                             <i class="primaryIconStyle fa-solid fa-magnifying-glass-location"></i>
                         </button>
                     </form>
-
                 </div>
 
 
                 <div id="mobileBottomNav" class="mobileBottomNav d-flex">
+                    <!-- near me search btn -->
                     <div id="searchNearByBtn" class="primaryNavBtn bg-light shadow customBorder">
                         <div class="primaryIconStyle">
                             <i class="fa-solid fa-mortar-pestle"></i>
@@ -60,15 +58,19 @@
                         <p>near me</p>
                     </div>
 
+                    <!-- drug advisor btn -->
                     <!-- modal for disclaimer -->
-                    <div id="drugAdvisorBtn" class="primaryNavBtn bg-light shadow customBorder" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <div id="drugAdvisorBtn" class="primaryNavBtn bg-light shadow customBorder" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
                         <div class="primaryIconStyle">
                             <i class="fa-solid fa-pills"></i>
                         </div>
                         <p>drug advisor</p>
                     </div>
                 </div>
+
             </nav>
+
             <!-- data input validation -->
             <div class="loader" id="nearMeSpinner"></div>
             <div class="validationResult" id="searchAddressValidationResult"></div>
@@ -80,12 +82,13 @@
 
         </section>
 
-        <!-- application brief -->
+        <!-- landing page -->
         <aside id="appBrief" class="greyContainer d-flex">
             <article class="secondaryPageBackground">
                 <div class="container">
 
-                    <div class="landingPageNav d-flex mt-3">
+                    <!-- landing page nav -->
+                    <nav class="landingPageNav d-flex mt-3">
                         <h1 class="appLogo appLogoColor">pharmacy-pal</h1>
                         <div class="githubLogoBox shadow ms-3">
                             <a class="githubLogo" href="https://github.com/Jerrysuper123/visitPharmacy" target=”_blank”>
@@ -96,15 +99,19 @@
                         <div id="closeAppBriefBtn" class="appLogoColor appLogo ms-auto me-4">
                             <i class="fa-solid fa-xmark"></i>
                         </div>
-                    </div>
+                    </nav>
 
                     <main class="mainContentLanding shadow">
+                        <!-- landing page call to action -->
                         <Section class="ctA mt-2 d-flex flex-column align-items-center justify-content-center p-2">
                             <div class="ctAText">
                                 <h1 class="text-center ctAHeader mt-2">Go to a nearby pharmacy</h1>
-                                <p class="subText text-light text-center ctASubtext">Pharmacy-pal is designed to aid "self-care
+                                <p class="subText text-light text-center ctASubtext">Pharmacy-pal is designed to aid
+                                    "self-care
                                     through
-                                    pharmacy" in the midst of Covid19. Not only does the it gives the the direction for the nearby pharmcy, it also helps you on symptom diagnosis & medication recommendation.
+                                    pharmacy" in the midst of Covid19. Not only does the it gives the the direction for
+                                    the nearby pharmcy, it also helps you on symptom diagnosis & medication
+                                    recommendation.
                                 </p>
                             </div>
 
@@ -117,6 +124,7 @@
                             </div>
                         </Section>
 
+                        <!-- landing page body text -->
                         <article class="landingPageText d-flex justify-content-center">
                             <div class="textBoxLanding mx-3">
                                 <section class="d-flex landingPageListItem mb-4 mt-5">
@@ -152,17 +160,10 @@
                                     </div>
                                 </section>
                             </div>
-
-
                         </article>
 
                     </main>
-
                 </div>
-
-
-
-
             </article>
 
             <div class="hideClickArea" id="appBriefHide">
@@ -174,7 +175,7 @@
             Launch demo modal
         </button> -->
 
-        <!-- Modal -->
+        <!-- Modal for disclaimer -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -183,7 +184,8 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        Our recommendations only serve as a reference. Consult your doctors or pharmacists before taking any medications!
+                        Our recommendations only serve as a reference. Consult your doctors or pharmacists before taking
+                        any medications!
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-info" data-bs-dismiss="modal">OK</button>
@@ -192,22 +194,21 @@
             </div>
         </div>
 
-        <!-- search drugadvisorPage -->
+        <!-- drugadvisorPage -->
         <aside id="drugAdvisorPage" class="drugAdvisorPage hidden">
             <article class="primaryPageBackground">
-                <div class="d-flex topNavDrugAdvisorPage">
+
+                <!-- top nav for drugadvisor page -->
+                <nav class="d-flex topNavDrugAdvisorPage">
                     <p class="ms-5 appLogo">pharmacy-pal</p>
                     <span id="closeAdvisorPage" class="ms-auto me-5">
-                        <!-- not working the font -->
                         <i class="fa-solid fa-xmark"></i>
-                        <!-- <p>Choose below services to find out more</p> -->
                     </span>
-                </div>
+                </nav>
 
-
-                <!-- navbar -->
 
                 <div id="all-pages" class="container">
+                    <!-- second-level nav for different pages -->
                     <nav id="drugNavBar" class="drugNavBar">
                         <!-- must always data-sth -->
                         <button id="page1-btn" data-page="1" class="changeBtnColorToWhite">
@@ -225,6 +226,8 @@
                             side-effect monitor
                         </button>
                     </nav>
+
+                    <!-- symptom checker page -->
                     <div class="page bg-light shadow p-3" id="page-1">
                         <div class="container d-flex flex-column align-items-center">
                             <h1 class="appLogo appLogoColor">pharmacy-pal</h1>
@@ -238,8 +241,6 @@
                                     class="searchSymptomInput searchString border-0"
                                     placeholder="search your main symptoms here...">
                             </div>
-
-
 
                             <section>
                                 <div id="symptomSearchResults" class="symptomSearchResults"></div>
@@ -420,4 +421,5 @@
     <script src="./javascript/mainMap.js"></script>
     <script src="./javascript/SPAAnimation.js"></script>
 </body>
+
 </html>
