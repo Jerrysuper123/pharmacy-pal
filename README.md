@@ -121,10 +121,12 @@ site map
 
 Briefly describe the structure ****
 
-![site map](sitemap.png)
+![site map](./READMESources/siteMap.jpeg.png)
 
 ## 4. Skeleton
 Access the wireframes for mobile, tablet, and laptop display for the website here.****
+
+![wireframe](./READMESources/wireframe.pdf)
 
 most important is map to make it the background
 
@@ -133,56 +135,85 @@ second most important search features
 last is search drugs and e-pharmacy
 
 ## 5. Surface - visual design
-
-why this design etc
-![icon]()
-
+### Colors
+As this is a medical app, we have chosen colors resembling hospital or medical theme below.
 ![Color](./READMESources/color.png)
 
-The app should adopt warm color - gives uses some hope, especially for those who are ill.
+Using the above color wheel, we have set the colors in the _constant.scss file to be global variables, to be used consistently through the application.
+- ColorPrimary is used the mostly throughout the app, including the app logo design, most of the icons used, and the theme of the displayed charts (See below)
+- ColorAccentThree is mostly used as the background color e.g. the drug advisor page background color.
+- The rest of the colors are also widely used, but mostly as supporting hues.
+```
+/* color setting */
+$colorPrimary: #ab5e69;
+$colorSecondary: #c2fbcd;
+$colorAccentOne: #F7c1c9;
+$colorAccentTwo: #E0ffe7;
+$colorAccentThree: #8fb095;
+```
 
-The app will also adopt a more offcial them, not too fancy color or front.
+PrimaryColor consistency
+![color](./READMESources/primaryColorUsage.png)
 
-Font
+### Font
+
+Font pair - Lora and Roboto 
+
+Although they’re two sans serifs, but the imperfect/perfect pairing of their character sets creates a good balance. This would work really well in giving a youthful and trustworthy vibe.
 
 ![font](https://elementor.com/cdn-cgi/image/f=auto,w=720/marketing/wp-content/uploads/sites/9/2020/11/4-Archivo-Black_Roboto.png)
 
-Archivo Black & Roboto
-Here we have a pairing of two sans serif fonts. Archivo Black is a grotesque sans serif, which makes it feel slightly imperfect compared to the neo-grotesque and geometric styling of Roboto.
+Against, in the _constant.scss file, we have set below font variables to be used consistently.
+```
+/* font family and size setting */
+$headerFront: 'Lora', serif;
+$bodyTextFront: 'Roboto', sans-serif;
+```
 
-This is a great example of how to use fonts in concord with one another. Yes, they’re two sans serifs, but the imperfect/perfect pairing of their character sets creates a good balance. This would work really well in giving an ecommerce site a youthful and trustworthy vibe.
+## 6. technology stack
+### Stack used:
 
-Icon
+| Tech  | Usage |
+| ------------- | ------------- |
+| HTML, CSS, vanilla Javascript, Bootstrap 5  | Build the main frame of the website  |
+| SASS  | Organize and structure css  |
+| [Axios](https://axios-http.com/docs/intro)  | Call APIs  |
+| [Apexcharts](https://apexcharts.com/)  | Plot charts of drug side effects reported  |
+| [Leaflet](https://leafletjs.com/)  | Create map and markers  |
+| [Leaflet routing machine](https://www.liedman.net/leaflet-routing-machine/)  | Draw routes on the map |
+| Fontawesome  | Place icons throughout the site  |
 
-## technology stack
 
-table here
+### Algorithm used:
+| Algorithm  | Usage |
+| ------------- | ------------- |
+| [Check if an array is a subset of another array](https://www.geeksforgeeks.org/find-whether-an-array-is-subset-of-another-array-set-1/)  | Match symptoms selected to disease types  |
+| Linear algorithm to calculate the shortest distance between two nodes  | Display nearest pharmacy to user, but time complexity could be improved |
 
-Algorithm used
+## 7. testing
+Click [here]() for the detailed test list.
 
+## 8. deployment
+The deployment is done through Github with the instructions [here](https://gist.github.com/TylerFisher/6127328).
 
-## testing
+## 9. Limitations and future implementations
+- [Use passive event listener](https://web.dev/uses-passive-event-listeners/) - not implemented currently, but could significantly improve the mobile scrolling experience especally on a map
 
-## deployment
-Github
+- Leeflet Routing Machine is an open-source project, not suitable for production use. Its server could be stopped without prior notice. To commercialize this project, we might consider paid services.
 
-## Future Consideration
-limitation and future implementations
-- passive touch
-- leeflet touring machine issue
-- dataset
+- The disease and symptom dataset is rather small - less than 50 disease types currently. To improve the predictive accuracy, we might need a larger dataset or implement a back-end server to collect users' info. 
 
-## 7. Credits
+## 10. Credits
 
 We have to give both visual and data-set credits below.
 
-### Icons and images:
+Icons and images:
 1. [Fontawesome icon](https://fontawesome.com/) - to embelish the website with icons throughout for better UI UX
 2. [Google fronts](https://www.google.com/search?q=google+fonts&oq=google+front&aqs=chrome.1.69i57j0i10j0i512l2j0i10l6.4333j0j4&sourceid=chrome&ie=UTF-8) - to set the primary and secondary font types 
 3. [Unsplash images](https://unsplash.com/) - to use it as the landing page background image
 4. [Flaticon icons](https://www.flaticon.com/) - to customize the map markers
 
-### DataSets:
+DataSets:
 
 1. [Pharmacy geoJson CSV data from data.gov.sg](https://data.gov.sg/dataset/retail-pharmacy-locations?resource_id=ae46281d-8ee1-4fa3-ab07-03ab409946d8) - to plot the markers on the map and acess the address info
 
