@@ -6,30 +6,26 @@ Access the live demo [here](https://jerrysuper123.github.io/pharmacy-pal/).
 
 ## Summary
 
-Value proposition
+### Project Context
+Covid19 has strained Singapore's medical system. To avoid infection hotspots (i.e. clinics or hospitals), many seek help from pharmacies when falling ill. When Googling for nearby pharmacist, the search results might not always be accurate, especially for pharmacies.
 
-Special consideration
+In addition, many also started using online sources to do their own symptom diagnosis, at times purchasing drugs on their own.
 
-E-pharmacy has been on the rise in Singapore. As such, we would provide a curated list of Health Sciences Authority (HSA) registered online pharmacies. This is to serve as a one-stop portal of legal e-pharmacies to guide the users to right phamacies,as the [rise of illegal/fake online pharmacies](https://www.straitstimes.com/singapore/courts-crime/the-rise-of-illegal-online-pharmacies) poses risks to the uninformed.
-
-***
-Project Context
-
-Organization goals
-
-User goals
-
-Unique-selling point
+### value proposition
+Pharmacy-pal is designed to aid "self-care through pharmacy" in the midst of Covid19. Not only does the it gives the the direction for the nearby pharmcy, it also helps you on symptom diagnosis & medication recommendation.
 
 ## 1. Strategy
-this section mainly discusses what???
+This section mainly discusses: 
+- creator's objective and users' needs match-fit
+- Users' pain points and app features designed to resolve them
+
+### Objective
+This app is designed to help people who want to:
+
+- Find locations of registered pharmacies, along with pharmacist info
+- Do symptom diagnosis and medication search-up
 
 ### target market
-
-This app is designed to target people who want to:
-
-- find locations of registered pharmacies
-- acquire information on the over-the-counter (OTC) drugs and pharmacists before making physical visits
 
 Our target groups could be further divided:
 
@@ -41,7 +37,7 @@ Those who only want to find nearby drugstore.
 - adequate IT literacy
 
 2. super users
-   Those who wants to get information on OTC drugs, pharmacist background, and e-pharmacy (see special consideration below)
+   Those who wants to get information on pharmacist background, and require symptom diagnosis and medication recommendation.
 
 - aged 18 to 40
 - high IT literacy
@@ -51,11 +47,9 @@ Those who only want to find nearby drugstore.
 
 - COVID-19 has strained Singapore's hospital system. For many citizens, self-care through pharmacy store has become more viable, especially for the fear of virus infection at hot spots - clinics and hospitals.
 
-- Google allows for pharmacy location search but its search return also includes non-pharmacy results. So this app provide geo location of registered pharmacy with the Singapore government.
+- Google allows for pharmacy location search but its search return also includes non-pharmacy results. So this app provide geo location of registered pharmacy under the Singapore government.
 
-- With many people visiting pharmacy, some might already know what drug they want to purchase, but not sure it could be purchased over the counter.
-
-- Some people might prefer e-pharmacy to get the drugs to deliver to their door step. However, there are many illegal online pharmacies, which might cause misuse of drugs or overdose. They need a list of HSA registered e-pharmacy.
+- With many people visiting pharmacy, some might require symptom diagnosis and medication recommendation before meeting the pharmacist for a more fruitful discussion.
 
 - In addition, some people might want to know the registered pharmacist at certain drug store and also to know their experience before consulting them
 
@@ -65,54 +59,42 @@ Basic users:
 
 - As I user who works from home, I want to get to nearby pharmacy to get drugs instead of going to clinics or hospitals.
 
-- As a user, I want to search for pharmacy in different areas, so that I could make recommendations to my my parents.
+- As a user, I want to search for pharmacy in different areas, so that I could make recommendations to my parents.
 
 Super users:
 
-- As a user, I know what drugs need, but I am not sure if it can be purchased over the counter (OTC) , I want to check if the drug is OTC or prescription-based, in addition to a brief description of the drug.
+- As a user, I want to do a simple diganosis on my symptoms before visting the pharmacy, so that I could have a more fruitful discussion with the pharmacist.
 
-- As a user, I also want to know the name of the registered pharmacist, because I want to get a brief consultation from him/her, instead of ramdom picking up drugs myself.
+- As a user, I want to know some background info of the pharmacist, so that I could get some recommendations over the counter.
 
-- As a user, I might not want to travel far, so I want to get pharmacist consultation online and get the drugs delivered to home (e-phaemacy).
+- As a user, I want to search for some medications for my conditions, so that I could understand more about drugs that might be suitable for me.
 
----
+- As a user, I want to search for the side effects of drugs, so that I could have a peace of mind when pharmacists prescibe some drugs to me.
 
 ### Features based on user story
 
-breifly describe features
-
-
-
+1. Display the route from user's location to the nearest pharmacist
+2. Provide pharmacist names based on location
+3. Offer symptom diagnosis and description of possible conditions
+4. Recommend possible medications for the users' conditions
+5. Display the drug side effects over time to users
 
 ## 2. Scope
+### Functional specification
+It would be based on the aforementioned features.
 
-****** functional specification
-*** content - data set (mentioned in credit)
-*** Non-functional
-Mobile responsive & fast performance
-****
+### Content
+The main content comes from the following sources:
+- Pharmacy location and pharmacist name displayed on the map
+- Display appropriate diseases matched to symptoms
+- Display appropriate drugs matched to diseases
+- Display charts of drug side effects trend
 
-Nearby pharmacy store
-Search pharmacy store
-Search pharmacy drugs
-See a list of HSA registered e-pharmacy
+For more details on info content, refer to the credits section below for the list of datasources used.
 
-At desk, the 3 buttons should appear on top.
-In mobile modes, the 3 buttons should appear below like wechat style.
-
-/ask users for access control in current location
-//find nearest pharmacy (Djastra algorithm) and check if the drug is OTC/prescription
-//tell them who is the license pharmacist in charge
-//remind them to bring NRIC to get pharmacy drugs (bring nric to see pharmacist)
-
-When to use/ mobile responsive
-at home, or ont he walk towards pharmacy
-computer and mobile consideration
-
-when walking map should include less buttons or feature to distract people.
-
-Main content
-
+### Non-functional
+- The app should be both mobile responsive, as users might bring their phone to search for pharmacy location
+- When in mobile format, the screen should have less buttons to prevent accidental press.
 
 ## 3. Structure
 
@@ -191,7 +173,7 @@ $bodyTextFront: 'Roboto', sans-serif;
 | Linear algorithm to calculate the shortest distance between two nodes  | Display nearest pharmacy to user, but time complexity could be improved |
 
 ## 7. testing
-Click [here]() for the detailed test list.
+Click [here](https://github.com/Jerrysuper123/pharmacy-pal/blob/main/READMESources/testCases.pdf) for the detailed test list.
 
 ## 8. deployment
 The deployment is done through Github with the instructions [here](https://gist.github.com/TylerFisher/6127328).
