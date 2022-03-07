@@ -7,12 +7,12 @@ Access the live demo [here](https://jerrysuper123.github.io/pharmacy-pal/).
 ## Summary
 
 ### Project Context
-Inevitably, Covid19 has strained Singapore's healthcare system. Also to avoid infection hotspots (i.e. clinics or hospitals), many netizens now seek help from pharmacies when falling ill. However, when Googling for nearby pharmacies, the search results might not always be satisfactory, with clinics and hospitals mixing in.
+Reportedly Covid19 has strained many countries' healthcare system. While in Singapore, to avoid infection hotspots (i.e. clinics or hospitals), many netizens now seek help from pharmacies. However, when Googling for nearby pharmacies, clinics and hospitals often mix up with the results.
 
-In addition, many also started using online sources to do their own symptom diagnosis, at times purchasing drugs on their own. This has paved way for the rising of [illegal online pharmacies](https://www.straitstimes.com/singapore/courts-crime/the-rise-of-illegal-online-pharmacies) in Singapore, definitely a cause for concern.
+Inevitably, many also start using online sources to do symptom diagnosis, at times purchasing drugs on their own. This has paved way for the rising of [illegal online pharmacies](https://www.straitstimes.com/singapore/courts-crime/the-rise-of-illegal-online-pharmacies), definitely a cause for concern.
 
 ### Value proposition and objective
-Pharmacy-pal is designed to aid "self-care through pharmacy" in the midst of Covid19. Not only does the it gives the direction for the nearby pharmacy together with the pharmacist info, it also provides symptom diagnosis & medication recommendation.
+Pharmacy-pal is designed to aid "self-care through pharmacy" in the midst of Covid19. Not only does it provide the direction for the nearby pharmacy, it also offers symptom diagnosis & medication recommendation.
 
 ## 1. Strategy
 This section mainly discusses: 
@@ -20,17 +20,17 @@ This section mainly discusses:
 - Users' pain points and app features designed to resolve them
 
 ### target market
-Our target groups could be divided into:
+The target market could be segmented into:
 
 1. basic users
 
-Those who only want to find nearby drugstore.
+Those who only want to find the nearby drugstore.
 
 - aged 18 to 50
 - adequate IT literacy
 
 2. super users
-   Those who wants to get information on pharmacist background, and require symptom diagnosis and medication recommendation.
+Those who wants to get information on the pharmacist's background and require symptom diagnosis & medication search-up.
 
 - aged 18 to 40
 - high IT literacy
@@ -38,16 +38,16 @@ Those who only want to find nearby drugstore.
 
 ### Needs and pain points
 
-- For many citizens, self-care through pharmacy store has become more viable in the midst of Covid19, especially for the fear of virus infection at hot spots - clinics and hospitals.
+- For many citizens, self-care through pharmacy store has a norm, but they are not getting adequate services compared to clinics and hospitals.
 
-- Google allows for pharmacy location search but its search return also includes non-pharmacy results. So this app provides a pure list of registered pharmacies under government.
+- Google's search result generate pure-pharmacy return, confusing for many. In fact, many times there is a drug store within 1 KM, but the search result returns a distance location.
 
 - With many people visiting pharmacies, some require symptom diagnosis and medication recommendation before meeting the pharmacist for a more fruitful discussion.
 
-- Some might to know the registered pharmacist in service before making the physical trips, rather than accepting cashiers' advices in the drug store.
+- Many want to know the registered pharmacist in service before making the physical trips, rather than accepting cashiers' advices in store.
 
-### User Stories
-The user stories is based on the aforementioned pain points. Access the list [here](https://github.com/Jerrysuper123/pharmacy-pal/blob/main/READMESources/userStory.pdf).
+### User stories
+The user stories are based on the aforementioned pain points. Access the list [here](https://github.com/Jerrysuper123/pharmacy-pal/blob/main/READMESources/userStory.pdf).
 
 ### Features based on user story
 
@@ -62,8 +62,8 @@ The user stories is based on the aforementioned pain points. Access the list [he
 It would be based on the aforementioned features.
 
 ### Content
-The main content comes from the following sources:
-- Display pharmacy location and pharmacist name on the map
+The main content are as of follows:
+- Display pharmacy location and pharmacist's name on the map
 - Suggest appropriate diseases matched to symptoms
 - Offer appropriate drugs matched to diseases
 - Plot charts of drug side effects trend
@@ -71,8 +71,8 @@ The main content comes from the following sources:
 For more details on info content, refer to the credits section below for the list of data sources used.
 
 ### Non-functional
-- The app should be mobile responsive, as users might on the go towards the pharmacy location.
-- When in mobile format, the screen should have less buttons to prevent accidental press.
+- The app should be mobile responsive, as users might be on the go towards the pharmacy location.
+- When in mobile format, the screen should have less buttons to prevent accidental press while walking.
 
 ## 3. Structure
 Opted for a tree information structure, with the map as the home page.
@@ -88,8 +88,8 @@ Opted for a tree information structure, with the map as the home page.
 As this is a medical app, we have chosen colors resembling hospital or medical theme below.
 ![Color](./READMESources/color.png)
 
-Using the above color wheel, we have set the colors in the _constant.scss file to be global variables, to be used consistently through the application.
-- ColorPrimary is used the mostly throughout the app, including the app logo design, most of the icons used, and the theme of the displayed charts (See below)
+Using the above color wheel, we have set the colors in the _constant.scss file to be global variables - to be used consistently through the application.
+- ColorPrimary is used the mostly throughout the app, including the app logo design, most of the icons used, and the theme of the displayed charts (see below)
 - ColorAccentThree is mostly used as the background color e.g. the drug advisor page background color.
 - The rest of the colors are also widely used, but mostly as supporting hues.
 ```
@@ -152,7 +152,7 @@ The deployment is done through Github with the instructions [here](https://gist.
 
 ## 10. Credits
 
-We have to give both visual and data-set credits below.
+For both visual and data-set credits below:
 
 Icons and images:
 1. [Fontawesome icon](https://fontawesome.com/) - to embelish the website with icons throughout for better UI UX
