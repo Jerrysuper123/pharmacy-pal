@@ -54,7 +54,7 @@ Those who only want to find nearby drugstore.
 - In addition, there is a need to know the registered pharmacist serving in drug store and also to know their experience before consulting them
 
 ### User Stories
-The user stories is based on the aforementined pain points. See the list here.
+The user stories is based on the aforementioned pain points. Access the list [here](https://github.com/Jerrysuper123/pharmacy-pal/blob/main/READMESources/userStory.pdf).
 
 ### Features based on user story
 
@@ -75,7 +75,7 @@ The main content comes from the following sources:
 - Display appropriate drugs matched to diseases
 - Display charts of drug side effects trend
 
-For more details on info content, refer to the credits section below for the list of datasources used.
+For more details on info content, refer to the credits section below for the list of data sources  used.
 
 ### Non-functional
 - The app should be mobile responsive, as users might bring their phone to search for pharmacy location.
