@@ -172,7 +172,7 @@ limitation and future implementations
 - leeflet touring machine issue
 - dataset
 
-## 7. Credit
+## 7. Credits
 
 We have to give both visual and data-set credits below.
 
