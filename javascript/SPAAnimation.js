@@ -1,18 +1,18 @@
-// show app brief through the barIcon
+// show landing page through the barIcon
 document.querySelector("#barIcon").addEventListener("click", function () {
   let page = document.querySelector("#appBrief");
   page.classList.remove("hideLeft");
   page.classList.add("show");
 });
 
-// //hide app brief through grey area
+//hide landing page through grey area
 document.querySelector("#appBriefHide").addEventListener("click", function () {
   let page = document.querySelector("#appBrief");
   page.classList.remove("show");
   page.classList.add("hideLeft");
 });
 
-//hide app brief thru x button
+//hide landing page thru x button
 document
   .querySelector("#closeAppBriefBtn")
   .addEventListener("click", function () {
@@ -28,7 +28,7 @@ document.querySelector("#drugAdvisorBtn").addEventListener("click", function () 
   page.classList.add("show");
 });
 
-//hide drug page through back button
+//hide drug advisor page
 document
   .querySelector("#closeAdvisorPage")
   .addEventListener("click", function () {
@@ -38,7 +38,6 @@ document
   });
 
   let allButtons = document.querySelectorAll("#drugNavBar button");
-  // console.log(allButtons);
   for (let btn of allButtons) {
     btn.addEventListener("click", function (event) {
       for(let btn of allButtons){
@@ -49,7 +48,6 @@ document
       //data-page="1";
       //dataset = {page: '1'};
       let pageNumber = selectedBtn.dataset.page;
-      // console.log("click pagenumber" + pageNumber);
   
       let pages = document.querySelectorAll(".page");
       for (let p of pages) {

@@ -44,5 +44,3 @@ async function extractAddressForSearch() {
   }
   return pharmacySearchArrayData;
 }
-
-// let searchDatabase = await extractAddressForSearch();
