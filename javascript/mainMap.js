@@ -152,9 +152,13 @@ const userLocationOptions = {
   maximumAge: 0
 };
 
+//leave spinner element as a global varibale to be accessed later
+let spinner = document.querySelector("#nearMeSpinner");
+
 //return error message if unable to get user's location
 function error(err) {
   console.warn(`ERROR(${err.code}): ${err.message}`);
+  spinner.classList.remove("displaySpinner");
   alert("Please allow us to access your location to find the pharmacy near you!")
 }
 
@@ -177,16 +181,16 @@ async function mainMap() {
       let searchDataArray = await extractAddressForSearch();
       let searchResultLayer = L.layerGroup();
 
-      //leave spinner element as a global varibale to be accessed later
-      let spinner = document.querySelector("#nearMeSpinner");
+      //if there is no access user location error, then draw routes
 
       //find the nearby pharmacy
       document.querySelector("#searchNearByBtn")
         .addEventListener("click", function () {
           spinner.classList.add("displaySpinner");
-
           //get user location 
           function success(pos) {
+            // becaust is running very fast
+            spinner.classList.add("displaySpinner");
             let crd = pos.coords;
             let lat = crd.latitude;
             let lng = crd.longitude;
@@ -280,7 +284,7 @@ async function mainMap() {
                 directionDivElement.addEventListener("click", function () {
                   spinner.classList.add("displaySpinner");
                   //get user location 
-                  function success(pos) {
+                  function success(pos) {    
                     let crd = pos.coords;
                     let staringLat = crd.latitude;
                     let startingLng = crd.longitude;

@@ -228,7 +228,7 @@
                     </nav>
 
                     <!-- symptom checker page -->
-                    <div class="page bg-light shadow p-3" id="page-1">
+                    <section class="page bg-light shadow p-3" id="page-1">
                         <div class="container d-flex flex-column align-items-center">
                             <h1 class="appLogo appLogoColor">pharmacy-pal</h1>
                             <h2>Symptom Checker</h2>
@@ -248,9 +248,7 @@
 
                             <article class="bg-light mt-5 d-flex flex-column align-items-center">
                                 <section id="symptomList" class="symptomList p-3 mt-2 text-center">
-
                                     <h3>My Symptoms</h3>
-
                                     <section class="symptomListBox">
                                         <div id="symptomBG" class="symptomBG">
                                             <i class="fa-solid fa-list-ul"></i>
@@ -260,21 +258,19 @@
                                         </div>
                                         <section id="symptomAdded" class="symptomAdded"></section>
                                     </section>
-
                                     <button id="diagnoseBtn" class="hideDiagnoseBtn btn btn-danger">Diagnose</button>
                                 </section>
                                 <!-- data input if there are symptoms selected -->
                                 <div class="validationResult" id="symptomsValidationResult"></div>
-
                                 <div id="downArrowIcon" class="d-none mt-4"><i class="fa-solid fa-angle-down"></i></div>
                                 <section id="diseaseList" class="mt-3 p-4"></section>
                                 <div class="loader" id="diseaseResultLoader"></div>
                                 <section id="diseaseDescription" class="mt-3 p-4"></section>
                             </article>
                         </div>
-                    </div>
+                    </section>
 
-                    <div class="page bg-light shadow p-3 hidden" id="page-2">
+                    <section class="page bg-light shadow p-3 hidden" id="page-2">
                         <div class="container d-flex flex-column align-items-center">
                             <h1 class="appLogo appLogoColor">pharmacy-pal</h1>
                             <h2>Drug Match-Disease</h2>
@@ -315,9 +311,9 @@
                             </article>
 
                         </div>
-                    </div>
+                    </section>
 
-                    <div class="page bg-light shadow p-3 hidden" id="page-3">
+                    <section class="page bg-light shadow p-3 hidden" id="page-3">
                         <div class="container d-flex flex-column align-items-center">
                             <h1 class="appLogo appLogoColor">pharmacy-pal</h1>
                             <h2>Side-Effects Monitor</h2>
@@ -358,35 +354,10 @@
                             </article>
 
                         </div>
-
-                    </div>
+                    </section>
                 </div>
-
-
-                <!-- <h1>Check if an OTC drug is available</h1>
-                <input id="queryDrugNameInput" class="form-control" type="text" placeholder="search by drug name...">
-                <button id="searchDrugBtn" class="btn btn-primary">Search</button>
-                <section id="autoComplete"></section>
-                <section id="drugContent"></section> -->
             </article>
         </aside>
-
-        <!-- e-pharmacy page
-        <aside id="ePharmacyPage" class="greyContainer hideLeft">
-            <article class="primaryPageBackground p-4">
-                <div id="ePharmacyBackBtn" class="display-6 text-secondary">
-                    <i class="fa-solid fa-arrow-left"></i>
-                    back
-                </div>
-                <h1>List of legit e-pharmacy in Singapore</h1>
-
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt aliquid, ab enim consectetur
-                    voluptate
-                    commodi accusamus magni corporis! Deleniti esse, assumenda repellat optio alias iure ipsum illo sunt
-                    officia
-                    magni.</p>
-            </article>
-        </aside> -->
     </main>
 
     <!-- boostrap 5 JS -->
@@ -395,6 +366,7 @@
         crossorigin="anonymous"></script>
     <!-- lordicon icon -->
     <script src="https://cdn.lordicon.com/lusqsztk.js"></script>
+    
     <!-- leaflet JS package-->
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
         integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
