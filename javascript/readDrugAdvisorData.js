@@ -2,7 +2,7 @@
 async function readSymptomsData() {
     let response;
     try {
-        response = await axios.get("../localData/diseaseAndSymptoms.csv");
+        response = await axios.get("./localData/diseaseAndSymptoms.csv");
         return response.data.split("\r\n");
     } catch (error) {
         console.log("Unable to read local diseaseAndSymptoms.csv file");
