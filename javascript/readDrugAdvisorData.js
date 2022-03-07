@@ -1,4 +1,3 @@
-
 /*utility for symptom checker page */
 async function readSymptomsData() {
     let response;
@@ -10,6 +9,22 @@ async function readSymptomsData() {
         return [];
     }
 
+}
+
+//trim and remove empty spaces
+function trimArray(arrayData) {
+    let finalResults = [];
+    for (let el of arrayData) {
+        oneArray = [];
+        for (let string of el) {
+            let oneString = string.trim();
+            if (oneString !== "") {
+                oneArray.push(oneString);
+            }
+        }
+        finalResults.push(oneArray);
+    }
+    return finalResults;
 }
 
 function symptomsDataTransform(results) {
@@ -27,33 +42,21 @@ function symptomsDataTransform(results) {
         arrayData.push(el.split(","));
     }
 
-    //trim and remove empty spaces
-    for (let el of arrayData) {
-        oneArray = [];
-        for (let string of el) {
-            let oneString = string.trim();
-            if (oneString !== "") {
-                oneArray.push(oneString);
-            }
-        }
-        finalResults.push(oneArray);
-    }
+    finalResults = trimArray(arrayData);
 
     //making final objects
     //[{disease: symptoms..},{...}]
     let objArray = [];
     for (el of finalResults) {
         let diseaseName = el[0];
-        // console.log(diseaseName)
         let symptoms = el.slice(1);
 
-        //create symptom for searching
+        //create unique symptom set for searching
         for (oneSymptom of symptoms) {
             symptomsSet.add(oneSymptom);
         }
         let obj = {};
         obj[diseaseName] = symptoms;
-        // console.log(obj);
         objArray.push(obj);
     }
 
@@ -121,17 +124,17 @@ async function getImage(diseaseName) {
         });
 
         //return medium image size url
-        try{
+        try {
             return response.data.photos[0].src.medium;
-        } catch(error) {
+        } catch (error) {
             console.log(error);
             //return sample image
             return "./images/pharmacy.png";
         }
-        
+
     }
     catch (error) {
-        catchStatusCodeError(error,"#symptomsValidationResult", "Pexels Picture API" );
+        catchStatusCodeError(error, "#symptomsValidationResult", "Pexels Picture API");
         return "";
     }
 }
