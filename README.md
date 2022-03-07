@@ -7,26 +7,19 @@ Access the live demo [here](https://jerrysuper123.github.io/pharmacy-pal/).
 ## Summary
 
 ### Project Context
-Covid19 has strained Singapore's medical system. To avoid infection hotspots (i.e. clinics or hospitals), many netizens seek help from pharmacies when falling ill. When Googling for nearby pharmacies, the search results might not always be accurate, with clinics and hospitals mixing in.
+Inevitably, Covid19 has strained Singapore's healthcare system. Also to avoid infection hotspots (i.e. clinics or hospitals), many netizens now seek help from pharmacies when falling ill. However, when Googling for nearby pharmacies, the search results might not always be satisfactory, with clinics and hospitals mixing in.
 
 In addition, many also started using online sources to do their own symptom diagnosis, at times purchasing drugs on their own. This has paved way for the rising of [illegal online pharmacies](https://www.straitstimes.com/singapore/courts-crime/the-rise-of-illegal-online-pharmacies) in Singapore, definitely a cause for concern.
 
-### value proposition
-Pharmacy-pal is designed to aid "self-care through pharmacy" in the midst of Covid19. Not only does the it gives the direction for the nearby pharmcy in addition to registered pharmacist info, it also helps you on symptom diagnosis & medication recommendation.
+### Value proposition and objective
+Pharmacy-pal is designed to aid "self-care through pharmacy" in the midst of Covid19. Not only does the it gives the direction for the nearby pharmacy together with the pharmacist info, it also provides symptom diagnosis & medication recommendation.
 
 ## 1. Strategy
 This section mainly discusses: 
-- Creator's objective and users' needs match-fit
+- App creator's objective and users' needs match-fit
 - Users' pain points and app features designed to resolve them
 
-### Objective
-This app is designed to help people who want to:
-
-- Find locations of registered pharmacies, along with pharmacist info
-- Do symptom diagnosis and medication search-up
-
 ### target market
-
 Our target groups could be divided into:
 
 1. basic users
@@ -47,11 +40,11 @@ Those who only want to find nearby drugstore.
 
 - For many citizens, self-care through pharmacy store has become more viable in the midst of Covid19, especially for the fear of virus infection at hot spots - clinics and hospitals.
 
-- Google allows for pharmacy location search but its search return also includes non-pharmacy results. So this app provides geolocation of registered pharmacy under the Singapore government.
+- Google allows for pharmacy location search but its search return also includes non-pharmacy results. So this app provides a pure list of registered pharmacies under government.
 
-- With many people visiting pharmacy, some might require symptom diagnosis and medication recommendation before meeting the pharmacist for a more fruitful discussion.
+- With many people visiting pharmacies, some require symptom diagnosis and medication recommendation before meeting the pharmacist for a more fruitful discussion.
 
-- In addition, there is a need to know the registered pharmacist serving in drug store and also to know their experience before consulting them
+- Some might to know the registered pharmacist in service before making the physical trips, rather than accepting cashiers' advices in the drug store.
 
 ### User Stories
 The user stories is based on the aforementioned pain points. Access the list [here](https://github.com/Jerrysuper123/pharmacy-pal/blob/main/READMESources/userStory.pdf).
@@ -70,19 +63,19 @@ It would be based on the aforementioned features.
 
 ### Content
 The main content comes from the following sources:
-- Pharmacy location and pharmacist name displayed on the map
-- Display appropriate diseases matched to symptoms
-- Display appropriate drugs matched to diseases
-- Display charts of drug side effects trend
+- Display pharmacy location and pharmacist name on the map
+- Suggest appropriate diseases matched to symptoms
+- Offer appropriate drugs matched to diseases
+- Plot charts of drug side effects trend
 
-For more details on info content, refer to the credits section below for the list of data sources  used.
+For more details on info content, refer to the credits section below for the list of data sources used.
 
 ### Non-functional
-- The app should be mobile responsive, as users might bring their phone to search for pharmacy location.
+- The app should be mobile responsive, as users might on the go towards the pharmacy location.
 - When in mobile format, the screen should have less buttons to prevent accidental press.
 
 ## 3. Structure
-Adopt a tree information structure, with the map as the home page.
+Opted for a tree information structure, with the map as the home page.
 
 ![site map](./READMESources/siteMap.jpeg)
 
@@ -153,7 +146,7 @@ The deployment is done through Github with the instructions [here](https://gist.
 ## 9. Limitations and future implementations
 - [Use passive event listener](https://web.dev/uses-passive-event-listeners/) - not implemented currently, but could significantly improve the mobile scrolling experience especally on a map
 
-- Leeflet Routing Machine is an open-source project, not suitable for production use. Its server could be stopped without prior notice. To commercialize this project, we might consider paid services.
+- Leeflet Routing Machine is an open-source project, not suitable for production use. Its server could be halted without prior notice. To commercialize this project, we might consider paid services.
 
 - The disease and symptom dataset is rather small - less than 50 disease types currently. To improve the predictive accuracy, we might need a larger dataset or implement a back-end server to collect users' info. 
 
@@ -173,12 +166,12 @@ DataSets:
 
 2. [Liscensed pharmacists API from data.gov.sg](https://data.gov.sg/dataset/listing-of-licensed-pharmacies) - to identify the names of the registered pharmacists
 
-2. [Kaggle disease symptom CSV dataset - credit to Pranay Patil](https://www.kaggle.com/itachi9604/disease-symptom-description-dataset) - to predict users' conditions/diseases based on symptoms selected
+3. [Kaggle disease symptom CSV dataset - credit to Pranay Patil](https://www.kaggle.com/itachi9604/disease-symptom-description-dataset) - to predict users' conditions/diseases based on symptoms selected
 
-2. [Wikipedia API](https://www.mediawiki.org/wiki/API:Main_page) - to retrieve the extract of disease info to display to users
+4. [Wikipedia API](https://www.mediawiki.org/wiki/API:Main_page) - to retrieve the extract of disease info to display to users
 
-2. [Pexels API](https://www.pexels.com/api/) - to retrieve disease image and display to users
+5. [Pexels API](https://www.pexels.com/api/) - to retrieve disease image and display to users
 
-2. [Disease match drug API from Open FDA](https://open.fda.gov/apis/drug/label/) - to match drug for users' conditions
+6. [Disease match drug API from Open FDA](https://open.fda.gov/apis/drug/label/) - to match drug for users' conditions
 
-2. [Adverse events data API from Open FDA](https://open.fda.gov/apis/drug/event/) - to plot the trends of drug side effects reported on charts
+7. [Adverse events data API from Open FDA](https://open.fda.gov/apis/drug/event/) - to plot the trends of drug side effects reported on charts
