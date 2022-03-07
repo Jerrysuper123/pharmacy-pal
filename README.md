@@ -133,26 +133,40 @@ second most important search features
 last is search drugs and e-pharmacy
 
 ## 5. Surface - visual design
-
-why this design etc
-![icon]()
-
+### Colors
+As this is a medical app, we have chosen colors resembling hospital or medical theme below.
 ![Color](./READMESources/color.png)
 
-The app should adopt warm color - gives uses some hope, especially for those who are ill.
+Using the above color wheel, we have set the colors in the _constant.scss file to be global variables, to be used consistently through the application.
+- ColorPrimary is used the mostly throughout the app, including the app logo design, most of the icons used, and the theme of the displayed charts (See below)
+- ColorAccentThree is mostly used as the background color e.g. the drug advisor page background color.
+- The rest of the colors are also widely used, but mostly as supporting hues.
+```
+/* color setting */
+$colorPrimary: #ab5e69;
+$colorSecondary: #c2fbcd;
+$colorAccentOne: #F7c1c9;
+$colorAccentTwo: #E0ffe7;
+$colorAccentThree: #8fb095;
+```
 
-The app will also adopt a more offcial them, not too fancy color or front.
+PrimaryColor consistency
+![color](./READMESources/primaryColorUsage.png)
 
-Font
+### Font
+
+Font pair - Lora and Roboto 
+
+Although they’re two sans serifs, but the imperfect/perfect pairing of their character sets creates a good balance. This would work really well in giving a youthful and trustworthy vibe.
 
 ![font](https://elementor.com/cdn-cgi/image/f=auto,w=720/marketing/wp-content/uploads/sites/9/2020/11/4-Archivo-Black_Roboto.png)
 
-Archivo Black & Roboto
-Here we have a pairing of two sans serif fonts. Archivo Black is a grotesque sans serif, which makes it feel slightly imperfect compared to the neo-grotesque and geometric styling of Roboto.
-
-This is a great example of how to use fonts in concord with one another. Yes, they’re two sans serifs, but the imperfect/perfect pairing of their character sets creates a good balance. This would work really well in giving an ecommerce site a youthful and trustworthy vibe.
-
-Icon
+Against, in the _constant.scss file, we have set below font variables to be used consistently.
+```
+/* font family and size setting */
+$headerFront: 'Lora', serif;
+$bodyTextFront: 'Roboto', sans-serif;
+```
 
 ## 6. technology stack
 ### Stack used:
@@ -175,6 +189,7 @@ Icon
 | Linear algorithm to calculate the shortest distance between two nodes  | Display nearest pharmacy to user, but time complexity could be improved |
 
 ## 7. testing
+Click [here]() for the detailed test list.
 
 ## 8. deployment
 The deployment is done through Github with the instructions [here](https://gist.github.com/TylerFisher/6127328).
