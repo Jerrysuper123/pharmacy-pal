@@ -155,16 +155,27 @@ This is a great example of how to use fonts in concord with one another. Yes, th
 Icon
 
 ## 6. technology stack
+### Stack used:
 
-table here
+| Tech  | Usage |
+| ------------- | ------------- |
+| HTML, CSS, vanilla Javascript, Bootstrap 5  | Build the main frame of the website  |
+| SASS  | Organize and structure css  |
+| [Axios](https://axios-http.com/docs/intro)  | Call APIs  |
+| [Leaflet](https://leafletjs.com/)  | Create map and markers  |
+| [Leaflet routing machine](https://www.liedman.net/leaflet-routing-machine/)  | Draw routes on the map |
+| Fontawesome  | Place icons throughout the site  |
 
-Algorithm used
-
+### Algorithm used:
+| Algorithm  | Usage |
+| ------------- | ------------- |
+| [Check if an array is a subset of another](https://www.geeksforgeeks.org/find-whether-an-array-is-subset-of-another-array-set-1/)  | Match symptoms selected to disease types  |
+| Linear algorithm to calculate the shortest distance between two nodes  | Display nearest pharmacy to user, but time complexity could be improved |
 
 ## 7. testing
 
 ## 8. deployment
-Github
+The deployment is done through Github with the instructions [here](https://gist.github.com/TylerFisher/6127328).
 
 ## 9. Limitations and future implementations
 - [Use passive event listener](https://web.dev/uses-passive-event-listeners/) - not implemented currently, but could significantly improve the mobile scrolling experience especally on a map
