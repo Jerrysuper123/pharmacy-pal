@@ -121,10 +121,12 @@ site map
 
 Briefly describe the structure ****
 
-![site map](sitemap.png)
+![site map](./READMESources/siteMap.jpeg.png)
 
 ## 4. Skeleton
 Access the wireframes for mobile, tablet, and laptop display for the website here.****
+
+![wireframe](./READMESources/wireframe.pdf)
 
 most important is map to make it the background
 
