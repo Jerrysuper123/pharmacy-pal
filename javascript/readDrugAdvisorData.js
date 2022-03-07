@@ -129,7 +129,7 @@ async function getImage(diseaseName) {
         } catch (error) {
             console.log(error);
             //return sample image
-            return "../images/pharmacy.png";
+            return "./images/pharmacy.png";
         }
 
     }
