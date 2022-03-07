@@ -7,16 +7,16 @@ Access the live demo [here](https://jerrysuper123.github.io/pharmacy-pal/).
 ## Summary
 
 ### Project Context
-Covid19 has strained Singapore's medical system. To avoid infection hotspots (i.e. clinics or hospitals), many seek help from pharmacies when falling ill. When Googling for nearby pharmacist, the search results might not always be accurate, especially for pharmacies.
+Covid19 has strained Singapore's medical system. To avoid infection hotspots (i.e. clinics or hospitals), many netizens seek help from pharmacies when falling ill. When Googling for nearby pharmacies, the search results might not always be accurate, with clinics and hospitals mixing in.
 
-In addition, many also started using online sources to do their own symptom diagnosis, at times purchasing drugs on their own.
+In addition, many also started using online sources to do their own symptom diagnosis, at times purchasing drugs on their own. This has paved way for the rising of [illegal online pharmacies](https://www.straitstimes.com/singapore/courts-crime/the-rise-of-illegal-online-pharmacies) in Singapore, definitely a cause for concern.
 
 ### value proposition
-Pharmacy-pal is designed to aid "self-care through pharmacy" in the midst of Covid19. Not only does the it gives the the direction for the nearby pharmcy, it also helps you on symptom diagnosis & medication recommendation.
+Pharmacy-pal is designed to aid "self-care through pharmacy" in the midst of Covid19. Not only does the it gives the direction for the nearby pharmcy in addition to registered pharmacist info, it also helps you on symptom diagnosis & medication recommendation.
 
 ## 1. Strategy
 This section mainly discusses: 
-- creator's objective and users' needs match-fit
+- Creator's objective and users' needs match-fit
 - Users' pain points and app features designed to resolve them
 
 ### Objective
@@ -27,7 +27,7 @@ This app is designed to help people who want to:
 
 ### target market
 
-Our target groups could be further divided:
+Our target groups could be divided into:
 
 1. basic users
 
@@ -45,13 +45,13 @@ Those who only want to find nearby drugstore.
 
 ### Needs and pain points
 
-- COVID-19 has strained Singapore's hospital system. For many citizens, self-care through pharmacy store has become more viable, especially for the fear of virus infection at hot spots - clinics and hospitals.
+- For many citizens, self-care through pharmacy store has become more viable in the midst of Covid19, especially for the fear of virus infection at hot spots - clinics and hospitals.
 
-- Google allows for pharmacy location search but its search return also includes non-pharmacy results. So this app provide geo location of registered pharmacy under the Singapore government.
+- Google allows for pharmacy location search but its search return also includes non-pharmacy results. So this app provides geolocation of registered pharmacy under the Singapore government.
 
 - With many people visiting pharmacy, some might require symptom diagnosis and medication recommendation before meeting the pharmacist for a more fruitful discussion.
 
-- In addition, some people might want to know the registered pharmacist at certain drug store and also to know their experience before consulting them
+- In addition, there is a need to know the registered pharmacist serving in drug store and also to know their experience before consulting them
 
 ### User Story
 
@@ -59,7 +59,7 @@ Basic users:
 
 - As I user who works from home, I want to get to nearby pharmacy to get drugs instead of going to clinics or hospitals.
 
-- As a user, I want to search for pharmacy in different areas, so that I could make recommendations to my parents.
+- As a user, I want to search for pharmacies in different areas, so that I could make recommendations to my parents.
 
 Super users:
 
@@ -69,15 +69,15 @@ Super users:
 
 - As a user, I want to search for some medications for my conditions, so that I could understand more about drugs that might be suitable for me.
 
-- As a user, I want to search for the side effects of drugs, so that I could have a peace of mind when pharmacists prescibe some drugs to me.
+- As a user, I want to search for the side effects of drugs, so that I could have a peace of mind when pharmacists prescibe the medications.
 
 ### Features based on user story
 
-1. Display the route from user's location to the nearest pharmacist
-2. Provide pharmacist names based on location
+1. Display the route from user's location to the nearest pharmacy
+2. Provide pharmacists' names based on locations
 3. Offer symptom diagnosis and description of possible conditions
 4. Recommend possible medications for the users' conditions
-5. Display the drug side effects over time to users
+5. Display the drug side effects statistics to users
 
 ## 2. Scope
 ### Functional specification
@@ -93,28 +93,17 @@ The main content comes from the following sources:
 For more details on info content, refer to the credits section below for the list of datasources used.
 
 ### Non-functional
-- The app should be both mobile responsive, as users might bring their phone to search for pharmacy location
+- The app should be mobile responsive, as users might bring their phone to search for pharmacy location.
 - When in mobile format, the screen should have less buttons to prevent accidental press.
 
 ## 3. Structure
-
-Adopt a tree information structure, centre on the map itself
-site map
-
-Briefly describe the structure ****
+Adopt a tree information structure, with the map as the home page.
 
 ![site map](./READMESources/siteMap.jpeg)
 
 ## 4. Skeleton
-Access the wireframes for mobile, tablet, and laptop display for the website here.****
 
 ![wireframe](./READMESources/wireframe.png)
-
-most important is map to make it the background
-
-second most important search features
-
-last is search drugs and e-pharmacy
 
 ## 5. Surface - visual design
 ### Colors
@@ -137,9 +126,7 @@ $colorAccentThree: #8fb095;
 PrimaryColor consistency
 ![color](./READMESources/primaryColorUsage.png)
 
-### Font
-
-Font pair - Lora and Roboto 
+### Font pair - Lora and Roboto 
 
 Although they’re two sans serifs, but the imperfect/perfect pairing of their character sets creates a good balance. This would work really well in giving a youthful and trustworthy vibe.
 
