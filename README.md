@@ -12,7 +12,7 @@ Reportedly, Covid19 has strained many countries' healthcare system. While in Sin
 Inevitably, many also start using online sources to do symptom diagnosis, at times purchasing drugs on their own. This has paved way for the rising of [illegal online pharmacies](https://www.straitstimes.com/singapore/courts-crime/the-rise-of-illegal-online-pharmacies), definitely a cause for concern.
 
 ### Value proposition and objective
-Pharmacy-pal is designed to aid "self-care through pharmacy" in the pandemic. Not only does it provide the direction for the nearby pharmacy, it also offers symptom diagnosis & medication recommendation.
+Pharmacy-pal is designed to aid "self-care through pharmacy" in the pandemic. Not only does it provide the direction for the legitimate nearby pharmacy, it also offers symptom diagnosis & medication recommendation.
 
 ## 1. Strategy
 This section mainly discusses: 
@@ -41,7 +41,7 @@ Those who wants to get information on the pharmacist's background and require sy
 
 - For many citizens, self-care through pharmacy has become a norm, but they are not getting adequate services compared to clinics and hospitals.
 
-- Google's search results do not yield a pure-pharmacy list, confusing for many. In fact, many times there is a drug store within 1 KM, but the search result recommends a distance location.
+- Google's search results do not yield a pure-pharmacy list, confusing for many. In fact, many times there is a drug store within 1 KM, but the search result recommends a distant location.
 
 - With many people visiting pharmacies, some require symptom diagnosis and medication recommendation before meeting the pharmacist for a more fruitful discussion.
 
