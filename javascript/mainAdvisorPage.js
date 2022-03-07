@@ -1,8 +1,5 @@
-
-
 // credit: https://www.geeksforgeeks.org/find-whether-an-array-is-subset-of-another-array-set-1/
-// check if an array is subset of another
-// Return true if arr2[] is a subset of arr1[] 
+// check if an array is subset of another, return true if arr2 is a subset of arr1
 function isSubSet(arr1, arr2, m = arr1.length, n = arr2.length) {
   let s = new Set();
   for (let i = 0; i < m; i++) {
@@ -19,14 +16,84 @@ function isSubSet(arr1, arr2, m = arr1.length, n = arr2.length) {
   else {
     return false;
   }
+};
+
+function getDiseaseDescriptionHTMLString(title, bodyText, image) {
+  return `
+        <h1 class="text-center drugDetailHeader">${title}</h1>
+        <img src=${image} class="diseaseImage" alt=${title}/>
+        <p class="bodyDetailHeader">${bodyText}</p>
+                  `;
+};
+
+//create list item html string for innerHtml, used at symptom checker and drug match disease page
+function returnListItemString(elValue) {
+  let stringHTML = `
+    <span class="itemItem">${elValue}</span>
+    <i class="expandIcon fa-solid fa-angle-right"></i>`;
+  return stringHTML;
+}
+
+//when program load will alway click the first child of the a parent element
+function clickFirstChild(parentElement) {
+  let firstChild = parentElement.firstChild;
+  firstChild.classList.add("colorAccentTwoAndScale");
+  firstChild.click();
+}
+
+//when use click one item, change its color and greyout the rest
+//1 arg is the item class, 2 arg is the event (being clicked);
+function addColorScaleToOneElementOnly(elementClass, event) {
+  let currentElement = event.target;
+  elementClassQuerySelector = `.${elementClass}`;
+  let items = document.querySelectorAll(elementClassQuerySelector);
+  for (let el of items) {
+    el.classList.remove("colorAccentTwoAndScale");
+  }
+  if (currentElement.classList[0] === elementClass) {
+    currentElement.classList.add("colorAccentTwoAndScale")
+  } else {
+    let parentElement = currentElement.parentElement;
+    if (parentElement.classList[0] === elementClass) {
+      parentElement.classList.add("colorAccentTwoAndScale");
+    }
+  }
 }
 
 
+//create an array for values of class elements selected
+function createArrayForSelectedItems(className) {
+  let elementsSelected = document.querySelectorAll(className);
+  let resultsArray = [];
+  for (let el of elementsSelected) {
+    resultsArray.push(el.innerHTML);
+  }
+  return resultsArray;
+}
+
+function getMatchedConditions(diseaseSymptomArray, symptomArray) {
+  let arrayResult = [];
+  let count = 0;
+  for (let el of diseaseSymptomArray) {
+    let arr1 = Object.values(el)[0];
+    let arr2 = symptomArray;
+    //check if symptomArray is a subset of diseaseSymptomArray
+    if (isSubSet(arr1, arr2)) {
+      //find max 3 matched items for time complexity optimization, arryResult=[{disease: symptom},{disease: symptom}...]
+      if (count === 3) break;
+      arrayResult.push(el);
+      count++;
+    }
+  }
+  return arrayResult;
+}
+
+/**event listener starts here**/
 async function mainAdvisorPage() {
   window.addEventListener("DOMContentLoaded", async function () {
-    //fill in the chart with sample vaccine data
+    //fill in the charts with sample vaccine data
     document.querySelector("#searchEffectBtn").click();
-    
+
     /*Landing page - for users to hide the page or click get direction to nearby pharmacy */
     document.querySelector("#landPageBtn")
       .addEventListener("click", function () {
@@ -35,7 +102,7 @@ async function mainAdvisorPage() {
       })
 
     /*symptom checker page*/
-    //load the data first [disease-symptom object dataset, symptom set]
+    //load the data first into [disease-symptom object dataset, symptom set], to be used later
     let symptomData = [];
     let symptomSearchResults = document.querySelector("#symptomSearchResults");
 
@@ -50,6 +117,7 @@ async function mainAdvisorPage() {
         searchInput.classList.add("borderRadiusNone");
       })
 
+    //for user to search, find, add symptoms to the symptom list
     document.querySelector("#searchSymptomInput")
       .addEventListener("keypress", function () {
         let searchSymptomString = document.querySelector("#searchSymptomInput").value;
@@ -68,11 +136,11 @@ async function mainAdvisorPage() {
             let symptomBG = document.querySelector("#symptomBG");
             symptomBG.innerHTML = "";
 
-            //this addd border radius when user selected symptom
+            //remove border radius of the input element when user added symptom
             let searchInput = document.querySelector("#searchSymptomBtn");
             searchInput.classList.remove("borderRadiusNone");
 
-            //this shows the diagnose button when user clicked added symptom;
+            //show the diagnose button when user added symptom;
             document.querySelector("#diagnoseBtn").classList.remove("hideDiagnoseBtn");
 
             //below add symptoms to the symtomAdded basket
@@ -91,43 +159,28 @@ async function mainAdvisorPage() {
             });
             symptomAdded.appendChild(element);
           })
-
           symptomSearchResults.appendChild(oneSymptomElement)
         }
       })
 
+    //diagnose user's conditions when user clicked the diganose button
     document.querySelector("#diagnoseBtn")
       .addEventListener("click", function () {
 
-
-        let symptomElements = document.querySelectorAll(".symptomSelected");
-        let symptomArray = [];
-        for (let el of symptomElements) {
-          symptomArray.push(el.innerHTML);
-        }
+        let symptomArray = createArrayForSelectedItems(".symptomSelected");
 
         let validationSymptomEle = document.querySelector("#symptomsValidationResult");
-        //validation on if uses have selected symptoms
+        //check if users have selected any symptoms
         if (symptomArray.length === 0) {
           validationSymptomEle.innerHTML = "You have not selected any symptoms!"
         } else {
           validationSymptomEle.innerHTML = "";
-          //check if symptomArray is a subset of diseaseSymptomArray
-          //find only 3 matched item for time optimization [{disease: symptom}]
-          let arrayResult = [];
-          let count = 0;
-          for (let el of diseaseSymptomArray) {
-            let arr1 = Object.values(el)[0];
-            let arr2 = symptomArray;
-            if (isSubSet(arr1, arr2)) {
-              if (count === 3) break;
-              arrayResult.push(el);
-              count++;
-            }
-          }
+
+          //Search for matched conditions to user's symptoms
+          let arrayResult = getMatchedConditions(diseaseSymptomArray, symptomArray);
 
 
-          // extract key and put it into an array
+          // extract disease key and put it into an array
           let diseaseArray = [];
           for (let el of arrayResult) {
             let diseaseName = Object.keys(el)[0];
@@ -139,90 +192,44 @@ async function mainAdvisorPage() {
             validationSymptomEle.innerHTML = "You symptoms did not match any conditions in our database. Choose your symptoms again!"
           } else {
             validationSymptomEle.innerHTML = "";
-
             let diseaseList = document.querySelector("#diseaseList");
             diseaseList.innerHTML = "";
 
-            //adding downarrowicon when user clicked diagnose
+            //UI UX: adding down arrow icon when user clicked the diagnose button
             let downArrowIcon = document.querySelector("#downArrowIcon");
             downArrowIcon.classList.remove("d-none");
 
+            //search for image and description of matched conditions/diease, to be displayed later
             for (let el of diseaseArray) {
               let diseaseElement = document.createElement('div');
               diseaseElement.innerHTML = returnListItemString(el);
-
               diseaseElement.classList.add("listItemDesign");
 
-
-              //retrieve the condition title, text and image
+              //retrieve the disease title, body text and image
               diseaseElement.addEventListener("click", async function (event) {
                 addColorScaleToOneElementOnly("listItemDesign", event);
                 let diseaseDescription = document.querySelector("#diseaseDescription");
                 diseaseDescription.innerHTML = "";
+                //add spinner for side effects
                 let spinner = document.querySelector("#diseaseResultLoader");
                 spinner.classList.add("displaySpinner");
                 let titleBodyImg = await getTitleBodyImg(el);
                 spinner.classList.remove("displaySpinner");
 
                 diseaseDescription.innerHTML = "";
-                diseaseDescription.innerHTML = `
-            <h1 class="text-center drugDetailHeader">${titleBodyImg[0][0]}</h1>
-            <img src=${titleBodyImg[1]} class="diseaseImage" alt=${titleBodyImg[0][0]}/>
-            <p class="bodyDetailHeader">${titleBodyImg[0][1]}</p>
-          `;
+                let diseaseTitle = titleBodyImg[0][0];
+                let diseaseBodyText = titleBodyImg[0][1];
+                let diseaseImage = titleBodyImg[1];
+                diseaseDescription.innerHTML = getDiseaseDescriptionHTMLString(diseaseTitle, diseaseBodyText, diseaseImage);
               })
               diseaseList.appendChild(diseaseElement);
             }
-
-            //click the first condition to show its details
+            //click the first disease to show its details to users
             clickFirstChild(diseaseList);
-
           }
-
         }
-
-
       })
-
-
   })
-
-  //create list item html string for inner html
-  function returnListItemString(elValue) {
-    let stringHTML = `
-  <span class="itemItem">${elValue}</span>
-    <i class="expandIcon fa-solid fa-angle-right"></i>`;
-    return stringHTML;
-  }
-
-  //when program load will alway click the first child of the a parent element
-  function clickFirstChild(parentElement) {
-    let firstChild = parentElement.firstChild;
-    firstChild.classList.add("colorAccentTwoAndScale");
-    firstChild.click();
-  }
-
-
-  //when use click one item, change its color and greyout the rest
-  //1 arg is the item class, 2 arg is the event (being clicked);
-  function addColorScaleToOneElementOnly(elementClass, event) {
-    let currentElement = event.target;
-    elementClassQuerySelector = `.${elementClass}`;
-    let items = document.querySelectorAll(elementClassQuerySelector);
-    for (let el of items) {
-      el.classList.remove("colorAccentTwoAndScale");
-    }
-    if (currentElement.classList[0] === elementClass) {
-      currentElement.classList.add("colorAccentTwoAndScale")
-    } else {
-      let parentElement = currentElement.parentElement;
-      if (parentElement.classList[0] === elementClass) {
-        parentElement.classList.add("colorAccentTwoAndScale");
-      }
-    }
-  }
-
-
 
   //Drug match-disease page
   document.querySelector("#searchMatchDrugBtn")
