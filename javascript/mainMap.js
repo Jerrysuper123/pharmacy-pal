@@ -174,8 +174,8 @@ async function mainMap() {
   async function init() {
     let map = initMap();
 
-    let pharmacyIcon = createCustomMarkerIcon('../images/pharmacy.png')
-    let startingPointIcon = createCustomMarkerIcon("../images/start.png");
+    let pharmacyIcon = createCustomMarkerIcon('./images/pharmacy.png')
+    let startingPointIcon = createCustomMarkerIcon("./images/start.png");
 
     window.addEventListener("DOMContentLoaded", async function () {
       let searchDataArray = await extractAddressForSearch();

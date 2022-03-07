@@ -1,5 +1,5 @@
 async function extractAddressForSearch() {
-  let response = await axios.get("../localData/pharmacyLocation.geojson");
+  let response = await axios.get("./localData/pharmacyLocation.geojson");
   let pharmacistNames = await extractPharmacistData();
 
   let pharmacySearchArrayData = [];
