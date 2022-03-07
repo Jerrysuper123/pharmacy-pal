@@ -7,12 +7,12 @@ Access the live demo [here](https://jerrysuper123.github.io/pharmacy-pal/).
 ## Summary
 
 ### Project Context
-Reportedly Covid19 has strained many countries' healthcare system. While in Singapore, to avoid infection hotspots (i.e. clinics or hospitals), many netizens now seek help from pharmacies. However, when Googling for nearby pharmacies, clinics and hospitals often mix up with the results.
+Reportedly, Covid19 has strained many countries' healthcare system. While in Singapore, to avoid infection hotspots (i.e. clinics or hospitals), many netizens now seek help from pharmacies. However, when Googling for nearby pharmacies, clinics and hospitals often mix up with the results.
 
 Inevitably, many also start using online sources to do symptom diagnosis, at times purchasing drugs on their own. This has paved way for the rising of [illegal online pharmacies](https://www.straitstimes.com/singapore/courts-crime/the-rise-of-illegal-online-pharmacies), definitely a cause for concern.
 
 ### Value proposition and objective
-Pharmacy-pal is designed to aid "self-care through pharmacy" in the midst of Covid19. Not only does it provide the direction for the nearby pharmacy, it also offers symptom diagnosis & medication recommendation.
+Pharmacy-pal is designed to aid "self-care through pharmacy" in the pandemic. Not only does it provide the direction for the nearby pharmacy, it also offers symptom diagnosis & medication recommendation.
 
 ## 1. Strategy
 This section mainly discusses: 
@@ -30,6 +30,7 @@ Those who only want to find the nearby drugstore.
 - adequate IT literacy
 
 2. super users
+
 Those who wants to get information on the pharmacist's background and require symptom diagnosis & medication search-up.
 
 - aged 18 to 40
@@ -38,16 +39,16 @@ Those who wants to get information on the pharmacist's background and require sy
 
 ### Needs and pain points
 
-- For many citizens, self-care through pharmacy store has a norm, but they are not getting adequate services compared to clinics and hospitals.
+- For many citizens, self-care through pharmacy has become a norm, but they are not getting adequate services compared to clinics and hospitals.
 
-- Google's search result generate pure-pharmacy return, confusing for many. In fact, many times there is a drug store within 1 KM, but the search result returns a distance location.
+- Google's search results do not yield a pure-pharmacy list, confusing for many. In fact, many times there is a drug store within 1 KM, but the search result recommends a distance location.
 
 - With many people visiting pharmacies, some require symptom diagnosis and medication recommendation before meeting the pharmacist for a more fruitful discussion.
 
 - Many want to know the registered pharmacist in service before making the physical trips, rather than accepting cashiers' advices in store.
 
 ### User stories
-The user stories are based on the aforementioned pain points. Access the list [here](https://github.com/Jerrysuper123/pharmacy-pal/blob/main/READMESources/userStory.pdf).
+Based on the aforementioned pain points, access the user-story list [here](https://github.com/Jerrysuper123/pharmacy-pal/blob/main/READMESources/userStory.pdf).
 
 ### Features based on user story
 
@@ -55,24 +56,20 @@ The user stories are based on the aforementioned pain points. Access the list [h
 2. Provide pharmacists' names based on locations
 3. Offer symptom diagnosis and description of possible conditions
 4. Recommend possible medications for the users' conditions
-5. Display the drug side effects statistics to users
+5. Display the drug side-effect statistics to users
 
 ## 2. Scope
 ### Functional specification
 It would be based on the aforementioned features.
 
 ### Content
-The main content are as of follows:
-- Display pharmacy location and pharmacist's name on the map
-- Suggest appropriate diseases matched to symptoms
-- Offer appropriate drugs matched to diseases
-- Plot charts of drug side effects trend
+The main content are similar as described in the features section.
 
-For more details on info content, refer to the credits section below for the list of data sources used.
+For more details on info content used, refer to the credits section below for the list of data sources.
 
 ### Non-functional
 - The app should be mobile responsive, as users might be on the go towards the pharmacy location.
-- When in mobile format, the screen should have less buttons to prevent accidental press while walking.
+- When in mobile format, the screen should have less buttons/features to prevent accidental press while walking.
 
 ## 3. Structure
 Opted for a tree information structure, with the map as the home page.
@@ -89,7 +86,7 @@ As this is a medical app, we have chosen colors resembling hospital or medical t
 ![Color](./READMESources/color.png)
 
 Using the above color wheel, we have set the colors in the _constant.scss file to be global variables - to be used consistently through the application.
-- ColorPrimary is used the mostly throughout the app, including the app logo design, most of the icons used, and the theme of the displayed charts (see below)
+- ColorPrimary is used the mostly throughout the app, including the app logo design, icon color, and data chart theme (see below)
 - ColorAccentThree is mostly used as the background color e.g. the drug advisor page background color.
 - The rest of the colors are also widely used, but mostly as supporting hues.
 ```
@@ -106,11 +103,11 @@ PrimaryColor consistency
 
 ### Font pair - Lora and Roboto 
 
-Although they’re two sans serifs, but the imperfect/perfect pairing of their character sets creates a good balance. This would work really well in giving a youthful and trustworthy vibe.
+Although they are two sans serifs, but the imperfect/perfect pairing of their character sets creates a good balance. This would work really well in giving a youthful and trustworthy vibe.
 
 ![font](https://elementor.com/cdn-cgi/image/f=auto,w=720/marketing/wp-content/uploads/sites/9/2020/11/4-Archivo-Black_Roboto.png)
 
-Against, in the _constant.scss file, we have set below font variables to be used consistently.
+Against, in the _constant.scss file, we have set below font variables to be used globally.
 ```
 /* font family and size setting */
 $headerFront: 'Lora', serif;
@@ -128,7 +125,7 @@ $bodyTextFront: 'Roboto', sans-serif;
 | [Apexcharts](https://apexcharts.com/)  | Plot charts of drug side effects reported  |
 | [Leaflet](https://leafletjs.com/)  | Create map and markers  |
 | [Leaflet routing machine](https://www.liedman.net/leaflet-routing-machine/)  | Draw routes on the map |
-| Fontawesome  | Place icons throughout the site  |
+| Fontawesome  | Use icons throughout the site  |
 
 
 ### Algorithm used:
