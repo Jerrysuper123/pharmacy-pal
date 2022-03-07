@@ -53,23 +53,8 @@ Those who only want to find nearby drugstore.
 
 - In addition, there is a need to know the registered pharmacist serving in drug store and also to know their experience before consulting them
 
-### User Story
-
-Basic users:
-
-- As I user who works from home, I want to get to nearby pharmacy to get drugs instead of going to clinics or hospitals.
-
-- As a user, I want to search for pharmacies in different areas, so that I could make recommendations to my parents.
-
-Super users:
-
-- As a user, I want to do a simple diganosis on my symptoms before visting the pharmacy, so that I could have a more fruitful discussion with the pharmacist.
-
-- As a user, I want to know some background info of the pharmacist, so that I could get some recommendations over the counter.
-
-- As a user, I want to search for some medications for my conditions, so that I could understand more about drugs that might be suitable for me.
-
-- As a user, I want to search for the side effects of drugs, so that I could have a peace of mind when pharmacists prescibe the medications.
+### User Stories
+The user stories is based on the aforementined pain points. See the list here.
 
 ### Features based on user story
 
