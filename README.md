@@ -162,14 +162,16 @@ Icon
 | HTML, CSS, vanilla Javascript, Bootstrap 5  | Build the main frame of the website  |
 | SASS  | Organize and structure css  |
 | [Axios](https://axios-http.com/docs/intro)  | Call APIs  |
+| [Apexcharts](https://apexcharts.com/)  | Plot charts of drug side effects reported  |
 | [Leaflet](https://leafletjs.com/)  | Create map and markers  |
 | [Leaflet routing machine](https://www.liedman.net/leaflet-routing-machine/)  | Draw routes on the map |
 | Fontawesome  | Place icons throughout the site  |
 
+
 ### Algorithm used:
 | Algorithm  | Usage |
 | ------------- | ------------- |
-| [Check if an array is a subset of another](https://www.geeksforgeeks.org/find-whether-an-array-is-subset-of-another-array-set-1/)  | Match symptoms selected to disease types  |
+| [Check if an array is a subset of another array](https://www.geeksforgeeks.org/find-whether-an-array-is-subset-of-another-array-set-1/)  | Match symptoms selected to disease types  |
 | Linear algorithm to calculate the shortest distance between two nodes  | Display nearest pharmacy to user, but time complexity could be improved |
 
 ## 7. testing
