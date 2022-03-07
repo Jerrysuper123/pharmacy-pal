@@ -129,6 +129,7 @@ async function mainAdvisorPage() {
     document.querySelector("#landPageBtn")
       .addEventListener("click", function () {
         document.querySelector("#appBrief").classList.add("hideLeft");
+        document.querySelector("#appBrief").classList.remove("show");
         document.querySelector("#searchNearByBtn").click();
       })
 
