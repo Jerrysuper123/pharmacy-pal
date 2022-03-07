@@ -60,7 +60,6 @@ function addColorScaleToOneElementOnly(elementClass, event) {
   }
 }
 
-
 //create an array for values of class elements selected
 function createArrayForSelectedItems(className) {
   let elementsSelected = document.querySelectorAll(className);
@@ -86,6 +85,38 @@ function getMatchedConditions(diseaseSymptomArray, symptomArray) {
     }
   }
   return arrayResult;
+}
+
+function extractObjectKeysToArray(arrayResult) {
+  let diseaseArray = [];
+  for (let el of arrayResult) {
+    let diseaseName = Object.keys(el)[0];
+    diseaseArray.push(diseaseName);
+  }
+  return diseaseArray;
+}
+
+function getDrugDetailsHTMLString(drugName, purpose, detailedpurpose, admin, whenUse, stopUse, activeIngredient) {
+  return `
+        <h1 class="text-center drugDetailHeader">${drugName}</h1>
+          ${purpose}
+        <div class="bodyDetailHeader">
+          ${detailedpurpose}
+          ${admin}
+          ${whenUse}
+          ${stopUse}
+          ${activeIngredient}
+        </div>  
+            `
+}
+
+function updateChart(chart, newSeries, newSeriesName) {
+  chart.updateSeries([
+    {
+      name: newSeriesName,
+      data: newSeries,
+    },
+  ]);
 }
 
 /**event listener starts here**/
@@ -179,13 +210,8 @@ async function mainAdvisorPage() {
           //Search for matched conditions to user's symptoms
           let arrayResult = getMatchedConditions(diseaseSymptomArray, symptomArray);
 
-
           // extract disease key and put it into an array
-          let diseaseArray = [];
-          for (let el of arrayResult) {
-            let diseaseName = Object.keys(el)[0];
-            diseaseArray.push(diseaseName);
-          }
+          let diseaseArray = extractObjectKeysToArray(arrayResult);
 
           //if there is no disease matched, let user know
           if (diseaseArray.length === 0) {
@@ -231,13 +257,13 @@ async function mainAdvisorPage() {
       })
   })
 
-  //Drug match-disease page
+  /**Drug match-disease page**/
   document.querySelector("#searchMatchDrugBtn")
     .addEventListener("click", async function (event) {
       event.preventDefault();
 
       let drugResultsElement = document.querySelector("#drugResults");
-      // clear results when user search again
+      //clear results when user search again
       drugResultsElement.innerHTML = "";
 
       let drugDetailsElement = document.querySelector("#drugDetails");
@@ -251,7 +277,6 @@ async function mainAdvisorPage() {
       } else {
 
         let results = await getTransformedDrug(searchDrugString);
-
         // let user know if there is no matched results
         if (results.length === 0) {
           userErrorNote.innerHTML = `You condition did not match anything in our database.
@@ -269,53 +294,38 @@ async function mainAdvisorPage() {
             eachDrugElement.innerHTML = returnListItemString(drugName);
 
             eachDrugElement.addEventListener("click", function (event) {
-              // let purpose = drug.openfda.brand_name !==  undefined ? `<h1>${drug.openfda.brand_name[0]}</h1>` : "";
-
               addColorScaleToOneElementOnly("listItemDesign", event);
 
+              //check if API returns undefined value, if no, show to users
               let purpose = drug.purpose !== undefined ? `<p class="text-center">${drug.purpose[0]}</p>` : "";
               let detailedpurpose = drug.indications_and_usage !== undefined ? `<h2>Drug use</h2><p>${drug.indications_and_usage[0]}</p>` : "";
               let admin = drug.dosage_and_administration !== undefined ? `<h2>Admin</h2><p>${drug.dosage_and_administration[0]}</p>` : "";
               let whenUse = drug.when_using !== undefined ? `<h2>How to use</h2><p>${drug.when_using[0]}</p>` : "";
               let stopUse = drug.stop_use !== undefined ? `<p>${drug.stop_use[0]}</p>` : "";
               let activeIngredient = drug.active_ingredient !== undefined ? ` <h2>Ingredient</h2><p>${drug.active_ingredient[0]}</p>` : "";
-              drugDetailsElement.innerHTML = `
-                      <h1 class="text-center drugDetailHeader">${drugName}</h1>
-                         ${purpose}
-                      <div class="bodyDetailHeader">
-                       ${detailedpurpose}
-                    ${admin}
-                    ${whenUse}
-                      ${stopUse}
-                      ${activeIngredient}
-                      </div>
-                   
-                   
-            `;
+
+              drugDetailsElement.innerHTML = getDrugDetailsHTMLString(drugName, purpose, detailedpurpose, admin, whenUse, stopUse, activeIngredient);
             })
-
             drugResultsElement.appendChild(eachDrugElement);
-            //highlight the first child
-
+            //highlight the first drug
             clickFirstChild(drugResultsElement);
           }
         }
-
       }
-
     })
+
 
   let lineData = [];
   let barData = [];
 
-  //drug side effects page
+  /**drug side effect page**/
   document.querySelector("#searchEffectBtn").addEventListener("click", async function (event) {
     event.preventDefault();
     let searchEffectString = document.querySelector("#searchEffectString").value;
     let sideEffectUserNote = document.querySelector("#drugSideEffectsValidationResult");
     sideEffectUserNote.innerHTML = "";
 
-    /*first load vaccine dummy data, the default is an empty string, so show no error message */
+    /*first load vaccine dummy data,   the default is an empty string, so show no error message */
     if (searchEffectString === "" && (lineData.length === 0 || barData.length === 0)) {
       searchEffectString = "BioNTech, Pfizer vaccine";
 
@@ -325,7 +335,6 @@ async function mainAdvisorPage() {
         sideEffectUserNote.innerHTML = `${globalValidationResults} We have defaulted the search string to "BioNTech, Pfizer vaccine"`;
       }
     }
-
     //added parallel loading for both charts
     loader1 = getEffectDataTranformed(searchEffectString);
     loaded2 = getEventsTransformed(searchEffectString);
@@ -346,79 +355,6 @@ async function mainAdvisorPage() {
       document.querySelector("#barChartTitle").innerHTML = `${searchEffectString} key side-effects`;
     }
   });
-
-  function updateChart(chart, newSeries, newSeriesName) {
-    chart.updateSeries([
-      {
-        name: newSeriesName,
-        data: newSeries,
-      },
-    ]);
-  }
-
-  /*Line chart */
-  const options = {
-    chart: {
-      type: "line",
-      height: "100%",
-    },
-    yaxis: {
-      show: false
-    },
-    fill: {
-      type: 'gradient',
-      // colors: ['#2E93fA']
-    },
-    grid: {
-      show: false
-    },
-    dataLabels: {
-      enabled: true,
-    },
-    colors: ['#ab5e69'],
-    title: {
-      text: "Past 5 year events reported"
-    },
-    series: [],
-    noData: {
-      text: "loading",
-    },
-  };
-
-  const lineChart = new ApexCharts(document.querySelector("#lineChart"), options);
-  lineChart.render();
-
-  /*bar chart */
-  const barOptions = {
-    chart: {
-      type: "bar",
-      height: "100%",
-    },
-    fill: {
-      type: 'gradient',
-    },
-    grid: {
-      show: false
-    },
-
-    colors: ['#ab5e69'],
-    plotOptions: {
-      bar: {
-        horizontal: true
-      }
-    },
-
-    title: {
-      text: "Top 5 events reported",
-    },
-    series: [],
-    noData: {
-      text: "loading",
-    },
-  };
-
-  const barChart = new ApexCharts(document.querySelector("#barChart"), barOptions);
-  barChart.render();
 }
 
 mainAdvisorPage();
