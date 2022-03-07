@@ -154,25 +154,25 @@ This is a great example of how to use fonts in concord with one another. Yes, th
 
 Icon
 
-## technology stack
+## 6. technology stack
 
 table here
 
 Algorithm used
 
 
-## testing
+## 7. testing
 
-## deployment
+## 8. deployment
 Github
 
-## Future Consideration
+## 9. Limitations and future implementations
 limitation and future implementations
 - passive touch
 - leeflet touring machine issue
 - dataset
 
-## 7. Credits
+## 10. Credits
 
 We have to give both visual and data-set credits below.
 
