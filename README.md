@@ -1,48 +1,8 @@
-//find a route and directions
-endless medical free to do symptom checker to know your illness
-https://endlessmedical.com/SymptomChecker/
+# pharmacy-pal
 
+****Nice picture layout of the app.
 
-Illness and their treatment api
-https://documenter.getpostman.com/view/4692440/RWEmKHEN
-https://www.altexsoft.com/blog/healthcare-api-overview/
-https://rapidapi.com/lukaszkiljanek/api/endlessmedicalapi1/
-https://www.altexsoft.com/blog/healthcare-api-overview/
-https://dailymed.nlm.nih.gov/dailymed/app-support-web-services.cfm
-https://www.altexsoft.com/blog/drug-data-openfda-dailymed-rxnorm-goodrx/
-
-Disclaimer:
-Please consult your pharmacist or medication doctors before taking the medication.
-All results in 
-
-1.check supplements or drugs
-1. User key in symptoms/illness - explained by wikipedia what it is (with image)
-2. Return possible drugs for it (source: FDA)
-3. Drug usage (source: FDA)
-4. Check if this drug is available in the pharmacy (Source: HSA)
-
-Can we display chart? Reported cases averse effects.
-Averse effects by year and type (till date)
-Some sample adverse effect samples
-https://api.fda.gov/drug/event.json?search=patient.drug.medicinalproduct:”Panadol”
-
-Let BASE_URL = “https://api.fda.gov/drug/event.json?search=”
-
-Congrats! Your API Key is:IIkjoiok33N5aEpSrb9XDMHXw7PPdiXZc2NFfYHL
-
-# below is the right way search by generic or brand name drug, but only return 1 adverse case
-https://api.fda.gov/drug/event.json?api_key=IIkjoiok33N5aEpSrb9XDMHXw7PPdiXZc2NFfYHL&search=patient.drug.medicinalproduct:"panadol"
-
-# try to get date range in place
-https://api.fda.gov/drug/event.json?api_key=IIkjoiok33N5aEpSrb9XDMHXw7PPdiXZc2NFfYHL&search=patient.drug.medicinalproduct:"panadol" & search=receivedate:[20040101+TO+20081231]
-
-https://open.fda.gov/apis/drug/event/searchable-fields/
-string
-Drug name. This may be the valid trade name of the product (such as ADVIL or ALEVE) or the generic name (such as IBUPROFEN). This field is not systematically normalized. It may contain misspellings or idiosyncratic descriptions of drugs, such as combination products such as those used for birth control.
-This is an .exact field. It has been indexed both as its exact string content, and also tokenized.
-* 		search=patient.drug.medicinalproduct:"FOO+BAR" Searches for records where either FOO or BAR appear anywhere in this field. 
-
-# visitPharmacy Application
+Access the live demo [here](https://jerrysuper123.github.io/pharmacy-pal/).
 
 ## Summary
 
@@ -52,9 +12,17 @@ Special consideration
 
 E-pharmacy has been on the rise in Singapore. As such, we would provide a curated list of Health Sciences Authority (HSA) registered online pharmacies. This is to serve as a one-stop portal of legal e-pharmacies to guide the users to right phamacies,as the [rise of illegal/fake online pharmacies](https://www.straitstimes.com/singapore/courts-crime/the-rise-of-illegal-online-pharmacies) poses risks to the uninformed.
 
----
+***
+Project Context
 
-## Strategy
+Organization goals
+
+User goals
+
+Unique-selling point
+
+## 1. Strategy
+this section mainly discusses what???
 
 ### target market
 
@@ -109,9 +77,20 @@ Super users:
 
 ---
 
-## Scope
+### Features based on user story
 
-Main features
+breifly describe features
+
+
+
+
+## 2. Scope
+
+****** functional specification
+*** content - data set (mentioned in credit)
+*** Non-functional
+Mobile responsive & fast performance
+****
 
 Nearby pharmacy store
 Search pharmacy store
@@ -134,58 +113,18 @@ when walking map should include less buttons or feature to distract people.
 
 Main content
 
-## DataSets
 
-1. [GeoJson data from data.gov.sg](https://data.gov.sg/dataset/retail-pharmacy-locations?resource_id=ae46281d-8ee1-4fa3-ab07-03ab409946d8)
-
-This allows us to plot the locations of the pharmacies on the map, and we are also able to identifiy its postal code.
-
-2. [Liscensed pharmacists from data.gov.sg](https://data.gov.sg/dataset/listing-of-licensed-pharmacies);
-
-This allows us to identify the names of the registered pharmacists in various postal codes. Merging with dataset 1, we are able to provide the name of the pharmacist in various locations.
-
-3. [List of registered drugs in Singapore from ](https://data.gov.sg/dataset/listing-of-registered-therapeutic-products)
-
-This allow us to identify if the drug are OTC or prescription-based, so that the users will not have to make wasted trips to the pharmacy. However, there are no efficacy description of the drugs in this dataset, but it does come with WHO's ATC codes on each drug
-
-4. ATC Code level 1 and level 2 list for the drugs (Json)
-
-See [detailed explaination](https://www.who.int/tools/atc-ddd-toolkit/atc-classification) on WHO's website. Simply put, the ATC codes allow us to identify a drug's usage, so that we could provide these information to our app users.
-
-For this dataset, we would gather and create data for level 1 and level 2 codes below. Otherwise, most are paid sources.
-
-//maybe use wedmd to search for drugs
-https://www.webmd.com/drugs/2/index
-
-![ATC Code System](ATCCode.png)
-
-_source: WHO_
-
-5. List of available e-pharmacy services
-
-https://www.straitstimes.com/singapore/health/first-hsa-registered-e-pharmacy-in-singapore-launched
-
-https://www.mobihealthnews.com/news/asia/hyphens-pharma-officially-launches-first-hsa-approved-e-pharmacy-singapore
-
-https://www.raffleshealth.com/pharmacy.html
-
-https://www.singhealth.com.sg/patient-care/patient-visitor-info/medicine-delivery-service
-
-https://www.sgh.com.sg/patient-care/visiting-specialist/medication-delivery-singapore-general-hospital
-
-Summary of main data points
-xx
-
----
-
-## Structure
+## 3. Structure
 
 Adopt a tree information structure, centre on the map itself
 site map
 
+Briefly describe the structure ****
+
 ![site map](sitemap.png)
 
-## Skeleton
+## 4. Skeleton
+Access the wireframes for mobile, tablet, and laptop display for the website here.****
 
 most important is map to make it the background
 
@@ -193,11 +132,12 @@ second most important search features
 
 last is search drugs and e-pharmacy
 
-## Surface - visual design
+## 5. Surface - visual design
 
-Wireframe
+why this design etc
+![icon]()
 
-![Color](color.png)
+![Color](./READMESources/color.png)
 
 The app should adopt warm color - gives uses some hope, especially for those who are ill.
 
@@ -213,3 +153,47 @@ Here we have a pairing of two sans serif fonts. Archivo Black is a grotesque san
 This is a great example of how to use fonts in concord with one another. Yes, they’re two sans serifs, but the imperfect/perfect pairing of their character sets creates a good balance. This would work really well in giving an ecommerce site a youthful and trustworthy vibe.
 
 Icon
+
+## technology stack
+
+table here
+
+Algorithm used
+
+
+## testing
+
+## deployment
+Github
+
+## Future Consideration
+limitation and future implementations
+- passive touch
+- leeflet touring machine issue
+- dataset
+
+## 7. Credits
+
+We have to give both visual and data-set credits below.
+
+### Icons and images:
+1. [Fontawesome icon](https://fontawesome.com/) - to embelish the website with icons throughout for better UI UX
+2. [Google fronts](https://www.google.com/search?q=google+fonts&oq=google+front&aqs=chrome.1.69i57j0i10j0i512l2j0i10l6.4333j0j4&sourceid=chrome&ie=UTF-8) - to set the primary and secondary font types 
+3. [Unsplash images](https://unsplash.com/) - to use it as the landing page background image
+4. [Flaticon icons](https://www.flaticon.com/) - to customize the map markers
+
+### DataSets:
+
+1. [Pharmacy geoJson CSV data from data.gov.sg](https://data.gov.sg/dataset/retail-pharmacy-locations?resource_id=ae46281d-8ee1-4fa3-ab07-03ab409946d8) - to plot the markers on the map and acess the address info
+
+2. [Liscensed pharmacists API from data.gov.sg](https://data.gov.sg/dataset/listing-of-licensed-pharmacies) - to identify the names of the registered pharmacists
+
+2. [Kaggle disease symptom CSV dataset - credit to Pranay Patil](https://www.kaggle.com/itachi9604/disease-symptom-description-dataset) - to predict users' conditions/diseases based on symptoms selected
+
+2. [Wikipedia API](https://www.mediawiki.org/wiki/API:Main_page) - to retrieve the extract of disease info to display to users
+
+2. [Pexels API](https://www.pexels.com/api/) - to retrieve disease image and display to users
+
+2. [Disease match drug API from Open FDA](https://open.fda.gov/apis/drug/label/) - to match drug for users' conditions
+
+2. [Adverse events data API from Open FDA](https://open.fda.gov/apis/drug/event/) - to plot the trends of drug side effects reported on charts
