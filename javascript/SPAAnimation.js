@@ -5,6 +5,20 @@ document.querySelector("#barIcon").addEventListener("click", function () {
   page.classList.add("show");
 });
 
+//show map by clicking on the drugadvisor company logo
+document.querySelector("#landingBtn").addEventListener("click", function () {
+  let page = document.querySelector("#drugAdvisorPage");
+  page.classList.remove("show");
+  page.classList.add("hideLeft");
+});
+
+//show map by clicking on the landing page company logo
+document.querySelector("#mapBtn").addEventListener("click", function () {
+  let page = document.querySelector("#appBrief");
+  page.classList.remove("show");
+  page.classList.add("hideLeft");
+});
+
 //hide landing page through grey area
 document.querySelector("#appBriefHide").addEventListener("click", function () {
   let page = document.querySelector("#appBrief");

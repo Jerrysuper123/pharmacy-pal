@@ -52,13 +52,22 @@
 
 .mainContentLanding{
   // border: 1px solid black;
-  min-height: 50rem;
-  background-image: url("../images/landingPageBg.jpg");
-  // background-size: cover;
+  min-height: 90vh;
+  // background-image: url("../images/landingPageBg.jpg");
+  background-image: url("https://images.pexels.com/photos/3806953/pexels-photo-3806953.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+  background-size: cover;
+  background-position: center;
 
   background-repeat: no-repeat;
 }
+.ctAHeader{
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 2px solid white;
+}
 
+.ctABg{
+  background-color: rgba(0, 0, 0, 0.2);
+}
 
 /* css rules for devices screen larger than 1279px */
 @media screen and (min-width: 1279px) {

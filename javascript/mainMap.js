@@ -216,6 +216,7 @@ async function mainMap() {
       document
         .querySelector("#searchBtn")
         .addEventListener("click", function (event) {
+          console.log("start search button");
           event.preventDefault();
           searchResultLayer.clearLayers();
           let searchString = document.querySelector("#searchString").value;

@@ -1,4 +1,5 @@
 async function readPharmacist() {
+  // government no longer supports below API
   let BASE_URL = "https://data.gov.sg/api/action/datastore_search";
   var data = {
     resource_id: "16db7800-d81e-4d0d-9d59-936f2c10d668", // the resource id

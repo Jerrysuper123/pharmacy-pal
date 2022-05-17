@@ -7,12 +7,12 @@
 }
 
 .appLogoColor {
-  color: #c20303;
+  color: rgb(194, 3, 3);
 }
 
 .githubLogo {
   font-size: 2rem;
-  color: #3f1212;
+  color: rgb(63, 18, 18);
 }
 
 .githubLogoBox {
@@ -25,7 +25,7 @@
   border: 1px solid #e2e1e1;
 }
 .githubLogoBox a:hover {
-  color: #c20303;
+  color: rgb(194, 3, 3);
 }
 
 /* color setting */
@@ -192,13 +192,13 @@ body {
     left: 0;
     z-index: 4;
     width: 100vw;
-    background-color: #fcfafa;
+    background-color: rgb(252, 250, 250);
     justify-content: center;
   }
   #mobileBottomNav .primaryNavBtn {
     border: none;
     box-shadow: none !important;
-    background-color: #fcfafa !important;
+    background-color: rgb(252, 250, 250) !important;
     font-size: 0.7rem;
     margin-left: 3rem !important;
     margin-right: 3rem !important;
@@ -275,9 +275,20 @@ body {
 }
 
 .mainContentLanding {
-  min-height: 50rem;
-  background-image: url("../images/landingPageBg.jpg");
+  min-height: 90vh;
+  background-image: url("https://images.pexels.com/photos/3806953/pexels-photo-3806953.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
+}
+
+.ctAHeader {
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 2px solid white;
+}
+
+.ctABg {
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 /* css rules for devices screen larger than 1279px */
@@ -344,7 +355,7 @@ body {
 
 .hidden {
   /* move all page to the right by 100% */
-  transform: translateX(-140%);
+  transform: translateX(-400%);
   transition: transform 1s;
 }
 
@@ -370,7 +381,7 @@ body {
 }
 
 .drugNavBar {
-  color: #9b9b9b;
+  color: rgb(155, 155, 155);
   font-size: 1rem;
 }
 .drugNavBar button {
@@ -411,7 +422,7 @@ body {
 }
 
 .symptomBG {
-  color: #a7a7a7;
+  color: rgb(167, 167, 167);
 }
 .symptomBG i {
   font-size: 10rem;
@@ -421,8 +432,8 @@ body {
 .symptomList {
   width: 21rem;
   min-height: 17rem;
-  background-color: #f0f0f0;
-  color: #636363;
+  background-color: rgb(240, 240, 240);
+  color: rgb(99, 99, 99);
   font-size: 1rem;
 }
 
@@ -431,16 +442,16 @@ body {
 }
 
 .oneSymptomStyle {
-  border-bottom: 1px solid #c2c2c2;
+  border-bottom: 1px solid rgb(194, 194, 194);
   display: flex;
   justify-content: space-between;
   margin: 1rem;
 }
 .oneSymptomStyle span {
-  color: #274d58;
+  color: rgb(39, 77, 88);
 }
 .oneSymptomStyle i {
-  color: #c2c2c2;
+  color: rgb(194, 194, 194);
 }
 .oneSymptomStyle:hover {
   color: #8fb095;
@@ -462,10 +473,10 @@ body {
   margin-top: 0.3rem;
 }
 .listItemDesign .itemItem {
-  color: #274d58;
+  color: rgb(39, 77, 88);
 }
 .listItemDesign .expandIcon {
-  color: #c2c2c2;
+  color: rgb(194, 194, 194);
   width: 20px;
   margin-left: auto;
 }
@@ -478,7 +489,7 @@ body {
 .drugResultsBox {
   width: 21rem;
   min-height: 17rem;
-  background-color: #f0f0f0;
+  background-color: rgb(240, 240, 240);
   background-image: url("../images/drugIcon.png");
   background-size: cover;
 }
@@ -497,20 +508,22 @@ body {
 
 #downArrowIcon {
   font-size: 1rem;
-  color: #c5c5c5;
+  color: rgb(197, 197, 197);
 }
 
-#lineChart, #barChart {
+#lineChart,
+#barChart {
   height: 20rem;
   width: 20rem;
 }
 
 .chartContainer {
-  background-color: white;
+  background-color: rgb(255, 255, 255);
 }
 
-#lineChartTitle, #barChartTitle {
-  color: #114611;
+#lineChartTitle,
+#barChartTitle {
+  color: rgb(17, 70, 17);
 }
 
 #singaporeMap {
@@ -524,7 +537,7 @@ body {
 }
 
 .hideLeft {
-  transform: translateX(-100%);
+  transform: translateX(-300%);
   transition: transform 0.5s;
 }
 

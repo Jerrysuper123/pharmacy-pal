@@ -89,7 +89,7 @@
 
                     <!-- landing page nav -->
                     <nav class="landingPageNav d-flex mt-3">
-                        <h1 class="appLogo appLogoColor">pharmacy-pal</h1>
+                        <h1 class="appLogo appLogoColor" id="mapBtn">pharmacy-pal</h1>
                         <div class="githubLogoBox shadow ms-3">
                             <a class="githubLogo" href="https://github.com/Jerrysuper123/visitPharmacy" target=”_blank”>
                                 <i class="fa-brands fa-github"></i>
@@ -102,21 +102,31 @@
                     </nav>
 
                     <main class="mainContentLanding shadow">
+                        <div class="alert alert-danger" role="alert">
+                            Singapore goverment is no longer supporting retail pharmacy location API. So currently only our drug advisor page is working now. We apologize for any inconvenience caused.
+                          </div>
                         <!-- landing page call to action -->
                         <Section class="ctA mt-2 d-flex flex-column align-items-center justify-content-center p-2">
                             <div class="ctAText">
-                                <h1 class="text-center ctAHeader mt-2">Go to a nearby pharmacy</h1>
-                                <p class="subText text-light text-center ctASubtext">Pharmacy-pal is designed to aid
-                                    "self-care
-                                    through
-                                    pharmacy" in the midst of Covid19. Not only does the it gives the the direction for
-                                    the nearby pharmcy, it also helps you on symptom diagnosis & medication
-                                    recommendation.
-                                </p>
+                                <h1 class="text-center ctAHeader mt-2 px-2">Go to a nearby pharmacy</h1>
+                                <main class="ctABg">
+                                    <p class="subText text-light text-center ctASubtext">Pharmacy-pal is designed to aid
+                                        "self-care
+                                        through
+                                        pharmacy" in the midst of Covid19. 
+                                        
+                                    </p>
+                                    <p class="subText text-light text-center ctASubtext">
+                                        Not only does the it gives the the direction for
+                                        the nearby pharmcy, it also helps you on symptom diagnosis & medication
+                                        recommendation.
+                                    </p>
+                                </main>
+                               
                             </div>
 
                             <div>
-                                <button id="landPageBtn" class="landPageBtn btn btn-danger text-light mx-4">
+                                <button id="landPageBtn" class="landPageBtn btn btn-danger text-light mx-4 mb-5">
                                     Start here
                                     <i class="fa-solid fa-diamond-turn-right">
                                     </i>
@@ -199,8 +209,9 @@
             <article class="primaryPageBackground">
 
                 <!-- top nav for drugadvisor page -->
-                <nav class="d-flex topNavDrugAdvisorPage">
-                    <p class="ms-5 appLogo">pharmacy-pal</p>
+                <nav class="d-flex topNavDrugAdvisorPage" >
+                    <p class="ms-5 appLogo" id="landingBtn">pharmacy-pal</p>
+
                     <span id="closeAdvisorPage" class="ms-auto me-5">
                         <i class="fa-solid fa-xmark"></i>
                     </span>
